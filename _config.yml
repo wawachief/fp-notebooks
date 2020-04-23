@@ -6,15 +6,15 @@
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 # https://learnxinyminutes.com/docs/yaml/
 
-title: fastpages
-description: An easy to use blogging platform with support for Jupyter Notebooks.
+title: notebooks
+description: Plateforme de blog avec support pour Jupyter Notebooks.
 github_username: wawachief
 # you can comment the below line out if your repo name is not different than your baseurl
 github_repo: "fp-notebooks"
 
 # OPTIONAL: override baseurl and url if using a custom domain
 # Note: leave out the trailing / from this value. 
-url: "https://wawachief.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://notebooks.lecluse.fr/" # the base hostname & protocol for your site, e.g. http://example.com
 
 ###########################################################
 #########  Special Instructions for baseurl ###############
@@ -39,8 +39,8 @@ baseurl: "/fp-notebooks" # the subpath of your site, e.g. "/blog".
 # Github and twitter are optional:
 minima:
   social_links:
-    twitter: fastdotai
-    github: fastai
+    twitter: leclusemaths
+    github: wawachief
 
 # Set this to true to get LaTeX math equation support
 use_math: 
@@ -49,7 +49,7 @@ use_math:
 show_description: true
 
 # Set this to true to display image previews on home page, if they exist
-show_image: false
+show_image: true
 
 # Set this to true to display tags on each post
 show_tags: true
