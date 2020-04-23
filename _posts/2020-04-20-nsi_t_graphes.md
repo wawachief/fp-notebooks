@@ -6,6 +6,7 @@ toc: true
 badges: true
 comments: false
 categories: [python, NSI, Terminale, Structure_donnees, graphes, TP]
+image: https://www.lecluse.fr/nsi/NSI_T/donnees/data.jpg
 nb_path: _notebooks/2020-04-20-nsi_t_graphes.ipynb
 layout: notebook
 ---
@@ -30,7 +31,7 @@ layout: notebook
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>On représente le réseau autoroutier entre les villes de Rennes (R), Angers (A), Tours (T), Le Mans (M), Paris (P), Lyon (L) et Grenoble (G) à l’aide d’un graphe. Les villes sont les sommets du graphe et les (auto)routes sont représentées par les arêtes du graphe.
 On a indiqué les distances entre les villes sur les arêtes
-<img src="/images/copied_from_nb/graphe.png" alt="Graphe"></p>
+<img src="/fp-notebooks/images/copied_from_nb/my_icons/graphe.png" alt="Graphe"></p>
 <h2 id="Matrice-d'adjacence">Matrice d'adjacence<a class="anchor-link" href="#Matrice-d'adjacence"> </a></h2><p>Ecrire la matrice d'adjacence de ce graphe :</p>
 <ul>
 <li>La matrice sera représentée par un tableau à 2 dimensions</li>

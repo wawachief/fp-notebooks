@@ -6,6 +6,7 @@ toc: true
 badges: true
 comments: false
 categories: [python, NSI, Terminale, Structure_donnees, POO, TP]
+image: https://www.lecluse.fr/nsi/NSI_T/donnees/data.jpg
 nb_path: _notebooks/2020-04-17-nsi_t_Initiation_POO.ipynb
 layout: notebook
 ---
@@ -89,7 +90,7 @@ layout: notebook
 <h2 id="Cr&#233;ation-d'une-classe">Cr&#233;ation d'une classe<a class="anchor-link" href="#Cr&#233;ation-d'une-classe"> </a></h2><p>Nous allons voir un premier exemple simple basé sur la notion de <em>pile</em> vue dans une séquence précédente.</p>
 <p>Une pile possède un comportement différent d'un tableau. On a utilisé un tableau pour simuler le comportement d'une pile mais faisant cela, on peut être tenté d'utiliser des fonctionnalités du tableau qui ne sont pas possibles avec une vraie pile comme accéder au dernier élément de la pile en faisant pile[0].</p>
 <p>Pour y remédier nous allons créer un objet <em>Pile</em> qui se comportera exactement comme on le souhaite. Un objet se définit dans une <strong>classe</strong> qui va nous permettre de définir les <strong>propriétés</strong> et les <strong>méthodes</strong> que l'on souhaite intégrer à notre objet <em>Pile</em>.</p>
-<p><img src="/images/copied_from_nb/classePile.png" alt="classe Pile"></p>
+<p><img src="/fp-notebooks/images/copied_from_nb/classePile.png" alt="classe Pile"></p>
 <p>Notre classe <em>Pile</em> va nous permettre de définir le modèle de l'objet que l'on souhaite créer. Ce modèle possèdera</p>
 <ul>
 <li>2 propriétés (variables intégrées à l'objet)<ul>
