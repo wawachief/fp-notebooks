@@ -3,38 +3,38 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Python 7 - Découverte du réseau et serveur | fastpages</title>
+<title>Python 7 - Découverte du réseau et serveur | notebooks</title>
 <meta name="generator" content="Jekyll v4.0.0" />
 <meta property="og:title" content="Python 7 - Découverte du réseau et serveur" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="application socket serveur basique" />
 <meta property="og:description" content="application socket serveur basique" />
-<link rel="canonical" href="https://wawachief.github.io/fp-notebooks/isn/socket/2020/03/07/Python7-Reseau-serveur.html" />
-<meta property="og:url" content="https://wawachief.github.io/fp-notebooks/isn/socket/2020/03/07/Python7-Reseau-serveur.html" />
-<meta property="og:site_name" content="fastpages" />
+<link rel="canonical" href="https://notebooks.lecluse.fr//fp-notebooks/isn/socket/2020/03/07/Python7-Reseau-serveur.html" />
+<meta property="og:url" content="https://notebooks.lecluse.fr//fp-notebooks/isn/socket/2020/03/07/Python7-Reseau-serveur.html" />
+<meta property="og:site_name" content="notebooks" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-03-07T00:00:00-06:00" />
 <script type="application/ld+json">
-{"description":"application socket serveur basique","mainEntityOfPage":{"@type":"WebPage","@id":"https://wawachief.github.io/fp-notebooks/isn/socket/2020/03/07/Python7-Reseau-serveur.html"},"@type":"BlogPosting","url":"https://wawachief.github.io/fp-notebooks/isn/socket/2020/03/07/Python7-Reseau-serveur.html","headline":"Python 7 - Découverte du réseau et serveur","dateModified":"2020-03-07T00:00:00-06:00","datePublished":"2020-03-07T00:00:00-06:00","@context":"https://schema.org"}</script>
+{"description":"application socket serveur basique","mainEntityOfPage":{"@type":"WebPage","@id":"https://notebooks.lecluse.fr//fp-notebooks/isn/socket/2020/03/07/Python7-Reseau-serveur.html"},"@type":"BlogPosting","url":"https://notebooks.lecluse.fr//fp-notebooks/isn/socket/2020/03/07/Python7-Reseau-serveur.html","headline":"Python 7 - Découverte du réseau et serveur","dateModified":"2020-03-07T00:00:00-06:00","datePublished":"2020-03-07T00:00:00-06:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/fp-notebooks/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://wawachief.github.io/fp-notebooks/feed.xml" title="fastpages" /><link rel="shortcut icon" type="image/x-icon" href="/fp-notebooks/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Python 7 - Découverte du réseau et serveur | fastpages</title>
+<link rel="stylesheet" href="/fp-notebooks/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://notebooks.lecluse.fr//fp-notebooks/feed.xml" title="notebooks" /><link rel="shortcut icon" type="image/x-icon" href="/fp-notebooks/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Python 7 - Découverte du réseau et serveur | notebooks</title>
 <meta name="generator" content="Jekyll v4.0.0" />
 <meta property="og:title" content="Python 7 - Découverte du réseau et serveur" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="application socket serveur basique" />
 <meta property="og:description" content="application socket serveur basique" />
-<link rel="canonical" href="https://wawachief.github.io/fp-notebooks/isn/socket/2020/03/07/Python7-Reseau-serveur.html" />
-<meta property="og:url" content="https://wawachief.github.io/fp-notebooks/isn/socket/2020/03/07/Python7-Reseau-serveur.html" />
-<meta property="og:site_name" content="fastpages" />
+<link rel="canonical" href="https://notebooks.lecluse.fr//fp-notebooks/isn/socket/2020/03/07/Python7-Reseau-serveur.html" />
+<meta property="og:url" content="https://notebooks.lecluse.fr//fp-notebooks/isn/socket/2020/03/07/Python7-Reseau-serveur.html" />
+<meta property="og:site_name" content="notebooks" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-03-07T00:00:00-06:00" />
 <script type="application/ld+json">
-{"description":"application socket serveur basique","mainEntityOfPage":{"@type":"WebPage","@id":"https://wawachief.github.io/fp-notebooks/isn/socket/2020/03/07/Python7-Reseau-serveur.html"},"@type":"BlogPosting","url":"https://wawachief.github.io/fp-notebooks/isn/socket/2020/03/07/Python7-Reseau-serveur.html","headline":"Python 7 - Découverte du réseau et serveur","dateModified":"2020-03-07T00:00:00-06:00","datePublished":"2020-03-07T00:00:00-06:00","@context":"https://schema.org"}</script>
+{"description":"application socket serveur basique","mainEntityOfPage":{"@type":"WebPage","@id":"https://notebooks.lecluse.fr//fp-notebooks/isn/socket/2020/03/07/Python7-Reseau-serveur.html"},"@type":"BlogPosting","url":"https://notebooks.lecluse.fr//fp-notebooks/isn/socket/2020/03/07/Python7-Reseau-serveur.html","headline":"Python 7 - Découverte du réseau et serveur","dateModified":"2020-03-07T00:00:00-06:00","datePublished":"2020-03-07T00:00:00-06:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
-<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://wawachief.github.io/fp-notebooks/feed.xml" title="fastpages" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://notebooks.lecluse.fr//fp-notebooks/feed.xml" title="notebooks" />
 
 <script>
 function wrap_img(fn) {
@@ -67,7 +67,7 @@ window.onload = wrap_img;
 </script>
 </head><body><header class="site-header">
 
-  <div class="wrapper"><a class="site-title" rel="author" href="/fp-notebooks/">fastpages</a><nav class="site-nav">
+  <div class="wrapper"><a class="site-title" rel="author" href="/fp-notebooks/">notebooks</a><nav class="site-nav">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
         <label for="nav-trigger">
           <span class="menu-icon">
@@ -505,11 +505,11 @@ entier entre 1 et 100.</p>
         </p>
       </div>
       <div class="footer-col">
-        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+        <p>Plateforme de blog avec support pour Jupyter Notebooks.</p>
       </div>
     </div>
 
-    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/fp-notebooks/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/fp-notebooks/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/wawachief" title="wawachief"><svg class="svg-icon grey"><use xlink:href="/fp-notebooks/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/leclusemaths" title="leclusemaths"><svg class="svg-icon grey"><use xlink:href="/fp-notebooks/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
 </div>
 
   </div>

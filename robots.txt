@@ -1,1 +1,1 @@
-Sitemap: https://wawachief.github.io/fp-notebooks/sitemap.xml
+Sitemap: https://notebooks.lecluse.fr//fp-notebooks/sitemap.xml
