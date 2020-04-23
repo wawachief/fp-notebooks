@@ -6,7 +6,7 @@ toc: false
 badges: true
 comments: false
 categories: [python, NSI, Terminale, Structure_donnees, POO, TP]
-image: https://www.lecluse.fr/nsi/NSI_T/donnees/data.jpg
+image: images/nsi1.png
 nb_path: _notebooks/2020-04-17-nsi_t_I_poo_arbre.ipynb
 layout: notebook
 ---
@@ -31,12 +31,12 @@ layout: notebook
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Dans ce TP nous allons implémenter une classe permettant de représenter un arbre binaire.</p>
 <p>Voici le schéma de la structure envisagée pour la classe <strong>Arbrebin</strong></p>
-<p><img src="/fp-notebooks/images/copied_from_nb/classeArbrebin.png" alt="classe Arbrebin"></p>
+<p><img src="/images/copied_from_nb/my_icons/classeArbrebin.png" alt="classe Arbrebin"></p>
 <p>La propriété <strong>valeur</strong> contiendra la valeur associée au noeud. Les propriétés <strong>gauche</strong> et <strong>droit</strong> seront les sous arbres gauche et droit. Ces deux propriétés seront donc des instances de la classe <strong>Arbrebin</strong>. Si il n'y a pas de sous arbre gauche ou droit, on indiquera la valeur <strong>None</strong> dans les propriétés correspondantes.</p>
 <p>La méthode <strong>est_feuille</strong> renverra un bouléen selon que l'objet est une feuille ou non.
 La méthode <strong>cree_fils_gauche()</strong> prend en paramètre une valeur et crée un fils à gauche dont la valeur est passée en paramètres.</p>
 <h2 id="Exemple-d'utilisation-de-la-classe-Arbrebin">Exemple d'utilisation de la classe Arbrebin<a class="anchor-link" href="#Exemple-d'utilisation-de-la-classe-Arbrebin"> </a></h2><p>En supposant la classe <strong>Arbrebin</strong> créée, voici comment on l'utilise pour créer cet arbre :
-<img src="/fp-notebooks/images/copied_from_nb/arbre1.png" alt="arbre exemple"></p>
+<img src="/images/copied_from_nb/my_icons/arbre1.png" alt="arbre exemple"></p>
 <div class="highlight"><pre><span></span><span class="nv">arbre</span> <span class="o">=</span> Arbrebin<span class="o">(</span><span class="s2">&quot;A&quot;</span><span class="o">)</span>
 <span class="nv">sous_arbre_gauche</span> <span class="o">=</span> arbre.cree_fils_gauche<span class="o">(</span><span class="s2">&quot;B&quot;</span><span class="o">)</span>
 sous_arbre_gauche.cree_fils_gauche<span class="o">(</span><span class="s2">&quot;D&quot;</span><span class="o">)</span>
@@ -128,7 +128,7 @@ print<span class="o">(</span>arbre.gauche.valeur<span class="o">)</span>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>A présent, vous utiliserez la classe Arbrebin et les méthodes que vous avez développées pour représenter l'arbre suivant dans la variable <code>expr</code>
-<img src="/fp-notebooks/images/copied_from_nb/expr.png" alt="expression"></p>
+<img src="/images/copied_from_nb/my_icons/expr.png" alt="expression"></p>
 <p>Les opérations seront représentées par des chaînes de caractères. Les feuilles seront des entiers.</p>
 
 </div>

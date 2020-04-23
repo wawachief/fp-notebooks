@@ -75,7 +75,8 @@ layout: notebook
 <p>Comme on peut le voir sur l'exemple précédent, une <strong>liste</strong> en Python est un objet délimité par deux crochets et qui renferme un nombre fini d'éléments de n'importe quel type, ces éléments étant séparés par des virgules.</p>
 <p>Voici quelques caractéristiques sur les listes</p>
 <blockquote><ul>
-<li>les éléments d'une liste sont ordonnés : si on échange de place deux éléments différents d'une liste, la liste est modifiée.&gt;- les éléments d'une liste sont numérotés <strong>depuis 0</strong>&gt;- un même objet peut appparaître plusieurs fois dans une liste.</li>
+<li>les éléments d'une liste sont ordonnés :si on échange de place deux éléments différents d'une liste, la liste est modifiée.&gt;- les éléments d'une liste sont numérotés <strong>depuis 0</strong></li>
+<li>un même objet peut appparaître plusieurs fois dans une liste.</li>
 <li>une liste peut contenir des éléments de type différents (nombres, chaines...)</li>
 </ul>
 </blockquote>

@@ -6,7 +6,7 @@ toc: true
 badges: true
 comments: false
 categories: [python, NSI, Terminale, Structure_donnees, TP]
-image: https://www.lecluse.fr/nsi/NSI_T/donnees/data.jpg
+image: images/nsi1.png
 nb_path: _notebooks/2020-04-14-nsi_t_listes_piles_files.ipynb
 layout: notebook
 ---
@@ -30,7 +30,7 @@ layout: notebook
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Les-piles">Les piles<a class="anchor-link" href="#Les-piles"> </a></h2><p>On va commencer ce TP par la manipulation des piles, plus faciles à appréhender, et on terminera par la manuipulation des listes chaînées. Rappelons tout d'abord la notion de <strong>piles</strong> répondant à la règle <strong>LIFO</strong> : dernier entré, premier sorti.</p>
-<p><img src="/fp-notebooks/images/copied_from_nb/pile1.png" alt="pile"></p>
+<p><img src="/images/copied_from_nb/my_icons/pile1.png" alt="pile"></p>
 <h3 id="Description-de-la-structure">Description de la structure<a class="anchor-link" href="#Description-de-la-structure"> </a></h3><p>Pour stocker les données dans notre pile, nous utiliserons un tableau python (objet list).
 Le dernier élément du tableau sera le sommet de la pile. Seul cet élément sera visible.</p>
 <p><strong>Exemple</strong> : Si la pile est représentée en mémoire par le tableau <code>[2, 3, 5, 8]</code>, le sommet de la pile sera <code>8</code>. Si je dépile le 8, la pile deviendra <code>[2, 3, 5]</code> et le sommet de la pile sera 5. Une fois tous les éléments dépilés, la pile sera vide et représentée par <code>[]</code>.</p>
@@ -206,7 +206,7 @@ Le dernier élément du tableau sera le sommet de la pile. Seul cet élément se
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Les-files">Les files<a class="anchor-link" href="#Les-files"> </a></h2><p>Rappelons la notion de <strong>files</strong> répondant à la règle <strong>FIFO</strong> : premier entré, premier sorti.</p>
-<p><img src="/fp-notebooks/images/copied_from_nb/file1.png" alt="file"></p>
+<p><img src="/images/copied_from_nb/my_icons/file1.png" alt="file"></p>
 <h3 id="Description-de-la-structure">Description de la structure<a class="anchor-link" href="#Description-de-la-structure"> </a></h3><p>Pour stocker les données dans notre file, nous utiliserons un tableau python (objet list).</p>
 <ul>
 <li>le dernier élément du tableau sera l'avant de la file. Seul cet élément sera visible</li>
@@ -385,7 +385,7 @@ Le dernier élément du tableau sera le sommet de la pile. Seul cet élément se
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Les-listes-cha&#238;n&#233;es">Les listes cha&#238;n&#233;es<a class="anchor-link" href="#Les-listes-cha&#238;n&#233;es"> </a></h2><h3 id="Description-de-la-structure">Description de la structure<a class="anchor-link" href="#Description-de-la-structure"> </a></h3><p>On rappelle que la structure d'une liste chaînée ressemble à ceci :
-<img src="/fp-notebooks/images/copied_from_nb/listechainee.svg" alt="Liste chainée"></p>
+<img src="/images/copied_from_nb/my_icons/listechainee.svg" alt="Liste chainée"></p>
 <p>L'illustration montre une liste chaînée composée de 4 maillons. Chaque maillon est composé de 2 champs : une valeur et un pointeur vers le maillon suivant.</p>
 <p>Pour implémenter une liste chaînée en python nous utiliserons</p>
 <ul>

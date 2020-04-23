@@ -6,7 +6,7 @@ toc: true
 badges: true
 comments: false
 categories: [python, NSI, Terminale, Structure_donnees, TP]
-image: https://www.lecluse.fr/nsi/NSI_T/donnees/data.jpg
+image: images/nsi1.png
 nb_path: _notebooks/2020-04-15-nsi_t_dictionnaires.ipynb
 layout: notebook
 ---
