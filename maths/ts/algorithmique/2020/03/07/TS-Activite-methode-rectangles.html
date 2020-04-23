@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Intégration - Méthode des rectangles | fastpages</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Intégration - Méthode des rectangles" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Découverte de l’algorithme des rectangles pour le calcul approché d’une intégrale" />
+<meta property="og:description" content="Découverte de l’algorithme des rectangles pour le calcul approché d’une intégrale" />
+<link rel="canonical" href="https://fastpages.fast.ai/maths/ts/algorithmique/2020/03/07/TS-Activite-methode-rectangles.html" />
+<meta property="og:url" content="https://fastpages.fast.ai/maths/ts/algorithmique/2020/03/07/TS-Activite-methode-rectangles.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-07T00:00:00-06:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://fastpages.fast.ai/maths/ts/algorithmique/2020/03/07/TS-Activite-methode-rectangles.html"},"description":"Découverte de l’algorithme des rectangles pour le calcul approché d’une intégrale","@type":"BlogPosting","url":"https://fastpages.fast.ai/maths/ts/algorithmique/2020/03/07/TS-Activite-methode-rectangles.html","headline":"Intégration - Méthode des rectangles","dateModified":"2020-03-07T00:00:00-06:00","datePublished":"2020-03-07T00:00:00-06:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://fastpages.fast.ai/feed.xml" title="fastpages" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-57531313-5','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Intégration - Méthode des rectangles | fastpages</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Intégration - Méthode des rectangles" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Découverte de l’algorithme des rectangles pour le calcul approché d’une intégrale" />
+<meta property="og:description" content="Découverte de l’algorithme des rectangles pour le calcul approché d’une intégrale" />
+<link rel="canonical" href="https://fastpages.fast.ai/maths/ts/algorithmique/2020/03/07/TS-Activite-methode-rectangles.html" />
+<meta property="og:url" content="https://fastpages.fast.ai/maths/ts/algorithmique/2020/03/07/TS-Activite-methode-rectangles.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-07T00:00:00-06:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://fastpages.fast.ai/maths/ts/algorithmique/2020/03/07/TS-Activite-methode-rectangles.html"},"description":"Découverte de l’algorithme des rectangles pour le calcul approché d’une intégrale","@type":"BlogPosting","url":"https://fastpages.fast.ai/maths/ts/algorithmique/2020/03/07/TS-Activite-methode-rectangles.html","headline":"Intégration - Méthode des rectangles","dateModified":"2020-03-07T00:00:00-06:00","datePublished":"2020-03-07T00:00:00-06:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://fastpages.fast.ai/feed.xml" title="fastpages" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-57531313-5','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">fastpages</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Intégration - Méthode des rectangles</h1><p class="page-description">Découverte de l&#39;algorithme des rectangles pour le calcul approché d&#39;une intégrale</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-03-07T00:00:00-06:00" itemprop="datePublished">
+        Mar 7, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      4 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#maths">maths</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#TS">TS</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#algorithmique">algorithmique</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/fastai/fastpages/tree/master/_notebooks/2020-03-07-TS - Activite methode rectangles.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/fastai/fastpages/master?filepath=_notebooks%2F2020-03-07-TS+-+Activite+methode+rectangles.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/fastai/fastpages/blob/master/_notebooks/2020-03-07-TS - Activite methode rectangles.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Problématique">Problématique </a></li>
+<li class="toc-entry toc-h2"><a href="#La-méthode-des-rectangles">La méthode des rectangles </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Rectangles-inférieurs-(rouges)">Rectangles inférieurs (rouges) </a></li>
+<li class="toc-entry toc-h3"><a href="#Rectangles-supérieurs-(bleus)">Rectangles supérieurs (bleus) </a></li>
+<li class="toc-entry toc-h3"><a href="#Le-programme">Le programme </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Modification-de-l'algorithme">Modification de l&#39;algorithme </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Notation">Notation </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-03-07-TS - Activite methode rectangles.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Problématique">
+<a class="anchor" href="#Probl%C3%A9matique" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problématique<a class="anchor-link" href="#Probl%C3%A9matique"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>On considère dans cette activité la fonction $f$ définie sur
+$[0 ;2]$ par $f (x) = 4 − x^2$ et $\mathcal C$ sa courbe représentative dans
+un repère orthonormé.</p>
+<p>L'objectif de cette activité est de calculer l'aire du domaine délimité</p>
+<ul>
+<li>d'une part par les droites d'équation $x=0$ et $x=2$</li>
+<li>d'autre part par l'axe des asbcisses et la courbe $\mathcal C$</li>
+</ul>
+<p><img src="/images/copied_from_nb/img1.png" alt=""></p>
+<p>En d'autre termes, nous cherchons à déterminer l'aire hachurée en rouge sous la courbe $\mathcal C$ pour $x$ compris entre 0 et 2.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="La-méthode-des-rectangles">
+<a class="anchor" href="#La-m%C3%A9thode-des-rectangles" aria-hidden="true"><span class="octicon octicon-link"></span></a>La méthode des rectangles<a class="anchor-link" href="#La-m%C3%A9thode-des-rectangles"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>L’idée va être d’encadrer l’aire recherchée par deux aires que l’on peut calculer aisément. On utilise pour
+cela des figures très élémentaires : des rectangles.</p>
+<p>Nous allons calculer un minorant de l'aire en inscrivant des rectangles sous la courbe (voir rectangles rouges) et un majorant de l'aire en construisant des rectangles au dessus de la courbe (voir rectangles bleus).</p>
+<p><img src="/images/copied_from_nb/img2.png" alt=""></p>
+<p>En effet, l'aire d'un rectangle est facile à calculer. Il suffit donc de faire la somme des aires de chacun des rectangles pour obtenir un encadrement de l'aire recherchée.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Rectangles-inférieurs-(rouges)">
+<a class="anchor" href="#Rectangles-inf%C3%A9rieurs-(rouges)" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rectangles inférieurs (rouges)<a class="anchor-link" href="#Rectangles-inf%C3%A9rieurs-(rouges)"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>On cherche à déterminer l'aire du rectangle dont la base est située entre les abscisses $x$ et $x+dx$ (dx désignant la largeur de chaque rectangle) et dont la hauteur est telle que le rectangle soit situé juste sous la courbe $\mathcal C$.</p>
+<p>Exprimer cette aire en fonction de $x$, $dx$ et la fonction $f$</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<details class="description">
+      <summary class="btn btn-sm" data-open="Hide Code" data-close="Show Code"></summary>
+        <p></p>
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># collapse</span>
+
+<span class="c1"># aireInf = dx * f(x+dx)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+    </details>
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Rectangles-supérieurs-(bleus)">
+<a class="anchor" href="#Rectangles-sup%C3%A9rieurs-(bleus)" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rectangles supérieurs (bleus)<a class="anchor-link" href="#Rectangles-sup%C3%A9rieurs-(bleus)"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>On cherche à déterminer l'aire du rectangle dont la base est située entre les abscisses $x$ et $x+dx$ (dx désignant la largeur de chaque rectangle) et dont la hauteur est telle que le rectangle soit situé juste au dessus de la courbe $\mathcal C$.</p>
+<p>Exprimer cette aire en fonction de $x$, $dx$ et la fonction $f$</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<details class="description">
+      <summary class="btn btn-sm" data-open="Hide Code" data-close="Show Code"></summary>
+        <p></p>
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># collapse</span>
+
+<span class="c1"># aireSup = dx * f(x)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+    </details>
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Le-programme">
+<a class="anchor" href="#Le-programme" aria-hidden="true"><span class="octicon octicon-link"></span></a>Le programme<a class="anchor-link" href="#Le-programme"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># On définit notre fonction f</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">4</span><span class="o">-</span><span class="n">x</span><span class="o">*</span><span class="n">x</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Compléter le programme ci-dessous dont le but est de calculer la somme des aires des rectangles sous la courbe (rouges) et la somme des aires des rectangles au dessus de la courbe (bleus).</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Complétez l'algorithme</span>
+
+<span class="k">def</span> <span class="nf">rectangles</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">dx</span><span class="o">=...</span>         <span class="c1"># ... Largeur d'un rectangle</span>
+
+    <span class="n">sommeInf</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># Aire des rectangles inférieurs</span>
+    <span class="n">sommeSup</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># Aire des rectangles supérieurs</span>
+
+    <span class="c1"># Traitement</span>
+
+    <span class="n">x</span><span class="o">=...</span>          <span class="c1"># Bord gauche du rectangle considéré</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">...</span><span class="p">):</span> <span class="c1"># répéter ... fois</span>
+        <span class="n">sommeInf</span> <span class="o">=</span> <span class="o">...</span>
+        <span class="n">sommeSup</span> <span class="o">=</span> <span class="o">...</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="o">...</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">sommeInf</span><span class="p">,</span> <span class="n">sommeSup</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<details class="description">
+      <summary class="btn btn-sm" data-open="Hide Code" data-close="Show Code"></summary>
+        <p></p>
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># collapse</span>
+<span class="k">def</span> <span class="nf">rectangles</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">dx</span><span class="o">=</span><span class="p">(</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span> <span class="c1"># ... Largeur d'un rectangle</span>
+
+    <span class="n">sommeInf</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># Aire des rectangles inférieurs</span>
+    <span class="n">sommeSup</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># Aire des rectangles supérieurs</span>
+
+    <span class="c1"># Traitement</span>
+
+    <span class="n">x</span><span class="o">=</span><span class="n">xmin</span>       <span class="c1"># Bord gauche du rectangle considéré</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>   <span class="c1"># Répéter n fois</span>
+        <span class="n">sommeInf</span> <span class="o">=</span> <span class="n">sommeInf</span> <span class="o">+</span> <span class="n">dx</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">dx</span><span class="p">)</span>
+        <span class="n">sommeSup</span> <span class="o">=</span> <span class="n">sommeSup</span> <span class="o">+</span> <span class="n">dx</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dx</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">sommeInf</span><span class="p">,</span> <span class="n">sommeSup</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+    </details>
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Votre calcul ici </span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">rectangles</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">r</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(4.4799999999999995, 6.08)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Quelle est l'incertitude commise par cet encadrement ?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>1.6000000000000005</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Comment augmenter la précision de ce calcul et diminuer cette incertitude ? Modifier votre programme pour donner une valeur de l'aire sous la courbe d'une précision d'au moins 0,1</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<details class="description">
+      <summary class="btn btn-sm" data-open="Hide Code" data-close="Show Code"></summary>
+        <p></p>
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># collapse</span>
+
+<span class="c1"># On augmente le nb de rectangles</span>
+<span class="c1"># jusqu'à obtenir la précision souhaitée</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">rectangles</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Précision : "</span><span class="p">,</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">r</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+    </details>
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Précision :  0.08000000000000007
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(5.293199999999998, 5.373199999999998)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Modification-de-l'algorithme">
+<a class="anchor" href="#Modification-de-l'algorithme" aria-hidden="true"><span class="octicon octicon-link"></span></a>Modification de l'algorithme<a class="anchor-link" href="#Modification-de-l'algorithme"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>On souhaite à présent modifier le programme afin d'obtenir un encadrement avec une précision fixée au départ. Par exemple : obtenir un encadrement de l'aire sous la courbe avec une précision d'au moins 0,0001. Que faut-il modifier dans notre algorithme pour arriver à ce résultat ?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ecrire un programme donnant un encadrement de l'aire avec une précision d'au moins 0,0001.</p>
+<p>Combien avez-vous utilisé de rectangles pour arriver à cette précision ?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<details class="description">
+      <summary class="btn btn-sm" data-open="Hide Code" data-close="Show Code"></summary>
+        <p></p>
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># collapse</span>
+
+<span class="c1"># On introduit une boucle tant que </span>
+<span class="c1"># pour obtenir la rpécision souhaitée :</span>
+<span class="c1"># on appelle la fonction rectangles en multipliant par 10</span>
+<span class="c1"># le nombre de rectangles à chaque nouvel appel</span>
+
+<span class="k">def</span> <span class="nf">aire</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">n</span><span class="o">=</span><span class="mi">1</span>
+    <span class="k">while</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="n">prec</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="n">n</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">rectangles</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+    </details>
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">aire</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>((5.33329333320509, 5.333373333205089), 100000)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Notation">
+<a class="anchor" href="#Notation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notation<a class="anchor-link" href="#Notation"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>On note l'aire sous la courbe que nous venons de calculer : $\displaystyle \int_0^2 4-x^2~ dx \approx 5,3333$</p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><a class="u-url" href="/maths/ts/algorithmique/2020/03/07/TS-Activite-methode-rectangles.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

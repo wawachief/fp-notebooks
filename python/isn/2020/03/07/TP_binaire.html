@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Découvrir le binaire | fastpages</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Découvrir le binaire" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="TP sur l’écriture binaire des nombres" />
+<meta property="og:description" content="TP sur l’écriture binaire des nombres" />
+<link rel="canonical" href="https://fastpages.fast.ai/python/isn/2020/03/07/TP_binaire.html" />
+<meta property="og:url" content="https://fastpages.fast.ai/python/isn/2020/03/07/TP_binaire.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-07T00:00:00-06:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://fastpages.fast.ai/python/isn/2020/03/07/TP_binaire.html"},"description":"TP sur l’écriture binaire des nombres","@type":"BlogPosting","url":"https://fastpages.fast.ai/python/isn/2020/03/07/TP_binaire.html","headline":"Découvrir le binaire","dateModified":"2020-03-07T00:00:00-06:00","datePublished":"2020-03-07T00:00:00-06:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://fastpages.fast.ai/feed.xml" title="fastpages" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-57531313-5','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Découvrir le binaire | fastpages</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Découvrir le binaire" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="TP sur l’écriture binaire des nombres" />
+<meta property="og:description" content="TP sur l’écriture binaire des nombres" />
+<link rel="canonical" href="https://fastpages.fast.ai/python/isn/2020/03/07/TP_binaire.html" />
+<meta property="og:url" content="https://fastpages.fast.ai/python/isn/2020/03/07/TP_binaire.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-07T00:00:00-06:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://fastpages.fast.ai/python/isn/2020/03/07/TP_binaire.html"},"description":"TP sur l’écriture binaire des nombres","@type":"BlogPosting","url":"https://fastpages.fast.ai/python/isn/2020/03/07/TP_binaire.html","headline":"Découvrir le binaire","dateModified":"2020-03-07T00:00:00-06:00","datePublished":"2020-03-07T00:00:00-06:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://fastpages.fast.ai/feed.xml" title="fastpages" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-57531313-5','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">fastpages</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Découvrir le binaire</h1><p class="page-description">TP sur l&#39;écriture binaire des nombres</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-03-07T00:00:00-06:00" itemprop="datePublished">
+        Mar 7, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      6 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#python">python</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#ISN">ISN</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/fastai/fastpages/tree/master/_notebooks/2020-03-07-TP_binaire.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/fastai/fastpages/master?filepath=_notebooks%2F2020-03-07-TP_binaire.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/fastai/fastpages/blob/master/_notebooks/2020-03-07-TP_binaire.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#Manipulations-de-chaînes-de-caractère">Manipulations de chaînes de caractère </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Concaténation">Concaténation </a></li>
+<li class="toc-entry toc-h2"><a href="#Conversion-Chaînes---Nombres">Conversion Chaînes - Nombres </a></li>
+<li class="toc-entry toc-h2"><a href="#le-slicing-où-comment-découper-des-parties-d'une-chaîne-de-caractère">le slicing où comment découper des parties d&#39;une chaîne de caractère </a></li>
+<li class="toc-entry toc-h2"><a href="#Renverser-une-chaîne">Renverser une chaîne </a></li>
+<li class="toc-entry toc-h2"><a href="#Parcourir-une-chaîne-de-caractère-par-une-boucle-pour">Parcourir une chaîne de caractère par une boucle pour </a></li>
+<li class="toc-entry toc-h2"><a href="#A-vous-de-jouer">A vous de jouer </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Convertir-un-binaire-en-décimal">Convertir un binaire en décimal </a></li>
+<li class="toc-entry toc-h1"><a href="#Convertir-un-décimal-en-binaire">Convertir un décimal en binaire </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Division-et-reste-en-Python">Division et reste en Python </a></li>
+<li class="toc-entry toc-h2"><a href="#A-vous-de-jouer.">A vous de jouer. </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-03-07-TP_binaire.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">bin</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">int</span><span class="p">(</span><span class="s1">'0b10'</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>En utilisant ces commandes,</p>
+<ul>
+<li>donner la valeur binaire du nombre décimal 123</li>
+<li>donner la valeur décimale du nombre binaire 1001110</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Mais comment fait-il ? Nous allons réécrire nos propres fonctions. Commençons par remarquer que l'écriture binaire d'un nombre est donné par Python sous forme d'<strong>une chaîne de caractères</strong>, c'est à dire un texte délimité par des guillemets. Nous allons commencer par voir quelques règles basiques de manipulation des chaînes.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Manipulations-de-chaînes-de-caractère">
+<a class="anchor" href="#Manipulations-de-cha%C3%AEnes-de-caract%C3%A8re" aria-hidden="true"><span class="octicon octicon-link"></span></a>Manipulations de chaînes de caractère<a class="anchor-link" href="#Manipulations-de-cha%C3%AEnes-de-caract%C3%A8re"> </a>
+</h1>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">maChaine</span><span class="o">=</span><span class="s2">"Ceci est une chaine"</span>
+<span class="n">autreChaine</span><span class="o">=</span><span class="s2">" de caractère"</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Concaténation">
+<a class="anchor" href="#Concat%C3%A9nation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Concaténation<a class="anchor-link" href="#Concat%C3%A9nation"> </a>
+</h2>
+<p>On utilise l'opération '+' pour mettre deux chaînes de caractères bout à bout.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">maChaine</span> <span class="o">+</span> <span class="n">autreChaine</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong><em>Attention</em></strong> : Une chaîne de caractère n'est pas un nombre. Observez attentivement cet exemple :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="s1">'2'</span>
+<span class="n">b</span><span class="o">=</span><span class="s1">'5'</span>
+<span class="n">a</span><span class="o">+</span><span class="n">b</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="s1">'2'</span>
+<span class="n">b</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">a</span><span class="o">+</span><span class="n">b</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">b</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">a</span><span class="o">+</span><span class="n">b</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Conversion-Chaînes---Nombres">
+<a class="anchor" href="#Conversion-Cha%C3%AEnes---Nombres" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conversion Chaînes - Nombres<a class="anchor-link" href="#Conversion-Cha%C3%AEnes---Nombres"> </a>
+</h2>
+<p>Il est possible de convertir un nombre en chaîne de caractère et réciproquement. On utilise pour cela les fonctions <strong>str</strong> et <strong>int</strong> de python :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">12</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">b</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Remarquez la fonction <strong>type</strong> permettant de connaître le <em>type</em> d'une variable. $a$ est de type <strong>entier</strong> alors que $b$ est de type <strong>chaîne</strong>.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">b</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="o">+</span><span class="n">a</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">b</span><span class="o">+</span><span class="n">b</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="le-slicing-où-comment-découper-des-parties-d'une-chaîne-de-caractère">
+<a class="anchor" href="#le-slicing-o%C3%B9-comment-d%C3%A9couper-des-parties-d'une-cha%C3%AEne-de-caract%C3%A8re" aria-hidden="true"><span class="octicon octicon-link"></span></a>le slicing où comment découper des parties d'une chaîne de caractère<a class="anchor-link" href="#le-slicing-o%C3%B9-comment-d%C3%A9couper-des-parties-d'une-cha%C3%AEne-de-caract%C3%A8re"> </a>
+</h2>
+<p>On peut extraire une sous chaîne de caractère à partir d'une chaîne en faisant suivre la chaîne de crochets contenant les indices de début et de fin de la chaîne que l'on souhaite extraire. Il faut savoir qu'en python, les indices commencent à 0. Observez les exemples suivants :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">maChaine</span><span class="o">=</span><span class="s2">"Ceci est un texte"</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">maChaine</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">maChaine</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">maChaine</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">maChaine</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">maChaine</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">maChaine</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">maChaine</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Il est possible de ne pas préciser le second indice après :. Dans ce cas, on obtient la fin de la chaîne à partir de l'indice de début précisé.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">maChaine</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Renverser-une-chaîne">
+<a class="anchor" href="#Renverser-une-cha%C3%AEne" aria-hidden="true"><span class="octicon octicon-link"></span></a>Renverser une chaîne<a class="anchor-link" href="#Renverser-une-cha%C3%AEne"> </a>
+</h2>
+<p>Il y a beaucoup à voir sur le slicing, en particulier l'utilisation des indices et des pas négatifs, mais nous en avons déjà assez vu. Juste un dernier exemple pratique permettant de renverser une chaîne de caractère</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">maChaine</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Parcourir-une-chaîne-de-caractère-par-une-boucle-pour">
+<a class="anchor" href="#Parcourir-une-cha%C3%AEne-de-caract%C3%A8re-par-une-boucle-pour" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parcourir une chaîne de caractère par une boucle pour<a class="anchor-link" href="#Parcourir-une-cha%C3%AEne-de-caract%C3%A8re-par-une-boucle-pour"> </a>
+</h2>
+<p>Il est possible de parcourir un à un chacun des caractères d'une chaîne très facilement en python. Observez cet exemple et admirez à quel point la syntaxe Python est proche du langage naturel !</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nb</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">maChaine</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Je lis le caractère : "</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">nb</span> <span class="o">+=</span><span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Il y a </span><span class="si">{</span><span class="n">nb</span><span class="si">}</span><span class="s2"> caractères dans cette chaîne"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="A-vous-de-jouer">
+<a class="anchor" href="#A-vous-de-jouer" aria-hidden="true"><span class="octicon octicon-link"></span></a>A vous de jouer<a class="anchor-link" href="#A-vous-de-jouer"> </a>
+</h2>
+<p>Vous allez créer une fonction <strong><em>somme</em></strong></p>
+<ul>
+<li>prenant en paramètre un nombre entier $n$</li>
+<li>renvoyant la somme des chiffres composant $n$</li>
+</ul>
+<p><em>Exemple</em> : somme(1234) devra renvoyer 10</p>
+<p><em>Indication</em> : Vous pourrez</p>
+<ul>
+<li>convertir $n$ en chaîne de caractère</li>
+<li>parcourir chaque caractère</li>
+<li>ajouter le chiffre correspondant à une variable total</li>
+<li>retourner la valeur de total</li>
+</ul>
+<p><em>Remarque</em> : Rappelez vous que 1+2 vaut 3 mais '1'+'2' vaut '12' !! je dis ça, je dis rien :)</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># A vous de compléter ...</span>
+
+<span class="k">def</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Convertir-un-binaire-en-décimal">
+<a class="anchor" href="#Convertir-un-binaire-en-d%C3%A9cimal" aria-hidden="true"><span class="octicon octicon-link"></span></a>Convertir un binaire en décimal<a class="anchor-link" href="#Convertir-un-binaire-en-d%C3%A9cimal"> </a>
+</h1>
+<p>Vous êtes maintenant armés pour convertir un binaire en décimal. Avant toute chose, avant d'écrire une fonction, on doit se faire une idée très précise de son fonctionnement avec un papier et un crayon.</p>
+<p>Prenons l'exemple du nombre $b='0b1101'$. Pour le convertir en décimal, nous allons le parcourir de la gauche vers la droite et totaliser au fur à mesure le nombre obtenu avec des puissances de 2. Observez la démarche :</p>
+<ol>
+<li>On se débarasse de l'entête
+b='1101'</li>
+<li>On initialise une variable $n\leftarrow$ 0</li>
+<li>On parcourt b de gauche à droite, caractère par caractère à l'aide d'une boucle</li>
+</ol>
+<ul>
+<li>On lit '1'. On l'ajoute donc à $n$ qui vaut 1</li>
+<li>On lit '1' à nouveau. Avant de l'ajouter à $n$, il faut multiplier $n$ par 2 (10 en binaire) du fait du décalage des bit d'un rang vers la gauche. $n$ vaut donc à présent $2\times 1 + 1$ soit 3 -c'est l'écriture décimale de 11 en binaire, tout va bien !</li>
+<li>On lit '0'. Comme précédemment, on va multiplier $n$ par 2 afin de tenir compte du décalage des bits vers la gauche. $n$ vaut alors 6 et comme on a lu 0, on ajoute rien.</li>
+<li>Pour finir, on lit '1'. On va donc multiplier $n$ par 2 et ajouter 1, ce qui nous donne $2\times 6+1$ soit 13</li>
+</ul>
+<ol>
+<li>On renvoie le résultat final n=13 </li>
+</ol>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">int</span><span class="p">(</span><span class="s1">'0b1101'</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pour bien vous imprégner de l'algorithme, appliquez cette même méthode pour convertir '0b101110' en décimal sur votre feuille. Ne validez la cellule suivante qu'une fois le calcul fait à la main !!</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">int</span><span class="p">(</span><span class="s1">'0b101110'</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Si on résume l'algorithme, il ressemble à ceci :</p>
+<pre>
+  tronquer la chaîne b pour enlever '0b'
+  Initialiser $n à 0
+  parcourir la chaîne b
+  multiplier n par deux et ajouter le chiffre binaire lu
+  renvoyer le résultat n
+</pre>
+<p>Il ne vous reste plus qu'à créer la fonction <strong>bin2dec</strong></p>
+<ul>
+<li>qui prend en entrée une chaîne au format binaire (comme'0b1101')</li>
+<li>qui renvoie l'écriture décimale du nombre</li>
+</ul>
+<p>Ainsi bin2dec('0b1101') devra renvoyer 13</p>
+<p>A vous de jouer</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># A vous de compléter ...</span>
+
+<span class="k">def</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Convertir-un-décimal-en-binaire">
+<a class="anchor" href="#Convertir-un-d%C3%A9cimal-en-binaire" aria-hidden="true"><span class="octicon octicon-link"></span></a>Convertir un décimal en binaire<a class="anchor-link" href="#Convertir-un-d%C3%A9cimal-en-binaire"> </a>
+</h1>
+<p>Nous allons faire maintenant l'opération inverse, c'est à dire passer d'une écriture décimale à binaire :
+<em>Exemple</em> : dec2bin(13) devra renvoyer '0b1101'</p>
+<p>Pour cette seconde fonction, vous commencerez par vous familiariser avec l'algorithme en le faisant fonctionner à la main sur des exemples. Ce n'est qu'une fois à l'aise avec le calcul à la main que vous pourrez apprendre à <strong>pyhton</strong> comment faire.</p>
+<p>L'algorithme consiste à faire des divisions successives par 2 et à regarder le reste. Le reste d'une division par 2 est 0 si le nombre est pair, ou 1 si le nombre est impair. Cela donne justement les chiffres de notre nombre binaire !! Observez l'exemple</p>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>Quotient par 2</th>
+<th>reste</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>13</td>
+<td>6</td>
+<td>1</td>
+</tr>
+<tr>
+<td>6</td>
+<td>3</td>
+<td>0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>On s'arrète lorsque le quotient par 2 est nul. Les restes successifs sont 1, 0 1 et 1 ce qui est justement l'écritune binaire de 13 écrit de la droite vers la gauche, mais vous savez renverser une chaîne de caractère n'est-ce pas  :)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Division-et-reste-en-Python">
+<a class="anchor" href="#Division-et-reste-en-Python" aria-hidden="true"><span class="octicon octicon-link"></span></a>Division et reste en Python<a class="anchor-link" href="#Division-et-reste-en-Python"> </a>
+</h2>
+<p>Avant de vous laisser créer la fonction, voici les opérateurs qui vous seront utiles :</p>
+<ul>
+<li>Division entière : //</li>
+<li>reste : %</li>
+</ul>
+<p>Regardez sur cet exemple :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">13</span><span class="o">//</span><span class="mi">2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">13</span><span class="o">%</span><span class="k">2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Le quotient de 13 par 2 est bien 6 et il reste 1.</p>
+<h2 id="A-vous-de-jouer.">
+<a class="anchor" href="#A-vous-de-jouer." aria-hidden="true"><span class="octicon octicon-link"></span></a>A vous de jouer.<a class="anchor-link" href="#A-vous-de-jouer."> </a>
+</h2>
+<p>Après vous être exercés sur papier à la conversions de nombres de decimal en binaire, il ne vous reste plus qu'à créer la fonction dec2bin</p>
+<ul>
+<li>qui prend en entrée un entier décimal</li>
+<li>qui renvoie l'écriture binaire du nombre sous forme d'une chaîne '0b....'</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># A vous de compléter ...</span>
+
+<span class="k">def</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/python/isn/2020/03/07/TP_binaire.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Initiation à la Programmation Orientée Objet | fastpages</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Initiation à la Programmation Orientée Objet" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Cours NSI Terminale - Thème 1." />
+<meta property="og:description" content="Cours NSI Terminale - Thème 1." />
+<link rel="canonical" href="https://fastpages.fast.ai/python/nsi/terminale/structure_donnees/poo/tp/2020/04/17/nsi_t_Initiation_POO.html" />
+<meta property="og:url" content="https://fastpages.fast.ai/python/nsi/terminale/structure_donnees/poo/tp/2020/04/17/nsi_t_Initiation_POO.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-04-17T00:00:00-05:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://fastpages.fast.ai/python/nsi/terminale/structure_donnees/poo/tp/2020/04/17/nsi_t_Initiation_POO.html"},"description":"Cours NSI Terminale - Thème 1.","@type":"BlogPosting","url":"https://fastpages.fast.ai/python/nsi/terminale/structure_donnees/poo/tp/2020/04/17/nsi_t_Initiation_POO.html","headline":"Initiation à la Programmation Orientée Objet","dateModified":"2020-04-17T00:00:00-05:00","datePublished":"2020-04-17T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://fastpages.fast.ai/feed.xml" title="fastpages" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-57531313-5','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Initiation à la Programmation Orientée Objet | fastpages</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Initiation à la Programmation Orientée Objet" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Cours NSI Terminale - Thème 1." />
+<meta property="og:description" content="Cours NSI Terminale - Thème 1." />
+<link rel="canonical" href="https://fastpages.fast.ai/python/nsi/terminale/structure_donnees/poo/tp/2020/04/17/nsi_t_Initiation_POO.html" />
+<meta property="og:url" content="https://fastpages.fast.ai/python/nsi/terminale/structure_donnees/poo/tp/2020/04/17/nsi_t_Initiation_POO.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-04-17T00:00:00-05:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://fastpages.fast.ai/python/nsi/terminale/structure_donnees/poo/tp/2020/04/17/nsi_t_Initiation_POO.html"},"description":"Cours NSI Terminale - Thème 1.","@type":"BlogPosting","url":"https://fastpages.fast.ai/python/nsi/terminale/structure_donnees/poo/tp/2020/04/17/nsi_t_Initiation_POO.html","headline":"Initiation à la Programmation Orientée Objet","dateModified":"2020-04-17T00:00:00-05:00","datePublished":"2020-04-17T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://fastpages.fast.ai/feed.xml" title="fastpages" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-57531313-5','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">fastpages</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Initiation à la Programmation Orientée Objet</h1><p class="page-description">Cours NSI Terminale - Thème 1.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-04-17T00:00:00-05:00" itemprop="datePublished">
+        Apr 17, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      9 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#python">python</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#NSI">NSI</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Terminale">Terminale</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Structure_donnees">Structure_donnees</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#POO">POO</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#TP">TP</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/fastai/fastpages/tree/master/_notebooks/2020-04-17-nsi_t_Initiation_POO.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/fastai/fastpages/master?filepath=_notebooks%2F2020-04-17-nsi_t_Initiation_POO.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/fastai/fastpages/blob/master/_notebooks/2020-04-17-nsi_t_Initiation_POO.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Introduction">Introduction </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Petit-historique">Petit historique </a></li>
+<li class="toc-entry toc-h3"><a href="#Programmation-procédurale">Programmation procédurale </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Création-d'une-classe">Création d&#39;une classe </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Définition-de-la-classe">Définition de la classe </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#A-vous-de-jouer">A vous de jouer </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-04-17-nsi_t_Initiation_POO.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Introduction">
+<a class="anchor" href="#Introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction<a class="anchor-link" href="#Introduction"> </a>
+</h2>
+<p>Objets et POO sont au centre de la manière Python fonctionne. Vous n'êtes pas obligé d'utiliser la POO dans vos programmes - mais comprendre le concept est essentiel pour devenir plus qu'un débutant. Entre autres raisons parce que vous aurez besoin d'utiliser les classes et objets fournis par la librairie standard.</p>
+<p>En effet en manipulant les tableaux en python, vous avez certainement remarqué qu'il y a deux syntaxes pour appeler des fonctions :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tableau</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="n">taille</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tableau</span><span class="p">)</span>
+<span class="n">tableau</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>le calcul de la longueur du tableau se fait par l'appel à la fonction <code>len()</code> avec une syntaxe identique aux foncitons que vous avez l'habitude d'écrire.</li>
+<li>l'ajout d'un élément dans le tableau est un peu différent car la fonction <code>append</code> semble provenir du tableau lui même : dans ce cas, on ne parle pas de fonciton mais de <strong>méthode</strong> associée à l'<strong>objet</strong> tableau.</li>
+</ul>
+<p>Un objet est une structure de donnée qui intègre des variables (que l'on nomme <strong>propriétés</strong>) et des fonctions (que l'on nomme <strong>méthodes</strong>). Nous allons voir l'intérêt de cette approche, omniprésente dans Python, en particulier lorsqu'on développe des interfaces graphiques, mais avant quelques petits repères historiques et éléments de contexte</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Petit-historique">
+<a class="anchor" href="#Petit-historique" aria-hidden="true"><span class="octicon octicon-link"></span></a>Petit historique<a class="anchor-link" href="#Petit-historique"> </a>
+</h3>
+<p>La programmation en tant que telle est une matière relativement récente. Etonnament la programmation orientée objet remonte aussi loin que les années 1960. <em>Simula</em> est considéré comme le premier langage de programmation orienté objet.</p>
+<p>Les années 1970 voient les principes de la programmation par objet se développent et prennent forme au travers notamment du langage <em>Smalltalk</em></p>
+<p>À partir des années 1980, commence l'effervescence des langages à objets : <em>Objective C</em> (début des années 1980, utilisé sur les plateformes Mac et iOS), <em>C++</em> (C with classes) en 1983 sont les plus célèbres.</p>
+<p>Les années 1990 voient l'âge d'or de l'extension de la programmation par objet dans les différents secteurs du développement logiciel, notemment grâce à l'émergence des systèmes d'exploitation basés sur une interface graphique (MacOS, Linux, Windows) qui font appel abondamment aux principes de la POO.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Programmation-procédurale">
+<a class="anchor" href="#Programmation-proc%C3%A9durale" aria-hidden="true"><span class="octicon octicon-link"></span></a>Programmation procédurale<a class="anchor-link" href="#Programmation-proc%C3%A9durale"> </a>
+</h3>
+<p>La programmation procédurale est celle que vous avez utilisé jusqu'à maintenant : cela consiste à diviser votre programme en blocs réutilisables appelés fonctions.</p>
+<p>Vous essayez autant que possible de garder votre code en blocs modulaires, en décidant de manière logique quel bloc est appelé. Cela demande moins d’effort pour visualiser ce que votre programme fait. Cela rend plus facile la maintenance de votre code – vous pouvez voir ce que fait une portion de code. Le fait d’améliorer une fonction (qui est réutilisée) peut améliorer la performance à plusieurs endroits dans votre programme.</p>
+<p>Vous avez des variables, qui contiennent vos données, et des fonctions. Vous passez vos variables à vos fonctions – qui agissent sur elles et peut-être les modifient. L'interaction entre les variables et les fonctions n'est pas toujours simple à gérer : les variables locales, globales, les effets de bords que provoquent certaines fonctions qui modifient des variables globales sont souvent source de bugs difficiles à déceler.</p>
+<p>On touche ici aux limites de la programmation procédurale, lorsque le nombre de fonctions et de variables devient important.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Création-d'une-classe">
+<a class="anchor" href="#Cr%C3%A9ation-d'une-classe" aria-hidden="true"><span class="octicon octicon-link"></span></a>Création d'une classe<a class="anchor-link" href="#Cr%C3%A9ation-d'une-classe"> </a>
+</h2>
+<p>Nous allons voir un premier exemple simple basé sur la notion de <em>pile</em> vue dans une séquence précédente.</p>
+<p>Une pile possède un comportement différent d'un tableau. On a utilisé un tableau pour simuler le comportement d'une pile mais faisant cela, on peut être tenté d'utiliser des fonctionnalités du tableau qui ne sont pas possibles avec une vraie pile comme accéder au dernier élément de la pile en faisant pile[0].</p>
+<p>Pour y remédier nous allons créer un objet <em>Pile</em> qui se comportera exactement comme on le souhaite. Un objet se définit dans une <strong>classe</strong> qui va nous permettre de définir les <strong>propriétés</strong> et les <strong>méthodes</strong> que l'on souhaite intégrer à notre objet <em>Pile</em>.</p>
+<p><img src="/images/copied_from_nb/classePile.png" alt="classe Pile"></p>
+<p>Notre classe <em>Pile</em> va nous permettre de définir le modèle de l'objet que l'on souhaite créer. Ce modèle possèdera</p>
+<ul>
+<li>2 propriétés (variables intégrées à l'objet)<ul>
+<li>longueur : la longueur de la pile</li>
+<li>sommet : la valeur du sommet de la pile</li>
+</ul>
+</li>
+<li>2 méthodes (fonctions agissant sur cet objet)<ul>
+<li>empile(v) : empile la valeur <code>v</code> sur le sommet de la pile</li>
+<li>depile() : sort une valeur de la pile et la renvoie.</li>
+</ul>
+</li>
+</ul>
+<p>Avec ces caractéristiques nous avons donc défini le prototype de notre pile.</p>
+<p>Voyons en pratique comment cela se passe.</p>
+<h3 id="Définition-de-la-classe">
+<a class="anchor" href="#D%C3%A9finition-de-la-classe" aria-hidden="true"><span class="octicon octicon-link"></span></a>Définition de la classe<a class="anchor-link" href="#D%C3%A9finition-de-la-classe"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Définir une classe - pour le moment vide</span>
+<span class="k">class</span> <span class="nc">Pile</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pour le moment, on a créé une classe <strong>Pile</strong>.</p>
+<p>On peut voir la classe comme le modèle de fabrication de l'objet. Ce n'est pas un objet réel, juste une manière de décrire comment il est constitué et comment il se comporte.</p>
+<p>Une classe seule ne sert à rien. C'est un peu comme voir le nouveau modèle du smartphone de vos rèves sur un site de commerce en ligne : Vous voyez à quoi il ressemble, ses caractéristiques, son prix, ses fonctionnalités... mais vous ne le possédez pas !</p>
+<p>Vous allez donc craquer et passer la commande. Quelques jours plus tard, vous allez posséder l'<strong>objet</strong> réel, le tenir dans vos mains, le manipuler. Vous avez créé ce qu'on appelle une <strong>instance</strong> de la classe.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Créer une instance de l'objet Pile</span>
+<span class="n">ma_pile</span> <span class="o">=</span> <span class="n">Pile</span><span class="p">()</span>
+<span class="n">ma_pile</span><span class="o">.</span><span class="n">longueur</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">ma_pile</span><span class="o">.</span><span class="n">sommet</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">autre_pile</span> <span class="o">=</span> <span class="n">Pile</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vous avez convaincu quelques uns de vos camarades qui ont aussi commandé le même modèle de smartphone. Ils vont aussi 
+posséder leur propre instance. Ces smartphones fonctionneront de la même manière que le votre car fabriqué à partir des mêmes plans, mais ne possèderont pas les mêmes données : vos photos ou vos apps sont propres à votre instance de votre téléphone et n'apparaîtront pas sur celles de vos amis.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ma_pile</span><span class="o">.</span><span class="n">taille</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">autre_pile</span><span class="o">.</span><span class="n">taille</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Nous avons créé deux instances de la classe <em>Pile</em> : <code>ma_pile</code> et <code>autre_pile</code>.
+<code>ma_pile</code> possède à présent deux propriétés : <em>longueur</em> et <em>sommet</em>. Ces propriétés n'existent pas sur <code>aure_pile</code> car l'initialisation de ces propriétés est faite en dehors de la classe, ce qui n'est pas une bonne chose : nous voulons que toutes nos piles soient fabriquées sur le même modèle et donc initialiser les propriétés à l'intérieur de la classe.</p>
+<p>Voici comment procéder :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Pile</span><span class="p">():</span>
+    <span class="sd">"""Implémentation basique d'une pile"""</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Initialisation de l'instance"""</span>
+        
+        <span class="c1"># Initialisation des propriétés</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">longueur</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sommet</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pour initialiser les propriétés, nous avons créé une méthode spéciale à l'intérieur de la classe : la méthode <strong><em><strong>init</strong>()</em></strong>. Le nom de cette méthode lancée automatiquement à la création de chaque instance est imposé par Python et ne peut être changé. Attention aux 2 __ à suivre.</p>
+<p>Le mot clé <strong>self</strong> désigne une instance de la classe - imaginez le remplacer par <code>ma_pile</code> ou <code>autre_pile</code>. Puisqu'au moment de concevoir ma classe, ces instances n'existent pas encore, le mot <strong>self</strong> a été introduit. Il est important de ne pas oublier le <strong>self</strong> car sinon <em>longueur</em> et <em>sommet</em> seront des variables locales à la fonction <strong><strong>init</strong>()</strong> ce qui n'est pas du tout le but recherché ici !</p>
+<p>Recréons à présent des instances de <em>Pile</em> et commençons à saisir des données :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ma_pile</span> <span class="o">=</span> <span class="n">Pile</span><span class="p">()</span>
+<span class="n">autre_pile</span> <span class="o">=</span> <span class="n">Pile</span><span class="p">()</span>
+
+<span class="n">ma_pile</span><span class="o">.</span><span class="n">longueur</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">ma_pile</span><span class="o">.</span><span class="n">sommet</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ma_pile</span><span class="o">.</span><span class="n">longueur</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">autre_pile</span><span class="o">.</span><span class="n">longueur</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Tout fonctionne comme prévu : mes deux instances possèdent les mêmes propriétés mais chacune possède ses valeurs qui lui sont propres.</p>
+<p>Il est temps de définir nos méthodes. Commençons pas <strong>empile</strong>. 
+La définition d'une méthode est similaire à la définition d'une fonction à deux détails près</p>
+<ul>
+<li>les méthodes sont définies <strong>à l'intérieur d'une classe</strong>
+</li>
+<li>le premier paramètre d'une méthode est <strong>toujours</strong> <strong><em>self</em></strong>
+</li>
+</ul>
+<p>Pour empiler des valeurs dans ma pile je vais avoir besoin d'une structure qui mémorise les données de ma pile. Je vais donc créer une propriété <em>cachée</em> <strong>__reste</strong> qui contiendra toutes les valeurs de ma pile autre que le sommet. Les 2 __ sont une convention de nommage et signifie que la propriété ou la méthode n'a pas vocation à être appelée à l'extérieur de la définition de la classe, d'où la qualification de <em>cachée</em>.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Pile</span><span class="p">():</span>
+    <span class="sd">"""Implémentation basique d'une pile"""</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Initialisation de l'instance"""</span>
+        
+        <span class="c1"># Initialisation des propriétés publiques</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">longueur</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sommet</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># None signifie que la pile est vide</span>
+        
+        <span class="c1"># Initialisation du reste de la pile</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__reste</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">empile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valeur</span><span class="p">):</span>
+        <span class="sd">"""empile la valeur passée en paramètre"""</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">longueur</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Le sommet de la pile passe dans le reste</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__reste</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sommet</span><span class="p">)</span>
+        <span class="c1"># le nouveau sommet est la valeur qu'on empile</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sommet</span> <span class="o">=</span> <span class="n">valeur</span>
+        <span class="c1"># La longueur de la pile augmente de 1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">longueur</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ma_pile</span> <span class="o">=</span> <span class="n">Pile</span><span class="p">()</span>
+<span class="n">ma_pile</span><span class="o">.</span><span class="n">empile</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ma_pile</span><span class="o">.</span><span class="n">empile</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ma_pile</span><span class="o">.</span><span class="n">sommet</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ma_pile</span><span class="o">.</span><span class="n">longueur</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>En lisant la définition de la méthode <strong>empile</strong>, vous serez attentif aux points suivants :</p>
+<ul>
+<li>le premier paramètre est <strong>self</strong>, <em>valeur</em> arrive en second</li>
+<li>lorsqu'on invoque la méthode <strong>empile</strong>, on ne passe pas <strong>self</strong>, on passe juste <em>valeur</em>.</li>
+<li>à chaque fois qu'on fait appel à une propriété, on utilise le préfixe <strong>self.</strong>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="A-vous-de-jouer">
+<a class="anchor" href="#A-vous-de-jouer" aria-hidden="true"><span class="octicon octicon-link"></span></a>A vous de jouer<a class="anchor-link" href="#A-vous-de-jouer"> </a>
+</h2>
+<p>L'implémentation de notre pile n'est pas terminée. Vous allez devoir à présent implémenter la méthode <strong>depile()</strong>. Celle-ci ne prend pas de paramètres (a part bien sûr <strong>self</strong> que vous n'oublierez pas !) et renvoie la valeur qui a été sorti de la pile. 
+Vous serez attentif</p>
+<ul>
+<li>à modifier la propriété longueur</li>
+<li>à ne pas provoquer d'erreur si il n'y a rien dans la pile. Dans ce cas, vous renverrez <strong>None</strong>.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Pile</span><span class="p">():</span>
+    <span class="sd">"""Implémentation basique d'une pile"""</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Initialisation de l'instance"""</span>
+        
+        <span class="c1"># Initialisation des propriétés publiques</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">longueur</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sommet</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># None signifie que la pile est vide</span>
+        
+        <span class="c1"># Initialisation du reste de la pile</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__reste</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">empile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valeur</span><span class="p">):</span>
+        <span class="sd">"""empile la valeur passée en paramètre"""</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">longueur</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Le sommet de la pile passe dans le reste</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__reste</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sommet</span><span class="p">)</span>
+        <span class="c1"># le nouveau sommet est la valeur qu'on empile</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sommet</span> <span class="o">=</span> <span class="n">valeur</span>
+        <span class="c1"># La longueur de la pile augmente de 1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">longueur</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+    <span class="c1"># YOUR CODE HERE</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Testez votre classe dans cette cellule</span>
+<span class="n">ma_pile</span> <span class="o">=</span> <span class="n">Pile</span><span class="p">()</span>
+<span class="n">ma_pile</span><span class="o">.</span><span class="n">empile</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Vérification du fonctionnement de la classe Pile</span>
+<span class="n">ma_pile</span> <span class="o">=</span> <span class="n">Pile</span><span class="p">()</span>
+<span class="n">ma_pile</span><span class="o">.</span><span class="n">empile</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ma_pile</span><span class="o">.</span><span class="n">empile</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">ma_pile</span><span class="o">.</span><span class="n">sommet</span> <span class="o">==</span> <span class="mi">5</span>
+<span class="k">assert</span> <span class="n">ma_pile</span><span class="o">.</span><span class="n">longueur</span> <span class="o">==</span> <span class="mi">2</span>
+<span class="k">assert</span> <span class="n">ma_pile</span><span class="o">.</span><span class="n">depile</span><span class="p">()</span> <span class="o">==</span> <span class="mi">5</span>
+<span class="k">assert</span> <span class="n">ma_pile</span><span class="o">.</span><span class="n">longueur</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="k">assert</span> <span class="n">ma_pile</span><span class="o">.</span><span class="n">depile</span><span class="p">()</span> <span class="o">==</span> <span class="mi">3</span>
+<span class="k">assert</span> <span class="n">ma_pile</span><span class="o">.</span><span class="n">longueur</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/python/nsi/terminale/structure_donnees/poo/tp/2020/04/17/nsi_t_Initiation_POO.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Utilisation avancée des variables | fastpages</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Utilisation avancée des variables" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Notion de variable locale/globale, références partagées et objets mutables" />
+<meta property="og:description" content="Notion de variable locale/globale, références partagées et objets mutables" />
+<link rel="canonical" href="https://fastpages.fast.ai/python/isn/2020/03/07/Python4-Utilisation-avanceee-des-variables.html" />
+<meta property="og:url" content="https://fastpages.fast.ai/python/isn/2020/03/07/Python4-Utilisation-avanceee-des-variables.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-07T00:00:00-06:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://fastpages.fast.ai/python/isn/2020/03/07/Python4-Utilisation-avanceee-des-variables.html"},"description":"Notion de variable locale/globale, références partagées et objets mutables","@type":"BlogPosting","url":"https://fastpages.fast.ai/python/isn/2020/03/07/Python4-Utilisation-avanceee-des-variables.html","headline":"Utilisation avancée des variables","dateModified":"2020-03-07T00:00:00-06:00","datePublished":"2020-03-07T00:00:00-06:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://fastpages.fast.ai/feed.xml" title="fastpages" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-57531313-5','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Utilisation avancée des variables | fastpages</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Utilisation avancée des variables" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Notion de variable locale/globale, références partagées et objets mutables" />
+<meta property="og:description" content="Notion de variable locale/globale, références partagées et objets mutables" />
+<link rel="canonical" href="https://fastpages.fast.ai/python/isn/2020/03/07/Python4-Utilisation-avanceee-des-variables.html" />
+<meta property="og:url" content="https://fastpages.fast.ai/python/isn/2020/03/07/Python4-Utilisation-avanceee-des-variables.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-07T00:00:00-06:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://fastpages.fast.ai/python/isn/2020/03/07/Python4-Utilisation-avanceee-des-variables.html"},"description":"Notion de variable locale/globale, références partagées et objets mutables","@type":"BlogPosting","url":"https://fastpages.fast.ai/python/isn/2020/03/07/Python4-Utilisation-avanceee-des-variables.html","headline":"Utilisation avancée des variables","dateModified":"2020-03-07T00:00:00-06:00","datePublished":"2020-03-07T00:00:00-06:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://fastpages.fast.ai/feed.xml" title="fastpages" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-57531313-5','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">fastpages</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Utilisation avancée des variables</h1><p class="page-description">Notion de variable locale/globale, références partagées et objets mutables</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-03-07T00:00:00-06:00" itemprop="datePublished">
+        Mar 7, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      9 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#python">python</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#ISN">ISN</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/fastai/fastpages/tree/master/_notebooks/2020-03-07-Python4 - Utilisation avanceee des variables.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/fastai/fastpages/master?filepath=_notebooks%2F2020-03-07-Python4+-+Utilisation+avanceee+des+variables.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/fastai/fastpages/blob/master/_notebooks/2020-03-07-Python4 - Utilisation avanceee des variables.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Affectations---rappels">Affectations - rappels </a></li>
+<li class="toc-entry toc-h2"><a href="#Variables-locales---Variables-globales">Variables locales - Variables globales </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Variables-locales">Variables locales </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Variables-globales">Variables globales </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Modifier-une-variable-globale-dans-une-fonction">Modifier une variable globale dans une fonction </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Exercice">Exercice </a></li>
+<li class="toc-entry toc-h2"><a href="#Les-références-partagées-:-le-cas-des-listes">Les références partagées : le cas des listes </a></li>
+<li class="toc-entry toc-h2"><a href="#Exercice">Exercice </a></li>
+<li class="toc-entry toc-h2"><a href="#Le-cas-des-chaînes">Le cas des chaînes </a></li>
+<li class="toc-entry toc-h1"><a href="#Conclusion">Conclusion </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-03-07-Python4 - Utilisation avanceee des variables.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>En Python, les variables sont crées automatiquement à leur première utilisation. Pour créer une variable, il
+suffit donc de l’utiliser en l’affectant une première fois, c’est à dire d’écrire <em>nom_variable=valeur_de_la_variable</em>.
+Une variable peut prendre n’importe quel nom, tant qu’elle respecte les règles suivantes :</p>
+<ul>
+<li>Son nom commence de préférence par une lettre minuscule (a à z) ou majuscule (A à Z), ou bien par le
+caractère souligné (_)</li>
+<li>Pour la suite de son nom, on peut utiliser les lettres minuscules et majuscule, le souligné et un chiffre (0
+à 9)</li>
+<li>Il faut éviter de préférence d’utiliser un mot réservé (commande Python)</li>
+</ul>
+<p>Avant de commencer, validez la cellule suivante qui nous permettra d'accéder à un outil très pratique : <strong>Python tutor</strong>.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">metakernel</span> <span class="kn">import</span> <span class="n">register_ipython_magics</span>
+<span class="n">register_ipython_magics</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Affectations---rappels">
+<a class="anchor" href="#Affectations---rappels" aria-hidden="true"><span class="octicon octicon-link"></span></a>Affectations - rappels<a class="anchor-link" href="#Affectations---rappels"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="mi">7</span> <span class="c1"># Affectation simple</span>
+<span class="n">x</span><span class="o">=</span><span class="n">y</span><span class="o">=</span><span class="mi">7</span> <span class="c1"># Affectation multiple</span>
+<span class="n">z</span><span class="p">,</span><span class="n">t</span><span class="o">=</span><span class="s2">"toto"</span><span class="p">,</span><span class="mi">8</span> <span class="c1"># Affectation en parallèle</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Variables-locales---Variables-globales">
+<a class="anchor" href="#Variables-locales---Variables-globales" aria-hidden="true"><span class="octicon octicon-link"></span></a>Variables locales - Variables globales<a class="anchor-link" href="#Variables-locales---Variables-globales"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Variables-locales">
+<a class="anchor" href="#Variables-locales" aria-hidden="true"><span class="octicon octicon-link"></span></a>Variables locales<a class="anchor-link" href="#Variables-locales"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Une <em>variable locale</em> est une variable définie à l’<strong>intérieur d’une fonction</strong>. Elle n’est utilisable qu’à l’intérieur
+de celle-ci, le reste du programme <strong>ignorant totalement</strong> son existence.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Cet exemple illustre le mécanisme de variable locale et de passage de paramètre. La variable locale <strong>varLoc</strong> est
+utilisable à l’intérieur de la fonction <em>maFonction</em> et remplit son rôle.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">maFonction</span><span class="p">(</span><span class="n">param</span><span class="p">):</span>
+    <span class="n">varLoc</span><span class="o">=</span><span class="mi">4</span>
+    <span class="n">varLoc</span><span class="o">=</span><span class="n">varLoc</span><span class="o">+</span><span class="n">param</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">varLoc</span><span class="p">)</span>
+
+<span class="n">maFonction</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Néanmoins, cette variable n'a plus d'existance à l'extérieur de la fonction.
+Exécutez le code suivant et trouver dans le message d'erreur ce qui prouve que la variable locale est détruite en sortant de la fonction.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">maFonction</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">varLoc</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Variables-globales">
+<a class="anchor" href="#Variables-globales" aria-hidden="true"><span class="octicon octicon-link"></span></a>Variables globales<a class="anchor-link" href="#Variables-globales"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Il existe des cas ou on souhaite qu'une variable soit persistante tout au long de la vie du programme, quelque soit la fonction qui l'utilise. C'est ce qu'on appelle une <em>variable globale</em>.</p>
+<p>Il faut être assez prudent dans l'utilisation de ces variables : une trop grande quantité de variables globales rend le programme difficile à lire et à maintenir. C'est une technique de programmation peu élégante.</p>
+<p>On préfère en général avoir recours à des <strong>objets</strong> (voir le classeur sur la programmation orientée objet).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Une <em>variable globale</em> est définie dans le programme principal (souvent au début dans la section d’initialisa-
+tion). Elle est par défaut <strong>accessible en lecture seule dans l’ensemble des fonctions</strong> définies dans le programme :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">varGlo</span><span class="o">=</span><span class="mi">5</span>
+<span class="k">def</span> <span class="nf">maFonction1</span><span class="p">():</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">"varGlo dans fonction1"</span><span class="p">,</span><span class="n">varGlo</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">maFonction2</span><span class="p">():</span>
+    <span class="n">varGlo</span><span class="o">=</span><span class="mi">4</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">"varGlo dans fonction2"</span><span class="p">,</span><span class="n">varGlo</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Debut programme principal"</span><span class="p">,</span><span class="n">varGlo</span><span class="p">)</span>
+<span class="n">maFonction1</span><span class="p">()</span>
+<span class="n">maFonction2</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Fin programme principal"</span><span class="p">,</span><span class="n">varGlo</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Afin de bien comprendre ce qui s'est passé, revoyons l'exécution de cette cellule au ralenti :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">tutor</span>
+varGlo=5
+def maFonction1():
+    print ("varGlo dans fonction1",varGlo)
+
+def maFonction2():
+    varGlo=4
+    print ("varGlo dans fonction2",varGlo)
+
+print("Debut programme principal",varGlo)
+maFonction1()
+maFonction2()
+print("Fin programme principal",varGlo)
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vous constaterez dans l'exemple ci-dessus que
+-<em>varGlo</em> est <strong>accessible en lecture</strong> dans <em>maFonction1</em>
+-<em>varGlo</em> <strong>a pu être modifiée</strong> dans <em>maFonction2</em>
+-les modifications de <em>varGlo</em> dans <em>maFonction2</em> n'ont <strong>pas été répercutées</strong> dans le programme principal !</p>
+<p>On peut avoir l'impression en lisant le code que <em>varGlo</em> prend la valeur 4 dès que <em>maFonction2</em> est exécutée. En réalité, maFonction2 va créer une variable locale de même nom que varGlo qui n'aura d'existance qu'à l'intérieur de la fonction. La variable globale varGlo créée au début du programme, elle, est <strong>inchangée</strong>.</p>
+<p>Voila pourquoi il faut être prudent quant à l'utilisation des variables globales.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Modifier-une-variable-globale-dans-une-fonction">
+<a class="anchor" href="#Modifier-une-variable-globale-dans-une-fonction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Modifier une variable globale dans une fonction<a class="anchor-link" href="#Modifier-une-variable-globale-dans-une-fonction"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Il est bien sûr possible de modifier le contenu d'une variable globale à l'intérieur d'une fonction. Pour ce faire, on utilisera la commande python <strong>global</strong> pour indiquer à la fonction  les variables globales accessibles en modification.</p>
+<p>Etudiez l'exemple suivant :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">varGlo</span><span class="o">=</span><span class="mi">5</span>
+
+<span class="k">def</span> <span class="nf">maFonction3</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">varGlo</span>
+    <span class="n">varGlo</span><span class="o">=</span><span class="mi">4</span>
+
+<span class="n">maFonction3</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Que vaut varGlo après appel de maFonction3 ?</span>
+<span class="c1">## indiquez votre réponse dans la variable réponse</span>
+
+<span class="n">reponse</span> <span class="o">=</span> <span class="o">...</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">varGlo</span> <span class="o">==</span> <span class="n">reponse</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Exercice">
+<a class="anchor" href="#Exercice" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exercice<a class="anchor-link" href="#Exercice"> </a>
+</h2>
+<ul>
+<li>Créer une variable <em>globale</em> nbCoups initialisée à 0</li>
+<li>Ecrire une fonction <strong>trouve</strong><ul>
+<li>prenant en paramètre un entier n</li>
+<li>créant une variable locale <em>inc</em> qui est un entier aléatoire entre 1 et 10</li>
+<li>renvoyant True si $n$ est égal à <em>inc</em>, False sinon</li>
+<li>le nombre de coups devra être incrémenté à chaque appel de la fonction</li>
+</ul>
+</li>
+</ul>
+<p>Combien de coups vous a t-il fallu pour tomber sur le nombre choisi pr l'ordinateur ?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<span class="c1"># YOUR CODE HERE</span>
+<span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trouve</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nbCoups</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nbCoups</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">trouve</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">nbCoups</span> <span class="o">==</span> <span class="mi">1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Les-références-partagées-:-le-cas-des-listes">
+<a class="anchor" href="#Les-r%C3%A9f%C3%A9rences-partag%C3%A9es-:-le-cas-des-listes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Les références partagées : le cas des listes<a class="anchor-link" href="#Les-r%C3%A9f%C3%A9rences-partag%C3%A9es-:-le-cas-des-listes"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Les listes Python sont des <strong>références</strong>, c’est à dire que écrire a = [(1,0,0),(0,1,0),(0,0,1)] ne
+signifie pas que a <em>vaut</em> [(1,0,0),(0,1,0),(0,0,1)] mais que a <em>référence</em> la liste [(1,0,0),(0,1,0),(0,0,1)], c'est à dire contient un <em>pointeur vers la zone mémoire qui contient cette liste</em>.</p>
+<p>La subtilité est que la commande <em>b = a</em> ne va pas duppliquer le contenu de la liste mais <strong>recopier une référence sur cette même liste</strong>. Si on modifie b, alors a <strong>sera également modifié</strong>.</p>
+<p>L’examen des deux exemples suivant illustre ce concept.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">"a="</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span> <span class="c1"># On copie la référence, pas la liste</span>
+
+<span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># On modifie b</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"b="</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"a="</span><span class="p">,</span><span class="n">a</span><span class="p">)</span> <span class="c1"># Ouuups !!!</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Dans l'exemple ci-dessus, la modification de $b$ entraîne sans qu'on s'y attende la modification de $a$ !!</p>
+<p>Ce n'est pas un bug de Python, c'est normal quand on sait comment Python gère la mémoire.
+Revoyons cette séquence au ralenti en validant la cellule suivante:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">tutor</span>
+a = [(1,0,0), (0,1,0), (0,0,1)]
+print ("a=",a)
+
+b = a # On copie la référence, pas la liste
+
+b[0] = (1,1,0) # On modifie b
+print("b=",b)
+
+print("a=",a) # Ouuups !!!
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vous le voyez, l'outil <strong>python tutor</strong> est très pratique pour observer dans le détail comment Python gère la mémoire. N'hésitez pas par la suite à l'utiliser en ajoutant <strong>%%tutor</strong> en première ligne de cellule.</p>
+<p>Pour suivre l'utilisation de la mémoire, on peut aussi utiliser la commande <strong>id</strong> qui permet d'obtenir l'adresse mémoire de l'objet référencé par une variable :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"adresse de a"</span><span class="p">,</span><span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"adresse de b"</span><span class="p">,</span><span class="nb">id</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Tout s'explique !! <em>a</em> et <em>b</em> son un seul et même objet !</p>
+<p>Mais comment faire pour obtenir dans <em>b</em> une liste identique mais indépendante de <em>a</em> ?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"adresse de a"</span><span class="p">,</span><span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"adresse de b"</span><span class="p">,</span><span class="nb">id</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>ah ! les adresses de <em>a</em> et de <em>b</em> sont différentes. Si je modifie <em>b</em>, <em>a</em> ne devrait pas être impacté. Vérifions le de suite !</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># On modifie b</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"b="</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"a="</span><span class="p">,</span><span class="n">a</span><span class="p">)</span> <span class="c1"># Ouuuf !!!</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>On devra donc être prudent sur l’utilisation d’une affectation du type b=a surtout lorsqu’on travaille avec des listes
+ou des chaîne de caractères, des effets inattendus peuvent alors se produire.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># une erreur classique</span>
+<span class="n">liste_desordre</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">liste_ordre</span><span class="o">=</span><span class="n">liste_desordre</span>
+<span class="n">liste_ordre</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">"Liste en ordre"</span><span class="p">,</span><span class="n">liste_ordre</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">"Liste de départ"</span><span class="p">,</span><span class="n">liste_desordre</span><span class="p">)</span> <span class="c1"># oups</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Et voici comment réaliser une véritable dupplication de notre liste : on utilise la méthode <strong><em>copy()</em></strong></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">liste_desordre</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">liste_ordre</span><span class="o">=</span><span class="n">liste_desordre</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">liste_ordre</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">"Liste en ordre"</span><span class="p">,</span><span class="n">liste_ordre</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">"Liste de départ"</span><span class="p">,</span><span class="n">liste_desordre</span><span class="p">)</span> <span class="c1"># ouf</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Exercice">
+<a class="anchor" href="#Exercice" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exercice<a class="anchor-link" href="#Exercice"> </a>
+</h2>
+<p>Ecrire une fonction double1 qui prend une liste de nombre en paramètre et qui multiplie chaque élément par 2. La fonction double1 renvoie la liste doublée. La liste de départ <strong>est modifiée </strong>par cette fonction.</p>
+<p>Ecrire une fonction double2 qui prend une liste de nombre en paramètre et renvoie une liste contenant les doubles de tous les éléments de la liste passée en paramètre. La liste de départ <strong>n'est pas modifiée</strong> par cette fonction.</p>
+<p>Regardez la cellule de tests pour plus d'informations si nécessaire</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># YOUR CODE HERE</span>
+<span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Cellule de test</span>
+
+<span class="n">liste</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="k">assert</span> <span class="n">double1</span><span class="p">(</span><span class="n">liste</span><span class="p">)</span> <span class="o">==</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+<span class="c1"># double1 modifie la liste de départ</span>
+<span class="k">assert</span> <span class="n">liste</span> <span class="o">==</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+
+<span class="n">liste</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="k">assert</span> <span class="n">double2</span><span class="p">(</span><span class="n">liste</span><span class="p">)</span> <span class="o">==</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+<span class="c1"># double2 ne modifie pas la liste de départ</span>
+<span class="k">assert</span> <span class="n">liste</span> <span class="o">==</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Le-cas-des-chaînes">
+<a class="anchor" href="#Le-cas-des-cha%C3%AEnes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Le cas des chaînes<a class="anchor-link" href="#Le-cas-des-cha%C3%AEnes"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Lorsque l'on manipule des variables contenant des chaînes de caractères, manipule t-on les références vers ces chaînes ou bien les contenus des chaînes de caractères ?</p>
+<p>Le comportement des chaînes de caractères est-il identique à celui des listes ou non ?</p>
+<p>En vous inspirant des manipulations faites listes mais avec des chaînes de caractères, tentez d'apporter des réponses à ces questions.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Faites vos tests ici</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Lorsque on manipule des chaines de caractères, on manipule des références vers ces chaines. De ce point de vue, les chaînes se comporte comme les listes.</p>
+<p>Observons si on peut avoir un <em>effet de bord</em> (modification non prévue d'une variable) :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span> <span class="o">=</span> <span class="s1">'salut tout le monde'</span>
+<span class="n">autrechaine</span> <span class="o">=</span> <span class="n">chaine</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">autrechaine</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="s2">"a"</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Il semble que les chaînes ne puissent pas être modifiées sur place. Ce sont des objets non mutables. Cela les distingue de listes. De ce point de vue, cela nous protège des <em>effets de bord</em> constatés sur les listes.</p>
+<p>Oui mais qu'en est-il de la concaténation ? en effet, on peut ajouter une chaine au bout d'une chaine et en ce sens modifier notre chaine... regardons :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">autrechaine</span> <span class="o">+=</span> <span class="s2">" est moche"</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">autrechaine</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chaine</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Tout va bien, autrechaine est modifiée mais sans effet non désiré sur chaine. Mais comment est-ce possible puisque on a modifié autrechaine ?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">autrechaine</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">chaine</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Après ajout d'une autre chaine au bout de la variable <em>autrechaine</em>, la variable <em>autrechaine</em> pointe sur un nouvel objet. Cela prouve que les chaines de caractères sont des objets non mutables contrairement aux listes.</p>
+<p>Pas de crainte d'effet de bord sur les chaines.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Conclusion">
+<a class="anchor" href="#Conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion<a class="anchor-link" href="#Conclusion"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Il y a deux grands types d'objets en python :</p>
+<ul>
+<li>les objets mutables</li>
+<li>les objets immuables</li>
+</ul>
+<p>Les objets mutables sont des objets qui acceptent d'être modifiés sans avoir besoin d'être recopiés - on parle alors de modification sur place. Exemples : les listes, les dictionnaires, les ensembles.</p>
+<p>Les objets immuables sont des objets qui nécessitent d'être recréés pour être modifiés. Exemple : les chaines de caractères ou les tuples.</p>
+<p>Il faut être très prudent lors de la manipulation d'objets mutables à cause du problème des <strong>références partagées</strong> qui peut occasionner des <em>effets de bords</em> non désirés : modification non prévue d'autres variables que celle sur laquelle on agit.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><a class="u-url" href="/python/isn/2020/03/07/Python4-Utilisation-avanceee-des-variables.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

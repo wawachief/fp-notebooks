@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Les chaines de caracteres | fastpages</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Les chaines de caracteres" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Initiation aux chaînes de caractères en Python" />
+<meta property="og:description" content="Initiation aux chaînes de caractères en Python" />
+<link rel="canonical" href="https://fastpages.fast.ai/python/isn/2020/03/07/Python3-Les-chaines.html" />
+<meta property="og:url" content="https://fastpages.fast.ai/python/isn/2020/03/07/Python3-Les-chaines.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-07T00:00:00-06:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://fastpages.fast.ai/python/isn/2020/03/07/Python3-Les-chaines.html"},"description":"Initiation aux chaînes de caractères en Python","@type":"BlogPosting","url":"https://fastpages.fast.ai/python/isn/2020/03/07/Python3-Les-chaines.html","headline":"Les chaines de caracteres","dateModified":"2020-03-07T00:00:00-06:00","datePublished":"2020-03-07T00:00:00-06:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://fastpages.fast.ai/feed.xml" title="fastpages" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-57531313-5','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Les chaines de caracteres | fastpages</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Les chaines de caracteres" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Initiation aux chaînes de caractères en Python" />
+<meta property="og:description" content="Initiation aux chaînes de caractères en Python" />
+<link rel="canonical" href="https://fastpages.fast.ai/python/isn/2020/03/07/Python3-Les-chaines.html" />
+<meta property="og:url" content="https://fastpages.fast.ai/python/isn/2020/03/07/Python3-Les-chaines.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-07T00:00:00-06:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://fastpages.fast.ai/python/isn/2020/03/07/Python3-Les-chaines.html"},"description":"Initiation aux chaînes de caractères en Python","@type":"BlogPosting","url":"https://fastpages.fast.ai/python/isn/2020/03/07/Python3-Les-chaines.html","headline":"Les chaines de caracteres","dateModified":"2020-03-07T00:00:00-06:00","datePublished":"2020-03-07T00:00:00-06:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://fastpages.fast.ai/feed.xml" title="fastpages" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-57531313-5','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">fastpages</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Les chaines de caracteres</h1><p class="page-description">Initiation aux chaînes de caractères en Python</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-03-07T00:00:00-06:00" itemprop="datePublished">
+        Mar 7, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      5 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#python">python</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#ISN">ISN</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/fastai/fastpages/tree/master/_notebooks/2020-03-07-Python3 - Les chaines.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/fastai/fastpages/master?filepath=_notebooks%2F2020-03-07-Python3+-+Les+chaines.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/fastai/fastpages/blob/master/_notebooks/2020-03-07-Python3 - Les chaines.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Couper-et-joindre">Couper et joindre </a></li>
+<li class="toc-entry toc-h2"><a href="#Majuscule-et-minuscule">Majuscule et minuscule </a></li>
+<li class="toc-entry toc-h2"><a href="#rechercher-un-caractère,-une-position-etc...-dans-une-chaîne.">rechercher un caractère, une position etc... dans une chaîne. </a></li>
+<li class="toc-entry toc-h2"><a href="#Conversion-chaîne-<->-nombres">Conversion chaîne &lt;-&gt; nombres </a></li>
+<li class="toc-entry toc-h2"><a href="#Comparaison-de-chaînes-de-caractères">Comparaison de chaînes de caractères </a></li>
+<li class="toc-entry toc-h2"><a href="#Tranches-de-chaînes">Tranches de chaînes </a></li>
+<li class="toc-entry toc-h2"><a href="#Parcourir-une-chaîne-de-caractères">Parcourir une chaîne de caractères </a></li>
+<li class="toc-entry toc-h2"><a href="#Mise-en-pratique">Mise en pratique </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Exercice-1">Exercice 1 </a></li>
+<li class="toc-entry toc-h3"><a href="#Exercice-2">Exercice 2 </a></li>
+<li class="toc-entry toc-h3"><a href="#Exercice-3">Exercice 3 </a></li>
+<li class="toc-entry toc-h3"><a href="#Exercice-4">Exercice 4 </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-03-07-Python3 - Les chaines.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span> <span class="o">=</span> <span class="s2">"Lycée Salvador Allende"</span>
+<span class="n">chaine</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Par contre, il est impossible de modifier une chaîne de caractères ! On dit alors qu'il s'agit d'une liste <em>non mutable</em> :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span> <span class="s2">"a"</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Si vous décidiez de lui ajouter des caractères en fin de chaîne à l'aide d'une concaténation du type suivant :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span> <span class="o">=</span> <span class="n">chaine</span><span class="o">+</span><span class="s2">" - Hérouville saint clair"</span>
+<span class="n">chaine</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong><em>Remarque</em></strong> : Contrairement aux apparences, la chaine n'a pas été modifiée <em>puisque les chaines sont non mutables</em>, une nouvelle chaine a été crée par <em>concaténation</em> des deux chaines placées autour du signe <strong><em>+</em></strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Il existe de nombreuses méthodes agissant sur les chaînes de caratères. Pour les voir, vous pouvez utiliser la fonction d'<em>autocompletion</em> de Jupyter en tapant dans une cellule de code</p>
+
+<pre><code>chaine. 
+
+</code></pre>
+<p>puis en pressant la touche <em>TAB</em>. N'oubliez pas le <strong><em>.</em></strong> !</p>
+<p>Vous devriez voir la liste des méthodes disponibles :</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">.</th>
+<th style="text-align:center">.</th>
+<th style="text-align:center">.</th>
+<th style="text-align:center">.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">x.capitalize</td>
+<td style="text-align:center">x.isalnum</td>
+<td style="text-align:center">x.join</td>
+<td style="text-align:center">x.rsplit </td>
+</tr>
+<tr>
+<td style="text-align:center">x.casefold</td>
+<td style="text-align:center">x.isalpha</td>
+<td style="text-align:center">x.ljust</td>
+<td style="text-align:center">x.rstrip </td>
+</tr>
+<tr>
+<td style="text-align:center">x.center</td>
+<td style="text-align:center">x.isdecimal</td>
+<td style="text-align:center">x.lower</td>
+<td style="text-align:center">x.split</td>
+</tr>
+<tr>
+<td style="text-align:center">x.count</td>
+<td style="text-align:center">x.isdigit</td>
+<td style="text-align:center">x.lstrip</td>
+<td style="text-align:center">x.splitlines</td>
+</tr>
+<tr>
+<td style="text-align:center">x.encode</td>
+<td style="text-align:center">x.isidentifier</td>
+<td style="text-align:center">x.maketrans</td>
+<td style="text-align:center">x.startswith</td>
+</tr>
+<tr>
+<td style="text-align:center">x.endswith</td>
+<td style="text-align:center">x.islower</td>
+<td style="text-align:center">x.partition</td>
+<td style="text-align:center">x.strip</td>
+</tr>
+<tr>
+<td style="text-align:center">x.expandtabs</td>
+<td style="text-align:center">x.isnumeric</td>
+<td style="text-align:center">x.replace</td>
+<td style="text-align:center">x.swapcase</td>
+</tr>
+<tr>
+<td style="text-align:center">x.find</td>
+<td style="text-align:center">x.isprintable</td>
+<td style="text-align:center">x.rfind</td>
+<td style="text-align:center">x.title</td>
+</tr>
+<tr>
+<td style="text-align:center">x.format</td>
+<td style="text-align:center">x.isspace</td>
+<td style="text-align:center">x.rindex</td>
+<td style="text-align:center">x.translate</td>
+</tr>
+<tr>
+<td style="text-align:center">x.format_map</td>
+<td style="text-align:center">x.istitle</td>
+<td style="text-align:center">x.rjust</td>
+<td style="text-align:center">x.upper</td>
+</tr>
+<tr>
+<td style="text-align:center">x.index</td>
+<td style="text-align:center">x.isupper</td>
+<td style="text-align:center">x.rpartition</td>
+<td style="text-align:center">x.zfill</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span><span class="o">.</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Inutile de toutes les connaître. Nous allons voir ici les fonctions les plus utiles.</p>
+<h2 id="Couper-et-joindre">
+<a class="anchor" href="#Couper-et-joindre" aria-hidden="true"><span class="octicon octicon-link"></span></a>Couper et joindre<a class="anchor-link" href="#Couper-et-joindre"> </a>
+</h2>
+<p>La fonction <strong><em>split()</em></strong> permet de <strong><em>découper</em></strong> la chaîne de caractères qui lui est passée en paramètre suivant un ou des caractère(s) de séparation et renvoie une liste des chaînes découpées. Les caractères de séparation lui sont également passés en paramètre et, si ce n'est pas le cas, ce sera le caractère espace qui sera utilisé :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span><span class="o">=</span><span class="s2">"Lycée Salvador Allende - Hérouville saint clair"</span>
+<span class="n">chaine</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'-'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>L'opération inverse s'appelle <strong><em>join()</em></strong>. Elle consiste a rendre une liste de chaînes de caractères pour former une chaîne en concaténant tous les éléments et en les assemblant à l'aide d'un caractère.</p>
+<p>Cette méthode prend en paramètre une liste de caractères et s'applique à une chaîne de caractères désignant le ou les caractère(s) de liaison :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">liste</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Lycée Salvador Allende'</span><span class="p">,</span> <span class="s1">'Hérouville saint clair'</span><span class="p">]</span>
+<span class="s1">' - '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">liste</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Majuscule-et-minuscule">
+<a class="anchor" href="#Majuscule-et-minuscule" aria-hidden="true"><span class="octicon octicon-link"></span></a>Majuscule et minuscule<a class="anchor-link" href="#Majuscule-et-minuscule"> </a>
+</h2>
+<p>Deux autres méthodes standards peuvent être utiles:</p>
+<p><strong><em>lower()</em></strong> et <strong><em>upper()</em></strong> permettant respectivement de convertir les caractères d'une chaîne en minuscules ou en majuscules.<br>
+Attention, bien que parlant de <em>conversion</em>, ces méthodes ne modifient pas la chaîne de départ mais renvoient une nouvelle chaîne :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>La fonction <strong><em>capitalize()</em></strong> permet de ne mettre en majuscule que la première lettre d'une chaîne :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="rechercher-un-caractère,-une-position-etc...-dans-une-chaîne.">
+<a class="anchor" href="#rechercher-un-caract%C3%A8re,-une-position-etc...-dans-une-cha%C3%AEne." aria-hidden="true"><span class="octicon octicon-link"></span></a>rechercher un caractère, une position etc... dans une chaîne.<a class="anchor-link" href="#rechercher-un-caract%C3%A8re,-une-position-etc...-dans-une-cha%C3%AEne."> </a>
+</h2>
+<ul>
+<li>La fonction <strong><em>len()</em></strong> permet, comme pour les listes, de connaîntre la longueur de la chaîne, c'est à dire compter le nombre de caractères.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span> <span class="o">=</span> <span class="s2">"Lycée Salvador Allende"</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">chaine</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>La méthode <strong><em>count()</em></strong> permet de compter le nombre d'occurrences d'une sous chaîne dans une chaîne de caractères.<br>
+Le premier paramètre est la chaîne dans laquelle effectuer la recherche et le second paramètre est la sous chaîne :</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">'a'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>La méthode <strong><em>find()</em></strong> permet de trouver l'indice de la première occurrence d'une sous chaîne. Les paramètres sont les mêmes que pour la fonction <strong><em>count()</em></strong><br>
+En cas d'échec, <strong><em>find()</em></strong> renvoie la valeur -1 ( 0 correspond à l'indice du premier caractère):
+On utilisera <strong><em>rfind()</em></strong> pour la dernière ocurrence.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'a'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'b'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s1">'a'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>index() est identique à find() mais retourne une erreur en cas d'échec</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">'a'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">'b'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>La fonction <strong><em>replace()</em></strong> permet, comme son nom l'indique, de remplacer une sous chaîne par une autre à l'intérieur d'une chaîne de caractères.<br>
+Les paramètres sont, dans l'ordre : la chaîne de caractères à modifier, la sous chaîne à remplacer, la sous chaîne de remplacement,et, éventuellement, le nombre maximum d'occurrences à remplacer (si non spécifié, toutes les occurrences seront remplacées).</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span><span class="s1">'@'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>et bien sûr, la variable <em>chaine</em> n'est pas modifiée, c'est une nouvelle chaine qui est renvoyée par cette méthode !</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Conversion-chaîne-&lt;-&gt;-nombres">
+<a class="anchor" href="#Conversion-cha%C3%AEne-&lt;-&gt;-nombres" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conversion chaîne &lt;-&gt; nombres<a class="anchor-link" href="#Conversion-cha%C3%AEne-&lt;-&gt;-nombres"> </a>
+</h2>
+<p>Il ne faut pas confondre les objets 12 et "12". Le premier désigne un nombre, le second est une chaîne de caractère. Les comportements et les opérations sont différents.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">12</span> <span class="o">==</span> <span class="s2">"12"</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">12</span><span class="o">+</span><span class="mi">1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">"12"</span><span class="o">+</span><span class="s2">"1"</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Il peut être néanmoins possible de convertir un nombre en chaîne et réciproquement comme on va le voir sur les exemples ci-dessous</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">int</span><span class="p">(</span><span class="s2">"12"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Comparaison-de-chaînes-de-caractères">
+<a class="anchor" href="#Comparaison-de-cha%C3%AEnes-de-caract%C3%A8res" aria-hidden="true"><span class="octicon octicon-link"></span></a>Comparaison de chaînes de caractères<a class="anchor-link" href="#Comparaison-de-cha%C3%AEnes-de-caract%C3%A8res"> </a>
+</h2>
+<p>De même qu'il est possible de comparer deux nombres, on peut aussi comparer des chaines par rapport à l'ordre lexicographique :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">"a"</span><span class="o">&lt;</span><span class="s2">"b"</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">"a"</span><span class="o">&lt;=</span><span class="s2">"r"</span><span class="o">&lt;=</span><span class="s2">"z"</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">"a"</span><span class="o">&lt;=</span><span class="s2">"R"</span><span class="o">&lt;=</span><span class="s2">"z"</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="s2">"toto"</span><span class="o">&lt;</span><span class="s2">"titi"</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tranches-de-chaînes">
+<a class="anchor" href="#Tranches-de-cha%C3%AEnes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tranches de chaînes<a class="anchor-link" href="#Tranches-de-cha%C3%AEnes"> </a>
+</h2>
+<p>Le tranchage (<em>slicing</em>) fonctionne exactement comme pour les listes. Observez les exemples suivants.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span> <span class="o">=</span> <span class="s2">"Lycée Salvador Allende"</span>
+<span class="c1"># obtenir la fin d'une chaîne</span>
+<span class="n">chaine</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># obtenir le début d'une chaîne</span>
+<span class="n">chaine</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Un intervalle</span>
+<span class="n">chaine</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">14</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Et avec des index négatifs ...</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># ce dernier exemple est très pratique pour renverser un itérable</span>
+<span class="n">chaine</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Parcourir-une-chaîne-de-caractères">
+<a class="anchor" href="#Parcourir-une-cha%C3%AEne-de-caract%C3%A8res" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parcourir une chaîne de caractères<a class="anchor-link" href="#Parcourir-une-cha%C3%AEne-de-caract%C3%A8res"> </a>
+</h2>
+<p>Une chaîne de raractère en Python rentre dans la catégorie des <em>itérables</em> au même titre que les listes. On retrouve donc les deux modes de parcours déjà rencontrés sur les listes, à savoir :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Le parcours caractères par caractères :</span>
+<span class="n">chaine</span> <span class="o">=</span> <span class="s2">"ISN"</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">chaine</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Le parcours par indice</span>
+<span class="n">chaine</span> <span class="o">=</span> <span class="s2">"ISN"</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">chaine</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">chaine</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Mise-en-pratique">
+<a class="anchor" href="#Mise-en-pratique" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mise en pratique<a class="anchor-link" href="#Mise-en-pratique"> </a>
+</h2>
+<h3 id="Exercice-1">
+<a class="anchor" href="#Exercice-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exercice 1<a class="anchor-link" href="#Exercice-1"> </a>
+</h3>
+<p>Écrire une fonction <strong>nb_chiffres</strong> qui prend en paramètre une chaîne de caractère et qui renvoie le nombre de chiffres contenus dans la chaîne</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">nb_chiffres</span><span class="p">(</span><span class="n">chaine</span><span class="p">):</span>
+    <span class="c1"># YOUR CODE HERE</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">chaine</span> <span class="o">=</span> <span class="s2">"Lycée Allende - 14200 Hérouville"</span>
+<span class="k">assert</span> <span class="n">nb_chiffres</span><span class="p">(</span><span class="n">chaine</span><span class="p">)</span><span class="o">==</span><span class="mi">5</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercice-2">
+<a class="anchor" href="#Exercice-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exercice 2<a class="anchor-link" href="#Exercice-2"> </a>
+</h3>
+<p>Écrire une fonction <strong>is_email</strong> qui prend en paramètre une chaîne de caractère et renvoie True si celle-ci est une adresse mail. On va simplifier en considérant qu'on a une adresse email si la chaîne possède les 2 propriétés suivantes :</p>
+<ul>
+<li>Un seul caractère @</li>
+<li>Un seul caractère .(point) après @.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">is_email</span><span class="p">(</span><span class="n">chaine</span><span class="p">):</span>
+    <span class="c1"># YOUR CODE HERE</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">is_email</span><span class="p">(</span><span class="s2">"olivier.lecluse@monfai.com"</span><span class="p">)</span>
+<span class="k">assert</span> <span class="ow">not</span> <span class="n">is_email</span><span class="p">(</span><span class="s2">"olivier.lecluse_AT_monfai.com"</span><span class="p">)</span>
+<span class="k">assert</span> <span class="ow">not</span> <span class="n">is_email</span><span class="p">(</span><span class="s2">"olivier.lecluse@monfai"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercice-3">
+<a class="anchor" href="#Exercice-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exercice 3<a class="anchor-link" href="#Exercice-3"> </a>
+</h3>
+<p>Un nombre est un palindrome s'il s'écrit de la même manière de gauche à droite ou de droite à gauche. Exemple : 12521.</p>
+<p>Ecrire une fonction <strong>est_palindrome</strong> prenant en paramètre un nombre et renvoyant <strong><em>True</em></strong> ou <strong><em>False</em></strong> selon que c'est un palindrom ou non.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">est_palindrome</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="c1"># YOUR CODE HERE</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">est_palindrome</span><span class="p">(</span><span class="mi">12521</span><span class="p">)</span>
+<span class="k">assert</span> <span class="ow">not</span> <span class="n">est_palindrome</span><span class="p">(</span><span class="mi">12520</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercice-4">
+<a class="anchor" href="#Exercice-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exercice 4<a class="anchor-link" href="#Exercice-4"> </a>
+</h3>
+<p>Ecrire une fonction <strong>somme_chiffres</strong> prenant un entier en paramètre et renvoyant la somme des chiffres de ce nombre.</p>
+<p>somme_chiffres(125) renvoie 8 puisque 1+2+5=8</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">somme_chiffres</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="c1"># YOUR CODE HERE</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">somme_chiffres</span><span class="p">(</span><span class="mi">125</span><span class="p">)</span><span class="o">==</span><span class="mi">8</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/python/isn/2020/03/07/Python3-Les-chaines.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

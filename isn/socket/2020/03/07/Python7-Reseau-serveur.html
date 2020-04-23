@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Python 7 - Découverte du réseau et serveur | fastpages</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Python 7 - Découverte du réseau et serveur" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="application socket serveur basique" />
+<meta property="og:description" content="application socket serveur basique" />
+<link rel="canonical" href="https://fastpages.fast.ai/isn/socket/2020/03/07/Python7-Reseau-serveur.html" />
+<meta property="og:url" content="https://fastpages.fast.ai/isn/socket/2020/03/07/Python7-Reseau-serveur.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-07T00:00:00-06:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://fastpages.fast.ai/isn/socket/2020/03/07/Python7-Reseau-serveur.html"},"description":"application socket serveur basique","@type":"BlogPosting","url":"https://fastpages.fast.ai/isn/socket/2020/03/07/Python7-Reseau-serveur.html","headline":"Python 7 - Découverte du réseau et serveur","dateModified":"2020-03-07T00:00:00-06:00","datePublished":"2020-03-07T00:00:00-06:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://fastpages.fast.ai/feed.xml" title="fastpages" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-57531313-5','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Python 7 - Découverte du réseau et serveur | fastpages</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Python 7 - Découverte du réseau et serveur" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="application socket serveur basique" />
+<meta property="og:description" content="application socket serveur basique" />
+<link rel="canonical" href="https://fastpages.fast.ai/isn/socket/2020/03/07/Python7-Reseau-serveur.html" />
+<meta property="og:url" content="https://fastpages.fast.ai/isn/socket/2020/03/07/Python7-Reseau-serveur.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-07T00:00:00-06:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://fastpages.fast.ai/isn/socket/2020/03/07/Python7-Reseau-serveur.html"},"description":"application socket serveur basique","@type":"BlogPosting","url":"https://fastpages.fast.ai/isn/socket/2020/03/07/Python7-Reseau-serveur.html","headline":"Python 7 - Découverte du réseau et serveur","dateModified":"2020-03-07T00:00:00-06:00","datePublished":"2020-03-07T00:00:00-06:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://fastpages.fast.ai/feed.xml" title="fastpages" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-57531313-5','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">fastpages</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Python 7 - Découverte du réseau et serveur</h1><p class="page-description">application socket serveur basique</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-03-07T00:00:00-06:00" itemprop="datePublished">
+        Mar 7, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      4 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#ISN">ISN</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#socket">socket</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/fastai/fastpages/tree/master/_notebooks/2020-03-07-Python7 - Reseau serveur.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/fastai/fastpages/master?filepath=_notebooks%2F2020-03-07-Python7+-+Reseau+serveur.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/fastai/fastpages/blob/master/_notebooks/2020-03-07-Python7 - Reseau serveur.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Partie-I-:-Adresses-réseau">Partie I : Adresses réseau </a></li>
+<li class="toc-entry toc-h2"><a href="#Partie-II-:-Les-noms-sur-internet">Partie II : Les noms sur internet </a></li>
+<li class="toc-entry toc-h2"><a href="#Partie-III-:-Principe-de-la-communication-Client/Serveur">Partie III : Principe de la communication Client/Serveur </a></li>
+<li class="toc-entry toc-h2"><a href="#Partie-IV-:-Ecrire-un-programme-serveur-en-Python">Partie IV : Ecrire un programme serveur en Python </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Le-programme-serveur">Le programme serveur </a></li>
+<li class="toc-entry toc-h3"><a href="#Compréhension-du-programme-serveur">Compréhension du programme serveur </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#A-vous-de-jouer-:-Jeu-du-juste-prix-en-réseau">A vous de jouer : Jeu du juste prix en réseau </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-03-07-Python7 - Reseau serveur.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Partie-I-:-Adresses-réseau">
+<a class="anchor" href="#Partie-I-:-Adresses-r%C3%A9seau" aria-hidden="true"><span class="octicon octicon-link"></span></a>Partie I : Adresses réseau<a class="anchor-link" href="#Partie-I-:-Adresses-r%C3%A9seau"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Sur un réseau, chaque ordinateur a une adresse appelée adresse IP (Internet Protocol).
+« Internet Protocol » est un mécanisme inventé pour le réseau internet mais qui est maintenant utilisé pratiquement tous les réseaux, y compris les petits réseaux domestiques.</p>
+<p>Sur Internet, chaque machine connectée au réseau (ordinateur, téléphone, ...) possède une «adresse IP» unique. Cette adresse est constituée de 4 octets.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>1) Combien de machines peut-on connecter sur Internet ?</p>
+<p>Répondez ici...</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>2) Ce protocole (nommé ipv4) a manifestement atteint ses limites. Un nouveau protocole, nommé ipv6 est en cours de déploiement sur Internet. Il utilise des adresses de 128 bits.
+Combien de machines pourront être connectées simultanément grâce à ce nouveau protocole ?</p>
+<p>Répondez ici...</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>3) Ouvrir un terminal et taper à l’invite de commande la commande $\fbox{/sbin/ifconfig}$</p>
+<p>a. Quelle est votre adresse IP ? ...</p>
+<p>b. Quelle est l'adresse IP de votre voisin ? ...</p>
+<p>c. Quelle partie votre adresse IP et celle de votre voisin ont-elle en commun ? ...</p>
+<p>d. Vous pouvez tenter de communiquer avec votre voisin au travers de la commande
+$\fbox{ping Adresse_Ip.De.Votre.Voisin}$ dans le terminal. Qu’obtenez-vous ?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Partie-II-:-Les-noms-sur-internet">
+<a class="anchor" href="#Partie-II-:-Les-noms-sur-internet" aria-hidden="true"><span class="octicon octicon-link"></span></a>Partie II : Les noms sur internet<a class="anchor-link" href="#Partie-II-:-Les-noms-sur-internet"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Les ordinateurs utilisent les adresses IP mais il est rare que les humains les retiennent : on préfère utiliser des noms.</p>
+<p>Chaque ordinateur peut avoir un - ou plusieurs - nom. Dans un réseau il existe des ordinateurs dont la seule fonction est de tenir à jour les tables de correspondance entre les adresses IP et les noms dans une sorte d’annuaire semblable aux annuaires téléphoniques : les serveurs de noms (en abrégé <em>DNS</em>)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>1) Dans un terminal, taper $\fbox{ping lcs}$ puis $\fbox{ping google.fr}$ .</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>2) Quelle est l’adresse IP du Lcs ?</p>
+<p>Répondez ici ...</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>3) Quelle est l’adresse IP de Google.fr ?</p>
+<p>Répondez ici ...</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Partie-III-:-Principe-de-la-communication-Client/Serveur">
+<a class="anchor" href="#Partie-III-:-Principe-de-la-communication-Client/Serveur" aria-hidden="true"><span class="octicon octicon-link"></span></a>Partie III : Principe de la communication Client/Serveur<a class="anchor-link" href="#Partie-III-:-Principe-de-la-communication-Client/Serveur"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Un ordinateur (le <strong><em>serveur</em></strong>) fait tourner en permanence un programme (un <strong><em>service</em></strong>) qui</p>
+<ul>
+<li>attend que d’autres ordinateurs (les <strong><em>clients</em></strong>) le sollicitent</li>
+<li>gère les échanges une fois la liaison établie</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>1) Citer des exemples de communications client/serveur dans vos usages quotidien des réseaux.</p>
+<p>Votre réponse ici ...</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>2) Pour ces exemples, décrire le rôle du serveur et du client.</p>
+<p>Votre réponse ici</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Partie-IV-:-Ecrire-un-programme-serveur-en-Python">
+<a class="anchor" href="#Partie-IV-:-Ecrire-un-programme-serveur-en-Python" aria-hidden="true"><span class="octicon octicon-link"></span></a>Partie IV : Ecrire un programme serveur en Python<a class="anchor-link" href="#Partie-IV-:-Ecrire-un-programme-serveur-en-Python"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Voici un programme serveur basique écrit en Python. On utilise ici la librairie <strong><em>socket</em></strong> qui gère la communication réseau en Python.</p>
+<p>Exécutez cette cellule puis ouvrez le classeur <strong>Python7 - Reseau client</strong> pour exécuter la partie cliente.</p>
+<p>Remarquez que quand le serveur tourne, le kernel python est monopolisé et ne permet plus l'exécution d'une autre cellule, d'où la nécessité de changer de classeur pour la partie cliente.</p>
+<p>Néanmoins, vous pourrez compléter la section suivante sur la compréhension du programme et répondre aux questions posées pendant que le serveur tourne.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Le-programme-serveur">
+<a class="anchor" href="#Le-programme-serveur" aria-hidden="true"><span class="octicon octicon-link"></span></a>Le programme serveur<a class="anchor-link" href="#Le-programme-serveur"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">socket</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1">### Mise en place du service ########</span>
+<span class="n">MON_IP</span> <span class="p">,</span><span class="n">PORT</span> <span class="o">=</span> <span class="s1">'127.0.0.1'</span> <span class="p">,</span> <span class="mi">50000</span>
+<span class="n">service</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">service</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="n">MON_IP</span> <span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
+    <span class="n">tourne</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="n">error</span> <span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Impossible de démarrer le service."</span><span class="p">)</span>
+    <span class="n">tourne</span> <span class="o">=</span> <span class="kc">False</span>
+    
+<span class="k">while</span> <span class="n">tourne</span> <span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Serveur prêt, en attente de requètes ..."</span><span class="p">)</span>
+    <span class="n">service</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1">### Mise en place d?une connexion ########</span>
+    <span class="n">connexion</span><span class="p">,</span> <span class="n">adresse</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Client connecté. : "</span><span class="p">,</span><span class="n">adresse</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="c1">### Dialogue avec le client ########</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="s2">""</span>
+    <span class="k">while</span> <span class="n">message</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">"FIN"</span> <span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">"moi &gt; "</span><span class="p">)</span>
+        <span class="n">connexion</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">"utf8"</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">message</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">"FIN"</span> <span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">connexion</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">"utf8"</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"client &gt; "</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+    <span class="n">connexion</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    
+    <span class="n">ch</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">"&lt;R&gt;ecommencer &lt;T&gt;erminer ? "</span><span class="p">)</span>
+    <span class="n">ch</span> <span class="o">=</span> <span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">ch</span> <span class="o">==</span><span class="s1">'T'</span><span class="p">:</span>
+        <span class="n">tourne</span> <span class="o">=</span> <span class="kc">False</span>
+    
+<span class="n">service</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Compréhension-du-programme-serveur">
+<a class="anchor" href="#Compr%C3%A9hension-du-programme-serveur" aria-hidden="true"><span class="octicon octicon-link"></span></a>Compréhension du programme serveur<a class="anchor-link" href="#Compr%C3%A9hension-du-programme-serveur"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>1) Sur quelle adresse IP le serveur va t-il répondre ?</p>
+<p>Votre réponse ...</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>2) Une même machine peut héberger plusieurs services (programmes serveur). En effet le Lcs héberge un serveur web, un serveur de base de données, des services de messagerie, etc... . Pour éviter que ces services entrent en conflit, on utilise en plus de l’adresse IP un numéro de port qui peut être vu comme un canal de communication. Ce numéro de port est compris entre 1024 et 65535.</p>
+<p>a. Quel numéro de port est utilisé dans le programme étudié ? ...</p>
+<p>b. Changer le numéro de port sur le serveur. Que se passe t-il au niveau du client ? ...</p>
+<p>c. Adapter également le numéro de port sur le client. Le programme fonctionne t-il à nouveau ? ...</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>3) Quelle commande est responsable sur le serveur de l’envoi du message au client ?</p>
+<p>Votre réponse ...</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>4) Écrire en langage naturel l’algorithme correspondant au serveur</p>
+<p>Votre réponse ...</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>5) Quel message taper coté client ou serveur pour mettre fin à la communication ?</p>
+<p>Votre réponse ...</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="A-vous-de-jouer-:-Jeu-du-juste-prix-en-réseau">
+<a class="anchor" href="#A-vous-de-jouer-:-Jeu-du-juste-prix-en-r%C3%A9seau" aria-hidden="true"><span class="octicon octicon-link"></span></a>A vous de jouer : Jeu du juste prix en réseau<a class="anchor-link" href="#A-vous-de-jouer-:-Jeu-du-juste-prix-en-r%C3%A9seau"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>L’objectif de l’activité est de réaliser un jeu de juste prix en réseau.</p>
+<p>1) Décrire le rôle du serveur et du client.</p>
+<p>Votre réponse ...</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>2) Écrire l’algorithme en langage naturel d’un jeu de juste prix en réseau. Vous devrez pour cela écrire l’algorithme du serveur et du client.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>3) en vous aidant des commandes vues dans l’exemple étudier, modifier le programme serveur
+étudié afin de programmer un jeu de juste prix en réseau. On pourra essayer de deviner un nombre
+entier entre 1 et 100.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Votre programme ici...</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/isn/socket/2020/03/07/Python7-Reseau-serveur.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

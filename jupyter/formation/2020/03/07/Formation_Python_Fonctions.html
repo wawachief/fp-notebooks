@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Découverte de l’environnement Jupyter | fastpages</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Découverte de l’environnement Jupyter" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Fastpages Notebook Blog Post" />
+<meta property="og:description" content="Fastpages Notebook Blog Post" />
+<link rel="canonical" href="https://fastpages.fast.ai/jupyter/formation/2020/03/07/Formation_Python_Fonctions.html" />
+<meta property="og:url" content="https://fastpages.fast.ai/jupyter/formation/2020/03/07/Formation_Python_Fonctions.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:image" content="https://respawner.fr/blog/public/Divers/.python_t.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-07T00:00:00-06:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://fastpages.fast.ai/jupyter/formation/2020/03/07/Formation_Python_Fonctions.html"},"description":"Fastpages Notebook Blog Post","@type":"BlogPosting","url":"https://fastpages.fast.ai/jupyter/formation/2020/03/07/Formation_Python_Fonctions.html","headline":"Découverte de l’environnement Jupyter","dateModified":"2020-03-07T00:00:00-06:00","datePublished":"2020-03-07T00:00:00-06:00","image":"https://respawner.fr/blog/public/Divers/.python_t.jpg","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://fastpages.fast.ai/feed.xml" title="fastpages" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-57531313-5','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Découverte de l’environnement Jupyter | fastpages</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Découverte de l’environnement Jupyter" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Fastpages Notebook Blog Post" />
+<meta property="og:description" content="Fastpages Notebook Blog Post" />
+<link rel="canonical" href="https://fastpages.fast.ai/jupyter/formation/2020/03/07/Formation_Python_Fonctions.html" />
+<meta property="og:url" content="https://fastpages.fast.ai/jupyter/formation/2020/03/07/Formation_Python_Fonctions.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:image" content="https://respawner.fr/blog/public/Divers/.python_t.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-07T00:00:00-06:00" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://fastpages.fast.ai/jupyter/formation/2020/03/07/Formation_Python_Fonctions.html"},"description":"Fastpages Notebook Blog Post","@type":"BlogPosting","url":"https://fastpages.fast.ai/jupyter/formation/2020/03/07/Formation_Python_Fonctions.html","headline":"Découverte de l’environnement Jupyter","dateModified":"2020-03-07T00:00:00-06:00","datePublished":"2020-03-07T00:00:00-06:00","image":"https://respawner.fr/blog/public/Divers/.python_t.jpg","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://fastpages.fast.ai/feed.xml" title="fastpages" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-57531313-5','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">fastpages</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Découverte de l&#39;environnement Jupyter</h1><p class="page-description">Fastpages Notebook Blog Post</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-03-07T00:00:00-06:00" itemprop="datePublished">
+        Mar 7, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      4 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#jupyter">jupyter</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#formation">formation</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/fastai/fastpages/tree/master/_notebooks/2020-03-07-Formation_Python_Fonctions.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/fastai/fastpages/master?filepath=_notebooks%2F2020-03-07-Formation_Python_Fonctions.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/fastai/fastpages/blob/master/_notebooks/2020-03-07-Formation_Python_Fonctions.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Concrêtement,-comment-ça-marche-?">Concrêtement, comment ça marche ? </a></li>
+<li class="toc-entry toc-h2"><a href="#Et-la-pédagogie-dans-tout-ça-?">Et la pédagogie dans tout ça ? </a></li>
+<li class="toc-entry toc-h1"><a href="#Coordonnées-du-milieu-d'un-segment">Coordonnées du milieu d&#39;un segment </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Compléter-l'algorithme-ci-dessous,-écrit-en-langage-naturel">Compléter l&#39;algorithme ci-dessous, écrit en langage naturel </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Algorithme">Algorithme </a></li>
+<li class="toc-entry toc-h3"><a href="#Complétez-:">Complétez : </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Ecrire-une-nouvelle-fonction">Ecrire une nouvelle fonction </a></li>
+<li class="toc-entry toc-h2"><a href="#Application">Application </a></li>
+<li class="toc-entry toc-h2"><a href="#Oui-mais-je-veux-voir-la-figure-!!">Oui mais je veux voir la figure !! </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#C'est-génial-Python,-je-le-veux-je-le-veux-!!">C&#39;est génial Python, je le veux je le veux !! </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Je-veux-Python-mais-je-ne-veux/peux-rien-installer-sur-mon-ordinateur">Je veux Python mais je ne veux/peux rien installer sur mon ordinateur </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-03-07-Formation_Python_Fonctions.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Concrêtement,-comment-ça-marche-?">
+<a class="anchor" href="#Concr%C3%AAtement,-comment-%C3%A7a-marche-?" aria-hidden="true"><span class="octicon octicon-link"></span></a>Concrêtement, comment ça marche ?<a class="anchor-link" href="#Concr%C3%AAtement,-comment-%C3%A7a-marche-?"> </a>
+</h2>
+<p>Il y a deux type de cellules :</p>
+<ul>
+<li>les cellules contenant du texte (<em>Markdown</em>, <em>Headers</em>)</li>
+<li>les cellules contenant des instructions Python : <code>In [ ]</code>
+</li>
+</ul>
+<p>Vous pouvez à tout moment changer le type d'une cellule grâce à la liste déroulante sur la barre d'outils. Vous pouvez choisir entre :</p>
+<ul>
+<li>code : la cellule contient alors des instructions Python qui seront interprétées</li>
+<li>Markdown : la cellule contient alors du texte qui sera juste affiché</li>
+<li>Heading x : la cellule s'affichera comme un titre de section.</li>
+</ul>
+<p>Pour valider une cellule, appuyez sur la touche <code>shift-enter</code> ou bien cliquez sur le bouton <button> &gt;| </button> de la barre d'icônes.</p>
+<p>Regardez ci-dessous votre première ligne de code Python : Simple n'est-ce pas ?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<details class="description">
+      <summary class="btn btn-sm" data-open="Hide Code" data-close="Show Code"></summary>
+        <p></p>
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#collapse</span>
+<span class="c1"># Ceci est une cellule Python</span>
+<span class="c1"># Le code qu'elle contient peut être exécuté</span>
+<span class="c1"># en tapant Shift+Entrée</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+    </details>
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Et-la-pédagogie-dans-tout-ça-?">
+<a class="anchor" href="#Et-la-p%C3%A9dagogie-dans-tout-%C3%A7a-?" aria-hidden="true"><span class="octicon octicon-link"></span></a>Et la pédagogie dans tout ça ?<a class="anchor-link" href="#Et-la-p%C3%A9dagogie-dans-tout-%C3%A7a-?"> </a>
+</h2>
+<p>Grâce à l'environnement Jupyter, l'élève a sous les yeux les consignes du professeur ainsi que l'outil lui permettant de les réaliser, le tout dans un environnement familier qu'est le navigateur internet. Prenons un exemple d'activité d'algorithmique.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Coordonnées-du-milieu-d'un-segment">
+<a class="anchor" href="#Coordonn%C3%A9es-du-milieu-d'un-segment" aria-hidden="true"><span class="octicon octicon-link"></span></a>Coordonnées du milieu d'un segment<a class="anchor-link" href="#Coordonn%C3%A9es-du-milieu-d'un-segment"> </a>
+</h1>
+<p>On rappelle la formule : si $I$ est le milieu de $[AB]$, $$I=\left( \dfrac{x_A+x_B}{2};\dfrac{x_A+x_B}{2} \right)$$</p>
+<p><em>Oui, je sais que vous le savez mais c'est pour frimer avec l'insertion de formules $\LaTeX$ dans Jupyter !!</em></p>
+<p><strong>Revenons aux choses sérieuses...</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Compléter-l'algorithme-ci-dessous,-écrit-en-langage-naturel">
+<a class="anchor" href="#Compl%C3%A9ter-l'algorithme-ci-dessous,-%C3%A9crit-en-langage-naturel" aria-hidden="true"><span class="octicon octicon-link"></span></a>Compléter l'algorithme ci-dessous, écrit en langage naturel<a class="anchor-link" href="#Compl%C3%A9ter-l'algorithme-ci-dessous,-%C3%A9crit-en-langage-naturel"> </a>
+</h2>
+<ul>
+<li>Pour modifier l'algorithme, double-cliquez sur la cellule puis complétez les blancs.</li>
+<li>Pour valider votre travail, tapez <strong><em>Shift+Entree</em></strong>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Algorithme">
+<a class="anchor" href="#Algorithme" aria-hidden="true"><span class="octicon octicon-link"></span></a>Algorithme<a class="anchor-link" href="#Algorithme"> </a>
+</h3>
+<pre><code>Définir la fonction milieu qui prend 4 pamamètres : xA, yA, xB, yB
+    xI prend la valeur ...
+    yI prend la valeur ...
+    retourner ...
+Fin de la fonction milieu
+
+Appeler la fonction ... avec les paramètres ...
+Stocker les résultats dans les variables xI et yI</code></pre>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Codage de l'algorithme en Python</span>
+<span class="c1"># Remplacez les ... par ce qui va bien :)</span>
+
+<span class="k">def</span> <span class="nf">milieu</span><span class="p">(</span><span class="n">xA</span><span class="p">,</span><span class="n">yA</span><span class="p">,</span><span class="n">xB</span><span class="p">,</span><span class="n">yB</span><span class="p">):</span>
+    <span class="n">xI</span><span class="o">=...</span>
+    <span class="n">yI</span><span class="o">=...</span>
+    <span class="k">return</span> <span class="o">...</span>
+
+<span class="n">xI</span><span class="p">,</span><span class="n">yI</span><span class="o">=</span><span class="n">milieu</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="p">(</span><span class="n">xI</span><span class="p">,</span><span class="n">yI</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Nous avons ainsi créé une <strong><em>fonction</em></strong> python. Cela nous permet d'enrichir le langage python avec nos propres commandes. Maintenant, notre langage préféré sais calculer des milieux !!</p>
+<p>Validez les cellules ci-dessous pour vous en convaincre.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">milieu</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">milieu</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Tiens c'est bizarre, on dirait que c'est le même milieu. Vérifions avec Python !</p>
+<p>Validez la cellule ci-dessous.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">milieu</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span><span class="o">==</span><span class="n">milieu</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Remarquez la présence du symbole <strong><em>==</em></strong> pour <strong>tester</strong> l'égalité de deux objets. Il ne faut pas le confondre avec le symbole <strong><em>=</em></strong> qui permet d'<strong>affecter</strong> une valeur à une variable.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Complétez-:">
+<a class="anchor" href="#Compl%C3%A9tez-:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Complétez :<a class="anchor-link" href="#Compl%C3%A9tez-:"> </a>
+</h3>
+<p>Soient A(1;...) B(...;...) C(5;...) D(...;...)</p>
+<p>Les segments [AC] et [BD] ont même milieu donc le quadrilatère ... est un ...</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Ecrire-une-nouvelle-fonction">
+<a class="anchor" href="#Ecrire-une-nouvelle-fonction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ecrire une nouvelle fonction<a class="anchor-link" href="#Ecrire-une-nouvelle-fonction"> </a>
+</h2>
+<p>En vous aidant de la démarche précédente, complétez la définition d'une fonction <strong><em>estParallelogramme</em></strong> prenant en arguments les coordonnées de 4 points A, B, C et D puis retournant <strong>Vrai</strong> ou <strong>Faux</strong> selon que le quadrilatère ABCD est un parallélogramme ou pas.</p>
+
+<pre><code>Définir la fonction ... qui prend ... pamamètres : ...
+    test prend la valeur ...
+retourner ...
+Fin de la fonction ...
+
+Entrées :
+    Saisir ...
+Traitement :
+    Appeler la fonction ... avec les paramètres ...
+    Stocker le résultat dans la variable ...
+Sortie :
+    Afficher ...</code></pre>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Codez à présent cette fonction dans cette cellule</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># On vérifie que cela marche. La cellule doit afficher True</span>
+<span class="n">test</span><span class="o">=</span><span class="n">estParallelogramme</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Application">
+<a class="anchor" href="#Application" aria-hidden="true"><span class="octicon octicon-link"></span></a>Application<a class="anchor-link" href="#Application"> </a>
+</h2>
+<p>Utiliser la fonction que l'on vient de définir pour dire si le quadrilatère ABCD est un parallélogramme :</p>
+<p>$A\left(-2;2\right)$ $B\left(\dfrac 2 5;-\dfrac 6 5\right)$ $C\left(4;\dfrac 2 5\right)$ $D\left(\dfrac 9 5;3\right)$</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># A vous de jouer</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Oui-mais-je-veux-voir-la-figure-!!">
+<a class="anchor" href="#Oui-mais-je-veux-voir-la-figure-!!" aria-hidden="true"><span class="octicon octicon-link"></span></a>Oui mais je veux voir la figure !!<a class="anchor-link" href="#Oui-mais-je-veux-voir-la-figure-!!"> </a>
+</h2>
+<p>Pas de panique, validez la cellule ci-dessous et vous pourrez facilement afficher des points ou des segments dans Jupyter.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline
+<span class="c1">## Pour cette section on définit deux fonctions </span>
+
+<span class="k">def</span> <span class="nf">trace_point</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">nom</span><span class="o">=</span><span class="s2">""</span><span class="p">):</span>
+    <span class="n">plot</span><span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">P</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s2">"ro"</span><span class="p">)</span>
+    <span class="n">text</span><span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">P</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span><span class="n">P</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">nom</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'r'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">trace_segment</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">Q</span><span class="p">):</span>
+    <span class="n">plot</span><span class="p">([</span><span class="n">P</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">Q</span><span class="p">[</span><span class="mi">0</span><span class="p">]],[</span><span class="n">P</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">Q</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span><span class="s2">"b"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>tadaaaaa...</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># et on définit si on souhaite l'échelle de notre repère</span>
+<span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># On met ici l'échelle sur l'axe des abscisses</span>
+<span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># et la l'adresse sur l'axe des ordonnées</span>
+<span class="n">grid</span><span class="p">()</span>
+
+<span class="n">A</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">B</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">5</span><span class="p">,</span><span class="o">-</span><span class="mi">6</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">C</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="o">/</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">trace_point</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="s2">"A"</span><span class="p">)</span>
+<span class="n">trace_point</span><span class="p">(</span><span class="n">B</span><span class="p">,</span><span class="s2">"B"</span><span class="p">)</span>
+<span class="n">trace_point</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="s2">"C"</span><span class="p">)</span>
+<span class="n">trace_point</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="s2">"D"</span><span class="p">)</span>
+<span class="n">trace_segment</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
+<span class="n">trace_segment</span><span class="p">(</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">)</span>
+<span class="n">trace_segment</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="n">D</span><span class="p">)</span>
+<span class="n">trace_segment</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="C'est-génial-Python,-je-le-veux-je-le-veux-!!">
+<a class="anchor" href="#C'est-g%C3%A9nial-Python,-je-le-veux-je-le-veux-!!" aria-hidden="true"><span class="octicon octicon-link"></span></a>C'est génial Python, je le veux je le veux !!<a class="anchor-link" href="#C'est-g%C3%A9nial-Python,-je-le-veux-je-le-veux-!!"> </a>
+</h1>
+<p>Python est un langage libre, gratuit et multiplateforme. Il sest disponible sur Window$, Linux, mac, ainsi que sur smartphones et tablettes Apple ou Androhideux.</p>
+<p>Pour télécharger Python, vous pouvez vous rendre sur le site officiel <a href="http://python.org">http://python.org</a> et choisir la version 3.6.2, mais cela n'installera que l'environnement très basique <strong><em>IDLE</em></strong>.</p>
+<p>Pour avoir Python dans l'environnement Jupyter que l'on vient d'utiliser, je recommande d'installer la distribution clé en main <a href="https://www.anaconda.com/download/">Anaconda</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Je-veux-Python-mais-je-ne-veux/peux-rien-installer-sur-mon-ordinateur">
+<a class="anchor" href="#Je-veux-Python-mais-je-ne-veux/peux-rien-installer-sur-mon-ordinateur" aria-hidden="true"><span class="octicon octicon-link"></span></a>Je veux Python mais je ne veux/peux rien installer sur mon ordinateur<a class="anchor-link" href="#Je-veux-Python-mais-je-ne-veux/peux-rien-installer-sur-mon-ordinateur"> </a>
+</h2>
+<p>Pas de panique, il existe des environnements prêts à l'emploi disponible sur internet :</p>
+<ul>
+<li>
+<a href="https://try.jupyter.org/">https://try.jupyter.org/</a> est un environnement jupyter complet prêt à l'emploi mais attention, les classeurs réalisés sur ce site sont temporaires, c'est à dire détruits à la déconnexion. Il faut donc bien penser à télécharger en local son travail avant de quitter...</li>
+<li>
+<a href="https://repl.it/languages/python3">https://repl.it/languages/python3</a> est un environnement entièrement en ligne du type IDLE donc console + éditeur de programme. Cela permet de tester rapidement un petit programme</li>
+<li>
+<a href="http://pythontutor.com/">http://pythontutor.com/</a> est un peu différent car il permet une exécution pas à pas des programme avec visualisation en temps réel du contenu des variables ce qui est un formidable outil pédagogique et de débuggage !</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="fastai/fastpages"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/jupyter/formation/2020/03/07/Formation_Python_Fonctions.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
