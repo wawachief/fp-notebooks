@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>SQL 2/3 | notebooks</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="SQL 2/3" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Cours NSI Terminale - Thème 2." />
+<meta property="og:description" content="Cours NSI Terminale - Thème 2." />
+<link rel="canonical" href="https://notebooks.lecluse.fr/nsi/terminale/bases%20de%20donn%C3%A9es/sql/tp/2020/06/23/nsi_t_SQL2.html" />
+<meta property="og:url" content="https://notebooks.lecluse.fr/nsi/terminale/bases%20de%20donn%C3%A9es/sql/tp/2020/06/23/nsi_t_SQL2.html" />
+<meta property="og:site_name" content="notebooks" />
+<meta property="og:image" content="https://notebooks.lecluse.fr/images/nsi2.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-23T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Cours NSI Terminale - Thème 2.","mainEntityOfPage":{"@type":"WebPage","@id":"https://notebooks.lecluse.fr/nsi/terminale/bases%20de%20donn%C3%A9es/sql/tp/2020/06/23/nsi_t_SQL2.html"},"@type":"BlogPosting","url":"https://notebooks.lecluse.fr/nsi/terminale/bases%20de%20donn%C3%A9es/sql/tp/2020/06/23/nsi_t_SQL2.html","headline":"SQL 2/3","dateModified":"2020-06-23T00:00:00-05:00","datePublished":"2020-06-23T00:00:00-05:00","image":"https://notebooks.lecluse.fr/images/nsi2.png","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://notebooks.lecluse.fr/feed.xml" title="notebooks" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>SQL 2/3 | notebooks</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="SQL 2/3" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Cours NSI Terminale - Thème 2." />
+<meta property="og:description" content="Cours NSI Terminale - Thème 2." />
+<link rel="canonical" href="https://notebooks.lecluse.fr/nsi/terminale/bases%20de%20donn%C3%A9es/sql/tp/2020/06/23/nsi_t_SQL2.html" />
+<meta property="og:url" content="https://notebooks.lecluse.fr/nsi/terminale/bases%20de%20donn%C3%A9es/sql/tp/2020/06/23/nsi_t_SQL2.html" />
+<meta property="og:site_name" content="notebooks" />
+<meta property="og:image" content="https://notebooks.lecluse.fr/images/nsi2.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-23T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Cours NSI Terminale - Thème 2.","mainEntityOfPage":{"@type":"WebPage","@id":"https://notebooks.lecluse.fr/nsi/terminale/bases%20de%20donn%C3%A9es/sql/tp/2020/06/23/nsi_t_SQL2.html"},"@type":"BlogPosting","url":"https://notebooks.lecluse.fr/nsi/terminale/bases%20de%20donn%C3%A9es/sql/tp/2020/06/23/nsi_t_SQL2.html","headline":"SQL 2/3","dateModified":"2020-06-23T00:00:00-05:00","datePublished":"2020-06-23T00:00:00-05:00","image":"https://notebooks.lecluse.fr/images/nsi2.png","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://notebooks.lecluse.fr/feed.xml" title="notebooks" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">notebooks</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">A propos</a><a class="page-link" href="/">Notebooks Jupyter</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a><a class="page-link" href="/page2/">Notebooks Jupyter</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">SQL 2/3</h1><p class="page-description">Cours NSI Terminale - Thème 2.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-06-23T00:00:00-05:00" itemprop="datePublished">
+        Jun 23, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      5 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#NSI">NSI</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Terminale">Terminale</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Bases de données">Bases de données</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#SQL">SQL</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#TP">TP</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/wawachief/fp-notebooks/tree/master/_notebooks/2020-06-23-nsi_t_SQL2.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/wawachief/fp-notebooks/master?filepath=_notebooks%2F2020-06-23-nsi_t_SQL2.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/wawachief/fp-notebooks/blob/master/_notebooks/2020-06-23-nsi_t_SQL2.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#Aller-plus-loin-en-SQL">Aller plus loin en SQL </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Aller-plus-loin-avec-SELECT">Aller plus loin avec SELECT </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Selection-simple">Selection simple </a></li>
+<li class="toc-entry toc-h3"><a href="#Sélection-multiple">Sélection multiple </a></li>
+<li class="toc-entry toc-h3"><a href="#Compter-le-nombre-de-réponses-d'une-requête-SELECT">Compter le nombre de réponses d&#39;une requête SELECT </a></li>
+<li class="toc-entry toc-h3"><a href="#Trier-les-réponses">Trier les réponses </a></li>
+<li class="toc-entry toc-h3"><a href="#Éviter-les-occurrences-multiples">Éviter les occurrences multiples </a></li>
+<li class="toc-entry toc-h3"><a href="#A-vous-de-jouer">A vous de jouer </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Requêtes-portant-sur-plusieurs-tables">Requêtes portant sur plusieurs tables </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Jointure">Jointure </a></li>
+<li class="toc-entry toc-h3"><a href="#A-vous-de-jouer">A vous de jouer </a></li>
+<li class="toc-entry toc-h3"><a href="#Le-cas-des-relations-de-n-à-n">Le cas des relations de n à n </a></li>
+<li class="toc-entry toc-h3"><a href="#A-vous-de-jouer">A vous de jouer </a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-06-23-nsi_t_SQL2.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Aller-plus-loin-en-SQL">
+<a class="anchor" href="#Aller-plus-loin-en-SQL" aria-hidden="true"><span class="octicon octicon-link"></span></a>Aller plus loin en SQL<a class="anchor-link" href="#Aller-plus-loin-en-SQL"> </a>
+</h1>
+<p>Dans ce classeur,nous poursuivrons l'étude de l'exemple de la base de données de livres de SF et nous verrons des requêtes de sélection avancées ainsi que la manière de fusionner plusieurs tables (Jointures).</p>
+<p>Commencez par valider les cellules suivantes afin d'activer la fonctionnalité SQL de Jupyter et de ncharger la base du TP précédent.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> sql
+
+<span class="o">%</span><span class="k">sql</span> sqlite:///livres_db
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Aller-plus-loin-avec-SELECT">
+<a class="anchor" href="#Aller-plus-loin-avec-SELECT" aria-hidden="true"><span class="octicon octicon-link"></span></a>Aller plus loin avec SELECT<a class="anchor-link" href="#Aller-plus-loin-avec-SELECT"> </a>
+</h2>
+<h3 id="Selection-simple">
+<a class="anchor" href="#Selection-simple" aria-hidden="true"><span class="octicon octicon-link"></span></a>Selection simple<a class="anchor-link" href="#Selection-simple"> </a>
+</h3>
+<p>Supposons que l'on veuille lister seulement les noms et prénoms des auteurs nés avant 1900, on utilisera une clause <strong>WHERE</strong> <em>condition</em> :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">sql</span> SELECT NomAuteur, PrenomAuteur from Auteurs WHERE AnneeNaissance &lt; 1900;
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pour obtebir les auteurs prénomés <em>Jules</em> :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">sql</span> SELECT NomAuteur, PrenomAuteur from Auteurs WHERE PrenomAuteur = 'Jules';
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vous voyez que les textes sont délimités par des quotes <strong>'...'</strong>.</p>
+<p><strong><em>Attention</em></strong> : essayez de remplacer <strong>Jules</strong> par jules** et vous constaterez que la recherche est sensible aux majuscules.</p>
+<p>Supposns maintenant que l'on recherche les auteurs dont le prénom commence par <strong>P</strong> : Nous utiliserons une clause LIKE de cette manière :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">sql</span> SELECT NomAuteur, PrenomAuteur from Auteurs WHERE PrenomAuteur LIKE 'P%';
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Sélection-multiple">
+<a class="anchor" href="#S%C3%A9lection-multiple" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sélection multiple<a class="anchor-link" href="#S%C3%A9lection-multiple"> </a>
+</h3>
+<p>Il est possible de croiser plusieurs critères à l'aide d'opérateurs booleens : <strong>AND</strong> et <strong>OR</strong>. Voici la liste des auteurs francais nés après 1900 :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">sql</span> SELECT NomAuteur, PrenomAuteur from Auteurs WHERE IdLangue = 2 AND AnneeNaissance &gt; 1900;
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Compter-le-nombre-de-réponses-d'une-requête-SELECT">
+<a class="anchor" href="#Compter-le-nombre-de-r%C3%A9ponses-d'une-requ%C3%AAte-SELECT" aria-hidden="true"><span class="octicon octicon-link"></span></a>Compter le nombre de réponses d'une requête SELECT<a class="anchor-link" href="#Compter-le-nombre-de-r%C3%A9ponses-d'une-requ%C3%AAte-SELECT"> </a>
+</h3>
+<p>Combien y a t-il d'auteurs nés entre 1900 et 1915 ?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nbr</span> <span class="o">=</span> <span class="o">%</span><span class="k">sql</span> SELECT COUNT(*) from Auteurs WHERE AnneeNaissance BETWEEN 1900 AND 1915;
+
+<span class="nb">print</span><span class="p">(</span><span class="n">nbr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"récupérer juste le nombre : "</span><span class="p">,</span> <span class="n">nbr</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Trier-les-réponses">
+<a class="anchor" href="#Trier-les-r%C3%A9ponses" aria-hidden="true"><span class="octicon octicon-link"></span></a>Trier les réponses<a class="anchor-link" href="#Trier-les-r%C3%A9ponses"> </a>
+</h3>
+<p>Nous allons lister tous les auteurs par ordre croissant d'année de naissance</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">sql</span> SELECT * from Auteurs ORDER BY AnneeNaissance;
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>et par ordre décroissant, on ajoute <strong>DESC</strong> à la fin de la requête</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">sql</span> SELECT * from Auteurs ORDER BY AnneeNaissance DESC;
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Éviter-les-occurrences-multiples">
+<a class="anchor" href="#%C3%89viter-les-occurrences-multiples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Éviter les occurrences multiples<a class="anchor-link" href="#%C3%89viter-les-occurrences-multiples"> </a>
+</h3>
+<p>Interrogons la table Livres sur les années de publication, rangées par ordre croissant :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">sql</span> SELECT AnneePubli from Livres ORDER BY AnneePubli;
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>On constate la présence de quelques doublons</p>
+<p>Pour éviter les redondances dans les résultats, on peut rajouter le mot-clé DISTINCT après le mot-clé SELECT :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">sql</span> SELECT DISTINCT AnneePubli from Livres ORDER BY AnneePubli;
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="A-vous-de-jouer">
+<a class="anchor" href="#A-vous-de-jouer" aria-hidden="true"><span class="octicon octicon-link"></span></a>A vous de jouer<a class="anchor-link" href="#A-vous-de-jouer"> </a>
+</h3>
+<ol>
+<li>Donner la liste de tous les titres des livres écrits entre 1920 et 1950.</li>
+<li>Combien y en a t-il ?</li>
+</ol>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Utilisez cette cellule en brouillon pour vos requetes </span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Utiliser la syntaxe courte </span>
+<span class="c1"># reponse_i = %sql VOTRE REQUETE pour i=1 ou i=2</span>
+
+<span class="c1"># YOUR CODE HERE</span>
+<span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Vérification des réponses</span>
+
+<span class="k">assert</span> <span class="n">reponse_1</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Les Robots'</span>
+<span class="k">assert</span> <span class="n">reponse_2</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Requêtes-portant-sur-plusieurs-tables">
+<a class="anchor" href="#Requ%C3%AAtes-portant-sur-plusieurs-tables" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requêtes portant sur plusieurs tables<a class="anchor-link" href="#Requ%C3%AAtes-portant-sur-plusieurs-tables"> </a>
+</h2>
+<p>Jusqu'à présent, nos requêtes ne portaient que sur une seule table. Néanmoins note bliste de livres comporte des donées en provenance de plusieurs tables simultanément. Nous allons voir comment effectuer des requêtes pour croiser des données en provenance de plusieurs tables.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">sql</span> SELECT * FROM Langues, Auteurs
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Comme on peut le constater cette requête est peu pertinente car elle affiche toutes les données de chacune des tables sans effectuer de croisement. La <strong>clé de jointure</strong> apparaît pourtant ici clairement : il s'agit de id_langue qui doit permettre de recouper les informations entre les deux tables. Il est en effet inutile d'afficher les données pour lesquelles les langues ne correspondent pas entre les deux tables.</p>
+<h3 id="Jointure">
+<a class="anchor" href="#Jointure" aria-hidden="true"><span class="octicon octicon-link"></span></a>Jointure<a class="anchor-link" href="#Jointure"> </a>
+</h3>
+<p>La <strong>jonture</strong> consiste à croiser les données de plusieurs tables pour les présenter sous forme d'un seul tableau. On va utiliser ce mécanisme pour afficher clairement la langue de l'auteur plutôt qu'un numéro qui n'est pas forcément très parlant. Nous utiliserons pour cela l'opérateur <strong>JOIN ... ON</strong> :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">sql</span> SELECT NomAuteur, PrenomAuteur, Langue, AnneeNaissance  FROM Auteurs JOIN Langues ON Auteurs.IdLangue = Langues.IdLangue
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Les champs sur lesquels faire la jointure <strong>ayant les mêmes noms dans les 2 tables</strong>, cette requête peut aussi être écrite plus simplement en utilisant le mot-clé <strong>USING</strong> ainsi :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">sql</span> SELECT NomAuteur, PrenomAuteur, Langue, AnneeNaissance  FROM Auteurs JOIN Langues USING (IdLangue)
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="A-vous-de-jouer">
+<a class="anchor" href="#A-vous-de-jouer" aria-hidden="true"><span class="octicon octicon-link"></span></a>A vous de jouer<a class="anchor-link" href="#A-vous-de-jouer"> </a>
+</h3>
+<p>En croisant la table <strong>Livres</strong> avec la table <strong>Auteurs</strong></p>
+<ol>
+<li>récupérer dans la variable <code>reponse_1</code> une liste dont les attributs sont <strong>Titre</strong>, <strong>PrenomAuteur</strong>, <strong>NomAuteur</strong> et <strong>AnneePubli</strong>, triée du plus récent au plus ancien.</li>
+<li>récupérer dans la variable <code>reponse_2</code> une liste dont les attributs sont <strong>Titre</strong>, <strong>PrenomAuteur</strong>, <strong>NomAuteur</strong> et <strong>AnneePubli</strong> écrits en français.</li>
+</ol>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Utiliser la syntaxe courte </span>
+<span class="c1"># reponse_i = %sql VOTRE REQUETE pour i=1 ou i=2</span>
+
+<span class="c1"># YOUR CODE HERE</span>
+<span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Utilisez cette cellule en brouillon pour vos requetes </span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">reponse_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="s1">'Ubik'</span><span class="p">,</span> <span class="s1">'Philip'</span><span class="p">,</span> <span class="s1">'K. Dick'</span><span class="p">,</span> <span class="mi">1969</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">reponse_2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="s1">'La nuit des temps'</span><span class="p">,</span> <span class="s1">'René'</span><span class="p">,</span> <span class="s1">'Barjavel'</span><span class="p">,</span> <span class="mi">1968</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Le-cas-des-relations-de-n-à-n">
+<a class="anchor" href="#Le-cas-des-relations-de-n-%C3%A0-n" aria-hidden="true"><span class="octicon octicon-link"></span></a>Le cas des relations de n à n<a class="anchor-link" href="#Le-cas-des-relations-de-n-%C3%A0-n"> </a>
+</h3>
+<p>Parfois i larrive que les données à collecter se trouvent dans plus que deux tables : c'est le cas des Thèmes pour les livres qui nécessitent l'analyse de 3 tables : <strong>Livres</strong> et <strong>Thèmes</strong> bien sûr, mais aussi la table de relation <strong>RelationsLivreTheme</strong>.</p>
+<p>Observez et étudiez la requête suivante : Le principe est d'enchaîner deux jointures <strong>JOIN ... USING</strong> en utilisant <strong><em>la table de Relation au milieu</em></strong>. En effet, la requête se lit de la gauche vers la droite et on ne peut faire de jointure que si on a une clé externe en commun, ce qui n'est par exemple pas le cas entre <strong>Livres</strong> et <strong>Thèmes</strong>.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">sql</span> SELECT Titre, Intitule FROM Livres JOIN RelationsLivreTheme USING (IdLivre) JOIN Themes USING (IdTheme)
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="A-vous-de-jouer">
+<a class="anchor" href="#A-vous-de-jouer" aria-hidden="true"><span class="octicon octicon-link"></span></a>A vous de jouer<a class="anchor-link" href="#A-vous-de-jouer"> </a>
+</h3>
+<p>Ecrire une requête permettant d'obtenir une liste dont les attributs sont <strong>Titre</strong>, <strong>NomAuteur</strong> et <strong>Langue</strong> triée par ordre croissant de date de naissance de l'auteur.</p>
+<p>Vous stockerez le résultat dans une variable <code>result</code></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Utiliser la syntaxe courte </span>
+<span class="c1"># reponse = %sql VOTRE REQUETE </span>
+
+<span class="c1"># YOUR CODE HERE</span>
+<span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Utilisez cette cellule en brouillon pour vos requetes </span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="s1">'De la Terre à la Lune'</span><span class="p">,</span> <span class="s1">'Verne'</span><span class="p">,</span> <span class="s1">'Français'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/nsi/terminale/bases%20de%20donn%C3%A9es/sql/tp/2020/06/23/nsi_t_SQL2.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Plateforme de blog avec support pour Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/wawachief" title="wawachief"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/leclusemaths" title="leclusemaths"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

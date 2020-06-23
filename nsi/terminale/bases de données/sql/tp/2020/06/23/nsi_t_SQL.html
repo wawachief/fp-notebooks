@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>SQL 1/3 | notebooks</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="SQL 1/3" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Cours NSI Terminale - Thème 2." />
+<meta property="og:description" content="Cours NSI Terminale - Thème 2." />
+<link rel="canonical" href="https://notebooks.lecluse.fr/nsi/terminale/bases%20de%20donn%C3%A9es/sql/tp/2020/06/23/nsi_t_SQL.html" />
+<meta property="og:url" content="https://notebooks.lecluse.fr/nsi/terminale/bases%20de%20donn%C3%A9es/sql/tp/2020/06/23/nsi_t_SQL.html" />
+<meta property="og:site_name" content="notebooks" />
+<meta property="og:image" content="https://notebooks.lecluse.fr/images/nsi2.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-23T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Cours NSI Terminale - Thème 2.","mainEntityOfPage":{"@type":"WebPage","@id":"https://notebooks.lecluse.fr/nsi/terminale/bases%20de%20donn%C3%A9es/sql/tp/2020/06/23/nsi_t_SQL.html"},"@type":"BlogPosting","url":"https://notebooks.lecluse.fr/nsi/terminale/bases%20de%20donn%C3%A9es/sql/tp/2020/06/23/nsi_t_SQL.html","headline":"SQL 1/3","dateModified":"2020-06-23T00:00:00-05:00","datePublished":"2020-06-23T00:00:00-05:00","image":"https://notebooks.lecluse.fr/images/nsi2.png","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://notebooks.lecluse.fr/feed.xml" title="notebooks" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>SQL 1/3 | notebooks</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="SQL 1/3" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Cours NSI Terminale - Thème 2." />
+<meta property="og:description" content="Cours NSI Terminale - Thème 2." />
+<link rel="canonical" href="https://notebooks.lecluse.fr/nsi/terminale/bases%20de%20donn%C3%A9es/sql/tp/2020/06/23/nsi_t_SQL.html" />
+<meta property="og:url" content="https://notebooks.lecluse.fr/nsi/terminale/bases%20de%20donn%C3%A9es/sql/tp/2020/06/23/nsi_t_SQL.html" />
+<meta property="og:site_name" content="notebooks" />
+<meta property="og:image" content="https://notebooks.lecluse.fr/images/nsi2.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-23T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Cours NSI Terminale - Thème 2.","mainEntityOfPage":{"@type":"WebPage","@id":"https://notebooks.lecluse.fr/nsi/terminale/bases%20de%20donn%C3%A9es/sql/tp/2020/06/23/nsi_t_SQL.html"},"@type":"BlogPosting","url":"https://notebooks.lecluse.fr/nsi/terminale/bases%20de%20donn%C3%A9es/sql/tp/2020/06/23/nsi_t_SQL.html","headline":"SQL 1/3","dateModified":"2020-06-23T00:00:00-05:00","datePublished":"2020-06-23T00:00:00-05:00","image":"https://notebooks.lecluse.fr/images/nsi2.png","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://notebooks.lecluse.fr/feed.xml" title="notebooks" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">notebooks</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">A propos</a><a class="page-link" href="/">Notebooks Jupyter</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a><a class="page-link" href="/page2/">Notebooks Jupyter</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">SQL 1/3</h1><p class="page-description">Cours NSI Terminale - Thème 2.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-06-23T00:00:00-05:00" itemprop="datePublished">
+        Jun 23, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      9 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#NSI">NSI</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Terminale">Terminale</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Bases de données">Bases de données</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#SQL">SQL</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#TP">TP</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/wawachief/fp-notebooks/tree/master/_notebooks/2020-06-23-nsi_t_SQL.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/wawachief/fp-notebooks/master?filepath=_notebooks%2F2020-06-23-nsi_t_SQL.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/wawachief/fp-notebooks/blob/master/_notebooks/2020-06-23-nsi_t_SQL.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#Découverte-du-langage-SQL">Découverte du langage SQL </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Créer-la-base-de-données">Créer la base de données </a></li>
+<li class="toc-entry toc-h2"><a href="#Créer-une-table">Créer une table </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Quelques-explications-:">Quelques explications : </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Insérer-des-enregistrements-dans-la-table">Insérer des enregistrements dans la table </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Quelques-explications-:">Quelques explications : </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Lire-le-contenu-d'une-table">Lire le contenu d&#39;une table </a></li>
+<li class="toc-entry toc-h2"><a href="#A-vous-de-jouer">A vous de jouer </a></li>
+<li class="toc-entry toc-h2"><a href="#A-vous-de-jouer">A vous de jouer </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#La-table-LIVRES">La table LIVRES </a></li>
+<li class="toc-entry toc-h3"><a href="#La-table-Themes">La table Themes </a></li>
+<li class="toc-entry toc-h3"><a href="#Une-table-manquante-!">Une table manquante ! </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Cardinalité">Cardinalité </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#A-vous-de-jouer">A vous de jouer </a></li>
+<li class="toc-entry toc-h3"><a href="#Table-de-relation">Table de relation </a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-06-23-nsi_t_SQL.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Découverte-du-langage-SQL">
+<a class="anchor" href="#D%C3%A9couverte-du-langage-SQL" aria-hidden="true"><span class="octicon octicon-link"></span></a>Découverte du langage SQL<a class="anchor-link" href="#D%C3%A9couverte-du-langage-SQL"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Dans ce TP jous allons découvrir le langage SQL (<em>Structured Query Language</em>) qui est le langage utilisé pour
+effectuer des requêtes sur une base de données relationnelles. Nous apprendrons lors de ce TP à</p>
+<ul>
+<li>créer des tables avec les attributs que l'on souhaite</li>
+<li>insérer des enregistrements</li>
+<li>faire des requêtes sur la base pour extraire des informations</li>
+</ul>
+<p>Contrairement aux apparences, nous n'utiliserons pas Python dans ce classeur, mais directement SQL grâce à l'extension <strong>ipython-sql</strong> qu'il faut activer en validant la cellule suivante :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> sql
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>En cas d'erreurs lors du chargement de l'extension, vous pouvez tenter de réinstaller les paquets nécessaires via les commandes</p>
+<div class="highlight"><pre><span></span>pip install jupyter-sql
+pip install ipython-sql
+sudo apt install python3-sql
+</pre></div>
+<p>puis relancer jupyter.</p>
+<h2 id="Créer-la-base-de-données">
+<a class="anchor" href="#Cr%C3%A9er-la-base-de-donn%C3%A9es" aria-hidden="true"><span class="octicon octicon-link"></span></a>Créer la base de données<a class="anchor-link" href="#Cr%C3%A9er-la-base-de-donn%C3%A9es"> </a>
+</h2>
+<p>Nous allons commencer par créer une base vide dans laquelle nous allons travailler :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">sql</span> sqlite:///livres_db
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>La base s'appelle <strong>livres_db</strong> et est au format <em>sqlite</em> qui est un gestionnaire de base de données relationnelles léger et facile à prendre en main.</p>
+<p>Les données seront inscrites dans le fichier <strong>livres_db</strong> qui vient d'être créé à côté de ce classeur et que vous pourrez télécharger quand vous aurez fini ce TP.</p>
+<p>L'objectif est de peupler cette base de données avec la base <strong>livres</strong> que l'on a étudié lors de la découverte du modèle relationnel. Cette base sera constituée de 4 tables :</p>
+<ul>
+<li>Auteurs</li>
+<li>Livres</li>
+<li>Langues</li>
+<li>Themes</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Créer-une-table">
+<a class="anchor" href="#Cr%C3%A9er-une-table" aria-hidden="true"><span class="octicon octicon-link"></span></a>Créer une table<a class="anchor-link" href="#Cr%C3%A9er-une-table"> </a>
+</h2>
+<p>Il est temps de commencer à peupler notre base de données. Nous allons commencer par créer la table <strong>Langues</strong> en saisissant notre première requête :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span> 
+CREATE TABLE "Langues" 
+(
+"IdLangue" INTEGER  PRIMARY KEY,
+"Langue"   TEXT
+);
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Quelques-explications-:">
+<a class="anchor" href="#Quelques-explications-:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quelques explications :<a class="anchor-link" href="#Quelques-explications-:"> </a>
+</h3>
+<p>Pour commencer, dans jupyter lorsque nous voulons taper une commande <strong>SQL</strong> et non du langage python. Pour cela, nous inscrirons <strong>en première ligne de cellule</strong> la commande <em>magique</em> <code>%%sql</code>. N'oubliez jamais de commencer toutes vos cellules ainsi car sinon, la commande sera interprétée par <em>python</em> et non <em>SQL</em>.</p>
+<p>La première requête <strong>SQL</strong> que nous allons apprendre est la requête <code>CREATE TABLE</code></p>
+<ul>
+<li>on insique le nom de la table à créer</li>
+<li>entre parenthèse on liste les <em>attributs</em> à mettre ainsi que leur <em>type</em>.</li>
+<li>une requête se termine <strong>toujours</strong> par ;</li>
+</ul>
+<p>Nous avons deux types différents dans notre base de données :</p>
+<ul>
+<li>le type TEXT pour tout ce qui est chaîne de caractères</li>
+<li>le type INTEGER pour les entiers</li>
+</ul>
+<p>L'attribut <strong>IdLangue</strong> est la <em>clé primaire</em> de la table. C'est un entier qui commence à 1 et qui sera automatiquement incrémenté au fur à mesure que l'on insère des données dans la table. C'est en indiquant <code>PRIMARY KEY</code> après le type dans la déclaration de l'attribut <strong>IdLangue</strong> que <em>sqlite</em> se comporte ainsi.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Insérer-des-enregistrements-dans-la-table">
+<a class="anchor" href="#Ins%C3%A9rer-des-enregistrements-dans-la-table" aria-hidden="true"><span class="octicon octicon-link"></span></a>Insérer des enregistrements dans la table<a class="anchor-link" href="#Ins%C3%A9rer-des-enregistrements-dans-la-table"> </a>
+</h2>
+<p>Maintenant que nous avons une table vide, il nous faut la remplir avec les données sur les auteurs. Nous utiliserons pour cela la requête <strong>INSERT</strong>. Voici son utilisation :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+INSERT INTO Langues 
+    (Langue)
+VALUES
+    ("Anglais"),
+    ("Français");
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Quelques-explications-:">
+<a class="anchor" href="#Quelques-explications-:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Quelques explications :<a class="anchor-link" href="#Quelques-explications-:"> </a>
+</h3>
+<p>La requête <strong>INSERT</strong> s'utilise ainsi :</p>
+
+<pre><code>INSERT INTO ##TABLE##
+    (## attributs dont on donne les valeurs##)
+VALUES
+    (## enregistrement 1 ##),
+    ...
+    (## enregistrement n ##);</code></pre>
+<p>On peut refaire une autre requête <strong>INSERT</strong> à la suite si on qouhaite ajouter encore des données au bout de la table.</p>
+<p>Vous remarquez que l'on ne donne pas de valeur pour l'attribut <strong>IdLangue</strong>. C'est parce qu'on l'a déclaré en <code>PRIMARY KEY</code>. Il est donc automatiquement géré par sqlite. Nous verrons cela en lisant le cpontenu complet de la table.</p>
+<p>On est pas obligé de préciser tous les attributs. <strong>IdLangue</strong> est un exemple particulier, mais il est possible d'ommetre d'autres attributs. Ils seront alors affectés d'une valeur nulle.</p>
+<p>A l'issue de la requête, sqlite nous informe que 2 lignes ont été créées.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Lire-le-contenu-d'une-table">
+<a class="anchor" href="#Lire-le-contenu-d'une-table" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lire le contenu d'une table<a class="anchor-link" href="#Lire-le-contenu-d'une-table"> </a>
+</h2>
+<p>Nous allons à présent utiliser une requête <strong>SELECT</strong> afin de récupérer le contenu de la table. Ces requêtes peuvent être très sophistiquées comme on va le voir en fin de TP. Pour le moment, nous nous contenterons de la forme la plus simple :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
+SELECT * FROM Langues;
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vous voyez donc appraître le contenbu de la table. Vous constatez que la clé primaire <strong>IdLangue</strong> a bien été générée correctement.</p>
+<p>Il est possible de stoquer le résultat de cette requête dans une variable pour l'exploiter plus facilement dans jupyter. Voici comment procéder en modifiant légèrement la première ligne :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">resultat</span> <span class="o">=</span> <span class="o">%</span><span class="k">sql</span> SELECT * FROM Langues;
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vous voyez au passage la syntaxe concise permettant de récupérer le résultat d'une requête dans une variable. Cette variable <code>résultat</code> est exploitable dans ce classeur, y compris par python !!</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">resultat</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">resultat</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">resultat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>On a donc ici le meilleur des deux mondes : des requêtes <strong>SQL</strong> et une base de données pour stocker efficacement les données, le langage python pour traiter ces données grâce à des algorithmes faciles à écrire.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="A-vous-de-jouer">
+<a class="anchor" href="#A-vous-de-jouer" aria-hidden="true"><span class="octicon octicon-link"></span></a>A vous de jouer<a class="anchor-link" href="#A-vous-de-jouer"> </a>
+</h2>
+<p>Créez la table Auteurs afin que celle-ci reflète les informations suivantes :</p>
+<table>
+<thead>
+<tr>
+<th>Nom</th>
+<th>Prenom</th>
+<th>annee naissance</th>
+<th>langue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Orwell</td>
+<td>George</td>
+<td>1903</td>
+<td>Anglais</td>
+</tr>
+<tr>
+<td>Herbert</td>
+<td>Frank</td>
+<td>1920</td>
+<td>Anglais</td>
+</tr>
+<tr>
+<td>Asimov</td>
+<td>Isaac</td>
+<td>1920</td>
+<td>Anglais</td>
+</tr>
+<tr>
+<td>Huxley</td>
+<td>Aldous</td>
+<td>1894</td>
+<td>Anglais</td>
+</tr>
+<tr>
+<td>Bradbury</td>
+<td>Ray</td>
+<td>1920</td>
+<td>Anglais</td>
+</tr>
+<tr>
+<td>K. Dick</td>
+<td>Philip</td>
+<td>1928</td>
+<td>Anglais</td>
+</tr>
+<tr>
+<td>Barjavel</td>
+<td>René</td>
+<td>1911</td>
+<td>Français</td>
+</tr>
+<tr>
+<td>Boulle</td>
+<td>Pierre</td>
+<td>1912</td>
+<td>Français</td>
+</tr>
+<tr>
+<td>Van Vogt</td>
+<td>Alfred Elton</td>
+<td>1912</td>
+<td>Anglais</td>
+</tr>
+<tr>
+<td>Verne</td>
+<td>Jules</td>
+<td>1828</td>
+<td>Français</td>
+</tr>
+</tbody>
+</table>
+<p>Pour cela, vous utiliserez la commande suivante pour créer la table et vous adapterez les données à cette structure.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span> 
+CREATE TABLE "Auteurs" (
+    "IdAuteur"       INTEGER  PRIMARY KEY,
+    "NomAuteur"      TEXT,
+    "PrenomAuteur"   TEXT,
+    "IdLangue"         INTEGER,
+    "AnneeNaissance" INTEGER
+);
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span> 
+
+/* 
+# YOUR CODE HERE
+raise NotImplementedError()
+*/
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="A-vous-de-jouer">
+<a class="anchor" href="#A-vous-de-jouer" aria-hidden="true"><span class="octicon octicon-link"></span></a>A vous de jouer<a class="anchor-link" href="#A-vous-de-jouer"> </a>
+</h2>
+<p>Notre base n'est pas encore complète : il nous reste à créer les tables <strong>Livres</strong> et <strong>Themes</strong> qui doivent refléter le contenu suivant :</p>
+<table>
+<thead>
+<tr>
+<th>Titre</th>
+<th>NomAuteur</th>
+<th>PrenomAuteur</th>
+<th>AnneeNaissance</th>
+<th>Langue</th>
+<th>AnneePubli</th>
+<th>Themes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1984</td>
+<td>Orwell</td>
+<td>George</td>
+<td>1903</td>
+<td>Anglais</td>
+<td>1949</td>
+<td>Totalitarisme, science-fiction, anticipation, Dystopie</td>
+</tr>
+<tr>
+<td>Dune</td>
+<td>Herbert</td>
+<td>Frank</td>
+<td>1920</td>
+<td>Anglais</td>
+<td>1965</td>
+<td>science-fiction, anticipation</td>
+</tr>
+<tr>
+<td>Fondation</td>
+<td>Asimov</td>
+<td>Isaac</td>
+<td>1920</td>
+<td>Anglais</td>
+<td>1951</td>
+<td>science-fiction, Economie</td>
+</tr>
+<tr>
+<td>Le meilleur des mondes</td>
+<td>Huxley</td>
+<td>Aldous</td>
+<td>1894</td>
+<td>Anglais</td>
+<td>1931</td>
+<td>Totalitarisme, science fiction, dystopie</td>
+</tr>
+<tr>
+<td>Fahrenheit 451</td>
+<td>Bradbury</td>
+<td>Ray</td>
+<td>1920</td>
+<td>Anglais</td>
+<td>1953</td>
+<td>science-fiction, Dystopie</td>
+</tr>
+<tr>
+<td>Ubik</td>
+<td>K. Dick</td>
+<td>Philip</td>
+<td>1928</td>
+<td>Anglais</td>
+<td>1969</td>
+<td>science-fiction, anticipation</td>
+</tr>
+<tr>
+<td>Chroniques martiennes</td>
+<td>Bradbury</td>
+<td>Ray</td>
+<td>1920</td>
+<td>Anglais</td>
+<td>1950</td>
+<td>science-fiction, anticipation</td>
+</tr>
+<tr>
+<td>La nuit des temps</td>
+<td>Barjavel</td>
+<td>René</td>
+<td>1911</td>
+<td>Français</td>
+<td>1968</td>
+<td>science-fiction, tragédie</td>
+</tr>
+<tr>
+<td>Blade Runner</td>
+<td>K. Dick</td>
+<td>Philip</td>
+<td>1928</td>
+<td>Anglais</td>
+<td>1968</td>
+<td>Intelligence artificielle, science fiction</td>
+</tr>
+<tr>
+<td>Les Robots</td>
+<td>Asimov</td>
+<td>Isaac</td>
+<td>1920</td>
+<td>Anglais</td>
+<td>1950</td>
+<td>science fiction, Intelligence artificielle</td>
+</tr>
+<tr>
+<td>La Planète des singes</td>
+<td>Boulle</td>
+<td>Pierre</td>
+<td>1912</td>
+<td>Français</td>
+<td>1963</td>
+<td>science fiction, Dystopie</td>
+</tr>
+<tr>
+<td>Ravage</td>
+<td>Barjavel</td>
+<td>René</td>
+<td>1911</td>
+<td>Français</td>
+<td>1943</td>
+<td>Science-Fiction, anticipation</td>
+</tr>
+<tr>
+<td>Le Maître du Haut Château</td>
+<td>K. Dick</td>
+<td>Philip</td>
+<td>1928</td>
+<td>Anglais</td>
+<td>1962</td>
+<td>Dystopie, Uchronie</td>
+</tr>
+<tr>
+<td>Le monde des A</td>
+<td>Van Vogt</td>
+<td>Alfred Elton</td>
+<td>1912</td>
+<td>Anglais</td>
+<td>1945</td>
+<td>science fiction, IA</td>
+</tr>
+<tr>
+<td>La Fin de l’éternité</td>
+<td>Asimov</td>
+<td>Isaac</td>
+<td>1920</td>
+<td>Anglais</td>
+<td>1955</td>
+<td>science-fiction, voyage dans le temps</td>
+</tr>
+<tr>
+<td>De la Terre à la Lune</td>
+<td>Verne</td>
+<td>Jules</td>
+<td>1828</td>
+<td>Français</td>
+<td>1865</td>
+<td>Science-Fiction, aventure</td>
+</tr>
+</tbody>
+</table>
+<h3 id="La-table-LIVRES">
+<a class="anchor" href="#La-table-LIVRES" aria-hidden="true"><span class="octicon octicon-link"></span></a>La table LIVRES<a class="anchor-link" href="#La-table-LIVRES"> </a>
+</h3>
+<p>La table <strong>LIVRES</strong> devra avoir la structure décrite dans l'extrait suivant :</p>
+<table>
+<thead>
+<tr>
+<th>IdLivre</th>
+<th>Titre</th>
+<th>IdAuteur</th>
+<th>AnneePubli</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>8</td>
+<td>La nuit des temps</td>
+<td>7</td>
+<td>1968</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>l'année de publication est de type <strong>INTEGER</strong>
+</li>
+<li>
+<strong>IdLivre</strong> désigne bien sûr la clé primaire</li>
+<li>
+<strong>IdAuteur</strong> est une <em>clé externe</em> faisant référence à l'auteur.</li>
+<li>dans l'extrait, la clé <strong>IdAuteur</strong> vaut 7. L'auteur de <em>La nuit des temps</em> est donc <em>Barjavel</em>
+</li>
+<li>on ne renseigne pas la langue ou l'année de naissance de l'auteur car ces informations sont déjà présentes dans la table <strong>Auteurs</strong>.</li>
+<li>On traitera la problématique des thèmes plus tard...</li>
+</ul>
+<p>Dans la cellule ci-dessous, saisissez la requête pour créer la table <strong>Livres</strong></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+
+/* 
+# YOUR CODE HERE
+raise NotImplementedError()
+*/
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A présent, saisissez les données à l'intérieur de la table.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span>
+/* 
+# YOUR CODE HERE
+raise NotImplementedError()
+*/
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vérifiez votre travail en listant tous les enregistrements de la table <strong>LIVRES*</strong> dans la variable <code>resultat</code></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># YOUR CODE HERE</span>
+<span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+<span class="n">resultat</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'1984'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1949</span><span class="p">)</span> <span class="ow">in</span> <span class="n">resultat</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="La-table-Themes">
+<a class="anchor" href="#La-table-Themes" aria-hidden="true"><span class="octicon octicon-link"></span></a>La table Themes<a class="anchor-link" href="#La-table-Themes"> </a>
+</h3>
+<p>Traitons à présent la problématique des Thèmes. La table Themes devra avoir la structure décrite dans l'extrait suivant :</p>
+<table>
+<thead>
+<tr>
+<th>IdTheme</th>
+<th>Intitule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Science-fiction</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>la note est un entier</li>
+<li>
+<strong>IdTheme</strong> désigne bien sûr la clé primaire</li>
+<li>
+<strong>Intitule</strong> est l'intitulé du thème tel qu'il apparaît dans le tableau global.</li>
+</ul>
+<p>Dans la cellule ci-dessous, vous saisirez donc 2 requêtes :</p>
+<ul>
+<li>Une pour créer la table Themes</li>
+<li>Une pour insérer les données dans la table.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span> 
+
+/* 
+# YOUR CODE HERE
+raise NotImplementedError()
+*/
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vérifiez votre travail en lisant tous les enregistrements de la table <strong>Themes</strong> dans la variable <code>resultat</code></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># YOUR CODE HERE</span>
+<span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+<span class="n">resultat</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">"Science-fiction"</span><span class="p">)</span> <span class="ow">in</span> <span class="n">resultat</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Une-table-manquante-!">
+<a class="anchor" href="#Une-table-manquante-!" aria-hidden="true"><span class="octicon octicon-link"></span></a>Une table manquante !<a class="anchor-link" href="#Une-table-manquante-!"> </a>
+</h3>
+<p>La saisie de notre base de donnée est incomplète ! Nous avons en effet saisi tous les auteurs, tous les livres, toutes les langues, tous les thèmes et pourtant il manque une information. Laquelle ?</p>
+<p>Quelle solution envisager pour saisir cette information ?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Créer une table <strong>RelationsLivreTheme</strong> mettant en relation les livres et les thèmes associés. Saisir le contenu de cette table.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span> 
+
+/* 
+# YOUR CODE HERE
+raise NotImplementedError()
+*/
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">resultat</span> <span class="o">=</span> <span class="o">%</span><span class="k">sql</span> SELECT IdLivre, IdTheme FROM RelationsLivreTheme;
+<span class="k">assert</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">in</span> <span class="n">resultat</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Cardinalité">
+<a class="anchor" href="#Cardinalit%C3%A9" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cardinalité<a class="anchor-link" href="#Cardinalit%C3%A9"> </a>
+</h2>
+<p>En regardant notre base de données et les relations que nous avons créé entre les tables, on remarque que celles-ci ont des <em>cardinalités</em> différentes. La <em>cardinalité</em> d'une relation entre deux tables <strong>A</strong> et <strong>B</strong> exprime à combien d'enregistrements de <strong>A</strong> peut être relié chaque enregistrement de <strong>B</strong>.</p>
+<p>Par exemple, à un livre est associé un auteur unique, mais pour un auteur donné, il peut y avoir plusieurs livres. On parle alors de <strong>relation de 1 à n</strong></p>
+<p>Lorsque plusieurs enregistrements de la table <strong>A</strong> peuvent être associés à plusieurs enregistremets de la table <strong>B</strong>, on parle alors d'une <strong>relation de n à n</strong></p>
+<h3 id="A-vous-de-jouer">
+<a class="anchor" href="#A-vous-de-jouer" aria-hidden="true"><span class="octicon octicon-link"></span></a>A vous de jouer<a class="anchor-link" href="#A-vous-de-jouer"> </a>
+</h3>
+<p>Citez dans la base de données</p>
+<ul>
+<li>une relation de 1 à n</li>
+<li>une relation de n à n</li>
+</ul>
+<h3 id="Table-de-relation">
+<a class="anchor" href="#Table-de-relation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Table de relation<a class="anchor-link" href="#Table-de-relation"> </a>
+</h3>
+<p>Pour une <strong>relation de n à n</strong>, nous aurons en général recours à la création d'une nouvelle table de relation contenant les clés externes des tables à mettre en relation. C'est ce que nous avons mis en oeuvre pour la table <strong>RelationsLivreTheme</strong>.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><a class="u-url" href="/nsi/terminale/bases%20de%20donn%C3%A9es/sql/tp/2020/06/23/nsi_t_SQL.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Plateforme de blog avec support pour Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/wawachief" title="wawachief"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/leclusemaths" title="leclusemaths"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
