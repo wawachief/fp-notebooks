@@ -29,11 +29,11 @@ layout: notebook
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Mise-en-pratique-sur-une-vraie-base">Mise en pratique sur une vraie base<a class="anchor-link" href="#Mise-en-pratique-sur-une-vraie-base"> </a></h2><p>A partir de maintenant, vous avez les connaissances pour réaliser une application s'appuyant sur une base de donénes. Il  ne reste plus qu'à les appliquer dans le cadre d'un projet ou un mini projet. Un exemple de mini-projet possible dans le domaine du <em>BigData</em> consiste à récupérer des données officielles et à s'aider du langage SQL pour les exploiter.</p>
+<h1 id="Mise-en-pratique-sur-une-vraie-base">Mise en pratique sur une vraie base<a class="anchor-link" href="#Mise-en-pratique-sur-une-vraie-base"> </a></h1><p>A partir de maintenant, vous avez les connaissances pour réaliser une application s'appuyant sur une base de données. Il  ne reste plus qu'à les appliquer dans le cadre d'un projet ou un mini projet. Un exemple de mini-projet possible dans le domaine du <em>BigData</em> consiste à récupérer des données officielles et à s'aider du langage SQL pour les exploiter.</p>
 <h2 id="Exemple-de-jeu-de-donn&#233;es">Exemple de jeu de donn&#233;es<a class="anchor-link" href="#Exemple-de-jeu-de-donn&#233;es"> </a></h2><p>Une source intéressante pour récupérer des données est <strong>data.gouv.fr</strong>. Voici un exemple de jeu de données : <a href="https://www.data.gouv.fr/fr/datasets/resultats-du-controle-sanitaire-de-leau-distribuee-commune-par-commune/#_">https://www.data.gouv.fr/fr/datasets/resultats-du-controle-sanitaire-de-leau-distribuee-commune-par-commune/#_</a></p>
 <p>La description de chacun des fichiers se trouve ici : <a href="https://static.data.gouv.fr/resources/resultats-du-controle-sanitaire-de-leau-distribuee-commune-par-commune/20190710-030936/20190708-eau-distrib-documentation-v4.pdf">https://static.data.gouv.fr/resources/resultats-du-controle-sanitaire-de-leau-distribuee-commune-par-commune/20190710-030936/20190708-eau-distrib-documentation-v4.pdf</a></p>
 <ol>
-<li>Téléchargez le fichier dis-* le plus récent. Décompressez le et anasysez sa structure.</li>
+<li>Téléchargez le fichier dis-* le plus récent. Décompressez le et analysez sa structure.</li>
 <li>Créez une nouvelle base de données et 3 tables à l'intérieur :<ul>
 <li>Communes</li>
 <li>Prelevements</li>
@@ -233,7 +233,7 @@ layout: notebook
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Interrogation-de-la-base-de-donn&#233;es">Interrogation de la base de donn&#233;es<a class="anchor-link" href="#Interrogation-de-la-base-de-donn&#233;es"> </a></h3><p>Nous avons à présent une vraie base de données avec de vraies données, en nombre conséquant. Une petite requête sur la table Resultats suffit pour s'en convaincre : Plus de 3 millions et demi d'enregistrements !</p>
+<h3 id="Interrogation-de-la-base-de-donn&#233;es">Interrogation de la base de donn&#233;es<a class="anchor-link" href="#Interrogation-de-la-base-de-donn&#233;es"> </a></h3><p>Nous avons à présent une vraie base de données avec de vraies données, en nombre conséquent. Une petite requête sur la table Resultats suffit pour s'en convaincre : Plus de 3 millions et demi d'enregistrements !</p>
 <h3 id="Quelques-id&#233;es-de-fonctions-&#224;-cr&#233;er-!">Quelques id&#233;es de fonctions &#224; cr&#233;er !<a class="anchor-link" href="#Quelques-id&#233;es-de-fonctions-&#224;-cr&#233;er-!"> </a></h3><ul>
 <li><p>une fonction <strong>liste_communes</strong> prenant en entrée un curseur et un numéro de département et renvoyant la liste des communes dans de département présentes dans la base.</p>
 <ul>
@@ -242,14 +242,14 @@ layout: notebook
 <li>Le champ <em>numeroinsee</em> commence par le numéro du département mais est différent du code postal.</li>
 </ul>
 </li>
-<li><p>une fonction <strong>anomalies()</strong> prenant un curseur et un nom de commune et qui renvoie la date et la conclusion du prélévement (champ <em>conclusionprel</em> dans <strong>Prelevements</strong> dans la commune) et la référence du prélèvement (champ <em>referenceprel</em> dans ùùPrelevements**) en cas d'anomalie. Vous repèrerez dans la base la phrase type lorsque tout va bien !</p>
+<li><p>une fonction <strong>anomalies()</strong> prenant un curseur et un nom de commune et qui renvoie la date et la conclusion du prélévement (champ <em>conclusionprel</em> dans <strong>Prelevements</strong> dans la commune) et la référence du prélèvement (champ <em>referenceprel</em> dans <strong>Prelevements</strong>) en cas d'anomalie. Vous repèrerez dans la base la phrase type lorsque tout va bien !</p>
 </li>
-<li><p>une fonction <strong>resultat()</strong> prenant en paramètres un curseur et une référence de prélèvement et qui renvoie les résultats détaillés de l'analyse avec les informatiuons suivantes :</p>
+<li><p>une fonction <strong>resultat()</strong> prenant en paramètres un curseur et une référence de prélèvement et qui renvoie les résultats détaillés de l'analyse avec les informations suivantes :</p>
 <ul>
 <li>libellé associé à chaque code paramètre, composant la dénomination du paramètre sous forme de texte libre</li>
 <li>Le résultat de l’analyse physico-chimique ou microbiologique du paramètre</li>
 <li>L'unité de mesure du paramètre</li>
-<li>La limite(s) de qualité du paramètre concernéen vigueur  au moment du prélèvement</li>
+<li>La limite(s) de qualité du paramètre concerné en vigueur  au moment du prélèvement</li>
 </ul>
 </li>
 </ul>
@@ -364,8 +364,8 @@ layout: notebook
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Amusez-vous">Amusez vous<a class="anchor-link" href="#Amusez-vous"> </a></h3><p>Interrogez la base de données pour rechercher des anomalies dans votre commune ou les environs, et récupérez les résultats détaillés des ananlyses en cas de problème pour identifier la source de l'anomalie.</p>
-<p>Au fil de votre parcours de la base, vous pouvez avoir envie de créer d'autres fonctions pour afficher d'autres informations. Ne vous provez pas !!!</p>
+<h3 id="Amusez-vous">Amusez vous<a class="anchor-link" href="#Amusez-vous"> </a></h3><p>Interrogez la base de données pour rechercher des anomalies dans votre commune ou les environs, et récupérez les résultats détaillés des analyses en cas de problème pour identifier la source de l'anomalie.</p>
+<p>Au fil de votre parcours de la base, vous pouvez avoir envie de créer d'autres fonctions pour afficher d'autres informations. Ne vous privez pas !!!</p>
 
 </div>
 </div>
@@ -392,7 +392,7 @@ layout: notebook
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Pour-aller-plus-loin">Pour aller plus loin<a class="anchor-link" href="#Pour-aller-plus-loin"> </a></h3><p>Vous avez les outils à présent pout construire une application graphique (avec TKInter par exemple) ou bien un site web mettant à disposition ces résultats. Cela peut faire l'objet d'un projet.</p>
 <h2 id="Fin-du-travail">Fin du travail<a class="anchor-link" href="#Fin-du-travail"> </a></h2><p>On n'oublie pas de fermer l'accès à la base de données :)</p>
-<p>Vous aurez pu constater au cours de vos requêtes que les réponses de la base de donnée sont immédiate malgré les millions d'enregistrement que celle-ci contient !!</p>
+<p>Vous aurez pu constater au cours de vos requêtes que les réponses de la base de données sont immédiates malgré les millions d'enregistrement que celle-ci contient !!</p>
 <p>Voici un petit aperçu de l'utilisation d'une base de donnée dans le monde réel.</p>
 
 </div>

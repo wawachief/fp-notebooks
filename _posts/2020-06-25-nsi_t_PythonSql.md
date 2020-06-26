@@ -29,7 +29,8 @@ layout: notebook
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Exploiter-une-base-de-donn&#233;es-avec-Python">Exploiter une base de donn&#233;es avec Python<a class="anchor-link" href="#Exploiter-une-base-de-donn&#233;es-avec-Python"> </a></h2><p>Dans ce TP, nous allons reprendre notre base de données d'exemples sur les livres, mais nous allons utiliser Python pour exécuter et exploiter les requêtes SQL. Notre SGBD sera toujours SQLite : le module python que nous utiliserons se nomme <strong>sqlite3</strong>.</p>
+<h1 id="Exploiter-une-base-de-donn&#233;es-avec-Python">Exploiter une base de donn&#233;es avec Python<a class="anchor-link" href="#Exploiter-une-base-de-donn&#233;es-avec-Python"> </a></h1><p>Dans ce TP, nous allons reprendre notre base de données d'exemples sur les livres, mais nous allons utiliser Python pour exécuter et exploiter les requêtes SQL. Notre SGBD sera toujours SQLite : le module python que nous utiliserons se nomme <strong>sqlite3</strong>.</p>
+<p>Si vous ne possédez pas cette base des TP précédents, vous pouvez la récupérer <a href="https://www.lecluse.fr/nsi/NSI_T/bdd/livres_db">ici</a>.</p>
 
 </div>
 </div>
@@ -258,7 +259,7 @@ Un indice : si vous réexécutez une nouvelle fois la méthode <strong>fetchall(
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">prenom</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">nom</span><span class="p">):</span>
-    <span class="n">requete</span> <span class="o">=</span> <span class="s2">&quot;select PrenomAuteur from Auteurs where NomAuteur = ?&quot;</span>
+    <span class="n">requete</span> <span class="o">=</span> <span class="s2">&quot;SELECT PrenomAuteur FROM Auteurs WHERE NomAuteur = ?&quot;</span>
     <span class="n">c</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">requete</span><span class="p">,</span> <span class="p">[</span><span class="n">nom</span><span class="p">])</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -418,7 +419,7 @@ Un indice : si vous réexécutez une nouvelle fois la méthode <strong>fetchall(
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">requete</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;SELECT * FROM Auteurs WHERE IdAuteur = ?&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">requete</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM Auteurs WHERE IdAuteur = ?&quot;</span>
 <span class="n">curseur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">requete</span><span class="p">,</span> <span class="p">[</span><span class="n">last_id</span><span class="p">])</span>
 <span class="n">curseur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
 </pre></div>
@@ -481,7 +482,7 @@ Un indice : si vous réexécutez une nouvelle fois la méthode <strong>fetchall(
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">curseur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select * from Auteurs&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">curseur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM Auteurs&quot;</span><span class="p">)</span>
 <span class="n">curseur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 </pre></div>
 
