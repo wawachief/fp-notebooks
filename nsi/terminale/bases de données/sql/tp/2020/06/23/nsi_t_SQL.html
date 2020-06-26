@@ -339,7 +339,7 @@ CREATE TABLE "Langues"
 <p>Pour commencer, dans jupyter lorsque nous voulons taper une commande <strong>SQL</strong> et non du langage python. Pour cela, nous inscrirons <strong>en première ligne de cellule</strong> la commande <em>magique</em> <code>%%sql</code>. N'oubliez jamais de commencer toutes vos cellules ainsi car sinon, la commande sera interprétée par <em>python</em> et non <em>SQL</em>.</p>
 <p>La première requête <strong>SQL</strong> que nous allons apprendre est la requête <code>CREATE TABLE</code></p>
 <ul>
-<li>on insique le nom de la table à créer</li>
+<li>on indique le nom de la table à créer</li>
 <li>entre parenthèse on liste les <em>attributs</em> à mettre ainsi que leur <em>type</em>.</li>
 <li>une requête se termine <strong>toujours</strong> par ;</li>
 </ul>
@@ -400,9 +400,9 @@ VALUES
     (## enregistrement 1 ##),
     ...
     (## enregistrement n ##);</code></pre>
-<p>On peut refaire une autre requête <strong>INSERT</strong> à la suite si on qouhaite ajouter encore des données au bout de la table.</p>
-<p>Vous remarquez que l'on ne donne pas de valeur pour l'attribut <strong>IdLangue</strong>. C'est parce qu'on l'a déclaré en <code>PRIMARY KEY</code>. Il est donc automatiquement géré par sqlite. Nous verrons cela en lisant le cpontenu complet de la table.</p>
-<p>On est pas obligé de préciser tous les attributs. <strong>IdLangue</strong> est un exemple particulier, mais il est possible d'ommetre d'autres attributs. Ils seront alors affectés d'une valeur nulle.</p>
+<p>On peut refaire une autre requête <strong>INSERT</strong> à la suite si on souhaite ajouter encore des données au bout de la table.</p>
+<p>Vous remarquez que l'on ne donne pas de valeur pour l'attribut <strong>IdLangue</strong>. C'est parce qu'on l'a déclaré en <code>PRIMARY KEY</code>. Il est donc automatiquement géré par sqlite. Nous verrons cela en lisant le contenu complet de la table.</p>
+<p>On est pas obligé de préciser tous les attributs. <strong>IdLangue</strong> est un exemple particulier, mais il est possible d'omettre d'autres attributs. Ils seront alors affectés d'une valeur nulle.</p>
 <p>A l'issue de la requête, sqlite nous informe que 2 lignes ont été créées.</p>
 
 </div>
@@ -441,8 +441,8 @@ SELECT * FROM Langues;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Vous voyez donc appraître le contenbu de la table. Vous constatez que la clé primaire <strong>IdLangue</strong> a bien été générée correctement.</p>
-<p>Il est possible de stoquer le résultat de cette requête dans une variable pour l'exploiter plus facilement dans jupyter. Voici comment procéder en modifiant légèrement la première ligne :</p>
+<p>Vous voyez donc appraître le contenu de la table. Vous constatez que la clé primaire <strong>IdLangue</strong> a bien été générée correctement.</p>
+<p>Il est possible de stocker le résultat de cette requête dans une variable pour l'exploiter plus facilement dans jupyter. Voici comment procéder en modifiant légèrement la première ligne :</p>
 
 </div>
 </div>
@@ -1148,7 +1148,7 @@ raise NotImplementedError()
 </h2>
 <p>En regardant notre base de données et les relations que nous avons créé entre les tables, on remarque que celles-ci ont des <em>cardinalités</em> différentes. La <em>cardinalité</em> d'une relation entre deux tables <strong>A</strong> et <strong>B</strong> exprime à combien d'enregistrements de <strong>A</strong> peut être relié chaque enregistrement de <strong>B</strong>.</p>
 <p>Par exemple, à un livre est associé un auteur unique, mais pour un auteur donné, il peut y avoir plusieurs livres. On parle alors de <strong>relation de 1 à n</strong></p>
-<p>Lorsque plusieurs enregistrements de la table <strong>A</strong> peuvent être associés à plusieurs enregistremets de la table <strong>B</strong>, on parle alors d'une <strong>relation de n à n</strong></p>
+<p>Lorsque plusieurs enregistrements de la table <strong>A</strong> peuvent être associés à plusieurs enregistrements de la table <strong>B</strong>, on parle alors d'une <strong>relation de n à n</strong></p>
 <h3 id="A-vous-de-jouer">
 <a class="anchor" href="#A-vous-de-jouer" aria-hidden="true"><span class="octicon octicon-link"></span></a>A vous de jouer<a class="anchor-link" href="#A-vous-de-jouer"> </a>
 </h3>
