@@ -164,7 +164,7 @@ window.onload = wrap_img;
 <ul>
 <li class="toc-entry toc-h2"><a href="#Aller-plus-loin-avec-SELECT">Aller plus loin avec SELECT </a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#Selection-simple">Selection simple </a></li>
+<li class="toc-entry toc-h3"><a href="#Sélection-simple">Sélection simple </a></li>
 <li class="toc-entry toc-h3"><a href="#Sélection-multiple">Sélection multiple </a></li>
 <li class="toc-entry toc-h3"><a href="#Compter-le-nombre-de-réponses-d'une-requête-SELECT">Compter le nombre de réponses d&#39;une requête SELECT </a></li>
 <li class="toc-entry toc-h3"><a href="#Trier-les-réponses">Trier les réponses </a></li>
@@ -204,7 +204,7 @@ window.onload = wrap_img;
 <h1 id="Aller-plus-loin-en-SQL">
 <a class="anchor" href="#Aller-plus-loin-en-SQL" aria-hidden="true"><span class="octicon octicon-link"></span></a>Aller plus loin en SQL<a class="anchor-link" href="#Aller-plus-loin-en-SQL"> </a>
 </h1>
-<p>Dans ce classeur,nous poursuivrons l'étude de l'exemple de la base de données de livres de SF et nous verrons des requêtes de sélection avancées ainsi que la manière de fusionner plusieurs tables (Jointures).</p>
+<p>Dans ce classeur, nous poursuivrons l'étude de l'exemple de la base de données de livres de SF et nous verrons des requêtes de sélection avancées ainsi que la manière de fusionner plusieurs tables (Jointures).</p>
 <p>Commencez par valider les cellules suivantes afin d'activer la fonctionnalité SQL de Jupyter et de ncharger la base du TP précédent.</p>
 
 </div>
@@ -235,8 +235,8 @@ window.onload = wrap_img;
 <h2 id="Aller-plus-loin-avec-SELECT">
 <a class="anchor" href="#Aller-plus-loin-avec-SELECT" aria-hidden="true"><span class="octicon octicon-link"></span></a>Aller plus loin avec SELECT<a class="anchor-link" href="#Aller-plus-loin-avec-SELECT"> </a>
 </h2>
-<h3 id="Selection-simple">
-<a class="anchor" href="#Selection-simple" aria-hidden="true"><span class="octicon octicon-link"></span></a>Selection simple<a class="anchor-link" href="#Selection-simple"> </a>
+<h3 id="Sélection-simple">
+<a class="anchor" href="#S%C3%A9lection-simple" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sélection simple<a class="anchor-link" href="#S%C3%A9lection-simple"> </a>
 </h3>
 <p>Supposons que l'on veuille lister seulement les noms et prénoms des auteurs nés avant 1900, on utilisera une clause <strong>WHERE</strong> <em>condition</em> :</p>
 
@@ -263,7 +263,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Pour obtebir les auteurs prénomés <em>Jules</em> :</p>
+<p>Pour obtebir les auteurs prénommés <em>Jules</em> :</p>
 
 </div>
 </div>
@@ -289,8 +289,8 @@ window.onload = wrap_img;
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Vous voyez que les textes sont délimités par des quotes <strong>'...'</strong>.</p>
-<p><strong><em>Attention</em></strong> : essayez de remplacer <strong>Jules</strong> par jules** et vous constaterez que la recherche est sensible aux majuscules.</p>
-<p>Supposns maintenant que l'on recherche les auteurs dont le prénom commence par <strong>P</strong> : Nous utiliserons une clause LIKE de cette manière :</p>
+<p><strong><em>Attention</em></strong> : essayez de remplacer <strong>Jules</strong> par <strong>jules</strong> et vous constaterez que la recherche est sensible aux majuscules.</p>
+<p>Supposns maintenant que l'on recherche les auteurs dont le prénom commence par <strong>P</strong> : Nous utiliserons une clause <em>LIKE</em> de cette manière :</p>
 
 </div>
 </div>
@@ -318,7 +318,7 @@ window.onload = wrap_img;
 <h3 id="Sélection-multiple">
 <a class="anchor" href="#S%C3%A9lection-multiple" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sélection multiple<a class="anchor-link" href="#S%C3%A9lection-multiple"> </a>
 </h3>
-<p>Il est possible de croiser plusieurs critères à l'aide d'opérateurs booleens : <strong>AND</strong> et <strong>OR</strong>. Voici la liste des auteurs francais nés après 1900 :</p>
+<p>Il est possible de croiser plusieurs critères à l'aide d'opérateurs booleens : <strong>AND</strong> et <strong>OR</strong>. Voici la liste des auteurs français nés après 1900 :</p>
 
 </div>
 </div>
@@ -346,7 +346,7 @@ window.onload = wrap_img;
 <h3 id="Compter-le-nombre-de-réponses-d'une-requête-SELECT">
 <a class="anchor" href="#Compter-le-nombre-de-r%C3%A9ponses-d'une-requ%C3%AAte-SELECT" aria-hidden="true"><span class="octicon octicon-link"></span></a>Compter le nombre de réponses d'une requête SELECT<a class="anchor-link" href="#Compter-le-nombre-de-r%C3%A9ponses-d'une-requ%C3%AAte-SELECT"> </a>
 </h3>
-<p>Combien y a t-il d'auteurs nés entre 1900 et 1915 ?</p>
+<p>Combien y a t-il d'auteurs nés entre 1900 et 1915 ? Vous verrez à l'occation l'utilisation de l'opérateur <em>BETWEEN</em> pour tester l'appartenance à un intervalle.</p>
 
 </div>
 </div>
@@ -430,7 +430,7 @@ window.onload = wrap_img;
 <h3 id="Éviter-les-occurrences-multiples">
 <a class="anchor" href="#%C3%89viter-les-occurrences-multiples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Éviter les occurrences multiples<a class="anchor-link" href="#%C3%89viter-les-occurrences-multiples"> </a>
 </h3>
-<p>Interrogons la table Livres sur les années de publication, rangées par ordre croissant :</p>
+<p>interrogeons la table <strong>Livres</strong> sur les années de publication, rangées par ordre croissant :</p>
 
 </div>
 </div>
@@ -456,7 +456,7 @@ window.onload = wrap_img;
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>On constate la présence de quelques doublons</p>
-<p>Pour éviter les redondances dans les résultats, on peut rajouter le mot-clé DISTINCT après le mot-clé SELECT :</p>
+<p>Pour éviter les redondances dans les résultats, on peut rajouter le mot-clé <em>DISTINCT</em> juste après le <em>SELECT</em> :</p>
 
 </div>
 </div>
@@ -556,7 +556,7 @@ window.onload = wrap_img;
 <h2 id="Requêtes-portant-sur-plusieurs-tables">
 <a class="anchor" href="#Requ%C3%AAtes-portant-sur-plusieurs-tables" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requêtes portant sur plusieurs tables<a class="anchor-link" href="#Requ%C3%AAtes-portant-sur-plusieurs-tables"> </a>
 </h2>
-<p>Jusqu'à présent, nos requêtes ne portaient que sur une seule table. Néanmoins note bliste de livres comporte des donées en provenance de plusieurs tables simultanément. Nous allons voir comment effectuer des requêtes pour croiser des données en provenance de plusieurs tables.</p>
+<p>Jusqu'à présent, nos requêtes ne portaient que sur une seule table. Néanmoins notre liste de livres comporte des donées en provenance de plusieurs tables simultanément. Nous allons voir comment effectuer des requêtes pour croiser des données en provenance de plusieurs tables.</p>
 
 </div>
 </div>
@@ -581,7 +581,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Comme on peut le constater cette requête est peu pertinente car elle affiche toutes les données de chacune des tables sans effectuer de croisement. La <strong>clé de jointure</strong> apparaît pourtant ici clairement : il s'agit de id_langue qui doit permettre de recouper les informations entre les deux tables. Il est en effet inutile d'afficher les données pour lesquelles les langues ne correspondent pas entre les deux tables.</p>
+<p>Comme on peut le constater cette requête est peu pertinente car elle affiche toutes les données de chacune des tables sans effectuer de correspondances. La <strong>clé de jointure</strong> apparaît pourtant ici clairement : il s'agit de <strong>id_langue</strong> qui doit permettre de recouper les informations entre les deux tables : il est en effet inutile d'afficher les données pour lesquelles les langues ne correspondent pas entre les deux tables.</p>
 <h3 id="Jointure">
 <a class="anchor" href="#Jointure" aria-hidden="true"><span class="octicon octicon-link"></span></a>Jointure<a class="anchor-link" href="#Jointure"> </a>
 </h3>
@@ -709,7 +709,7 @@ window.onload = wrap_img;
 <h3 id="Le-cas-des-relations-de-n-à-n">
 <a class="anchor" href="#Le-cas-des-relations-de-n-%C3%A0-n" aria-hidden="true"><span class="octicon octicon-link"></span></a>Le cas des relations de n à n<a class="anchor-link" href="#Le-cas-des-relations-de-n-%C3%A0-n"> </a>
 </h3>
-<p>Parfois i larrive que les données à collecter se trouvent dans plus que deux tables : c'est le cas des Thèmes pour les livres qui nécessitent l'analyse de 3 tables : <strong>Livres</strong> et <strong>Thèmes</strong> bien sûr, mais aussi la table de relation <strong>RelationsLivreTheme</strong>.</p>
+<p>Parfois il arrive que les données à collecter se trouvent dans plus que deux tables : c'est le cas des Thèmes pour les livres qui nécessitent l'analyse de 3 tables : <strong>Livres</strong> et <strong>Thèmes</strong> bien sûr, mais aussi la table de relation <strong>RelationsLivreTheme</strong>.</p>
 <p>Observez et étudiez la requête suivante : Le principe est d'enchaîner deux jointures <strong>JOIN ... USING</strong> en utilisant <strong><em>la table de Relation au milieu</em></strong>. En effet, la requête se lit de la gauche vers la droite et on ne peut faire de jointure que si on a une clé externe en commun, ce qui n'est par exemple pas le cas entre <strong>Livres</strong> et <strong>Thèmes</strong>.</p>
 
 </div>

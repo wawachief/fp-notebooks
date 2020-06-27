@@ -316,10 +316,10 @@ sudo apt install python3-sql
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span> 
-CREATE TABLE "Langues" 
+CREATE TABLE Langues 
 (
-"IdLangue" INTEGER  PRIMARY KEY,
-"Langue"   TEXT
+IdLangue INTEGER  PRIMARY KEY,
+Langue   TEXT
 );
 </pre></div>
 
@@ -623,12 +623,12 @@ SELECT * FROM Langues;
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span> 
-CREATE TABLE "Auteurs" (
-    "IdAuteur"       INTEGER  PRIMARY KEY,
-    "NomAuteur"      TEXT,
-    "PrenomAuteur"   TEXT,
-    "IdLangue"         INTEGER,
-    "AnneeNaissance" INTEGER
+CREATE TABLE Auteurs (
+    IdAuteur       INTEGER  PRIMARY KEY,
+    NomAuteur      TEXT,
+    PrenomAuteur   TEXT,
+    IdLangue       INTEGER,
+    AnneeNaissance INTEGER
 );
 </pre></div>
 
@@ -999,11 +999,10 @@ raise NotImplementedError()
 </tbody>
 </table>
 <ul>
-<li>la note est un entier</li>
 <li>
 <strong>IdTheme</strong> désigne bien sûr la clé primaire</li>
 <li>
-<strong>Intitule</strong> est l'intitulé du thème tel qu'il apparaît dans le tableau global.</li>
+<strong>Intitule</strong> est un champ texte contenant l'intitulé du thème tel qu'il apparaît dans le tableau global.</li>
 </ul>
 <p>Dans la cellule ci-dessous, vous saisirez donc 2 requêtes :</p>
 <ul>

@@ -194,7 +194,7 @@ window.onload = wrap_img;
 <a class="anchor" href="#Manipuler-les-donn%C3%A9es-avec-SQL" aria-hidden="true"><span class="octicon octicon-link"></span></a>Manipuler les données avec SQL<a class="anchor-link" href="#Manipuler-les-donn%C3%A9es-avec-SQL"> </a>
 </h1>
 <p>Dans ce dernier TP, nous allons voir comment insérer, mettre à jour ou supprimer des enregistrements dans des tables.</p>
-<p>Commencez par valider les cellules suivantes afin d'activer la fonctionnalité SQL de Jupyter et de ncharger la base du TP précédent.</p>
+<p>Commencez par valider les cellules suivantes afin d'activer la fonctionnalité SQL de Jupyter et de charger la base du TP précédent.</p>
 
 </div>
 </div>
@@ -283,7 +283,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">sql</span> SELECT IdAuteur FROM Auteurs WHERE IdAuteur = 10;
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">sql</span> SELECT NomAuteur FROM Auteurs WHERE IdAuteur = 10;
 </pre></div>
 
     </div>
@@ -315,7 +315,7 @@ window.onload = wrap_img;
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">sql</span> 
 
 UPDATE Auteurs 
-SET NomAuteur = "Ze Djoule", PrenomAuteur = "Juju"
+SET NomAuteur = "Ze Djloule", PrenomAuteur = "Juju"
 WHERE IdAuteur=10;
 
 SELECT * FROM Auteurs ;
@@ -365,7 +365,7 @@ SELECT * FROM Auteurs;
 <h3 id="Attention-à-la-cohérence-des-données">
 <a class="anchor" href="#Attention-%C3%A0-la-coh%C3%A9rence-des-donn%C3%A9es" aria-hidden="true"><span class="octicon octicon-link"></span></a>Attention à la cohérence des données<a class="anchor-link" href="#Attention-%C3%A0-la-coh%C3%A9rence-des-donn%C3%A9es"> </a>
 </h3>
-<p>Dans une base de données relationnelle il faut être vigilant lors de la suppression d'enregistrements : en effet la suppression d'en enregistement entraîne la suppression de sa clé primaire qui peut être utilisée en tant que clé externe dans une autre table. Cela entraîne la corruption des données. Observez l'exemple ci-dessous dans lequel je me suis atribué un livre célèbre sans toucher à la table <strong>Livres</strong></p>
+<p>Dans une base de données relationnelle il faut être vigilant lors de la suppression d'enregistrements : en effet la suppression d'un enregistrement entraîne la suppression de sa clé primaire qui peut être utilisée en tant que clé externe dans une autre table. Cela entraîne la corruption des données. Observez l'exemple ci-dessous dans lequel je me suis attribué un livre célèbre sans toucher à la table <strong>Livres</strong></p>
 <p>Il existe en SQL des moyens pour se prémunir de ce type de problèmes mais cela dépasse le cadre de ce cours.</p>
 
 </div>
