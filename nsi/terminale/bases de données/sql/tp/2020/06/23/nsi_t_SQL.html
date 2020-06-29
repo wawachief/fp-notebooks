@@ -628,7 +628,8 @@ CREATE TABLE Auteurs (
     NomAuteur      TEXT,
     PrenomAuteur   TEXT,
     IdLangue       INTEGER,
-    AnneeNaissance INTEGER
+    AnneeNaissance INTEGER,
+    FOREIGN KEY(IdLangue) REFERENCES Langues(IdLangue)
 );
 </pre></div>
 
@@ -639,6 +640,16 @@ CREATE TABLE Auteurs (
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Une nouveauté apparaît ici dans la création de la table : La table <strong>Auteurs</strong> possède une <em>clé étangère</em> : <em>IdLangue</em>. Cette clé est un entier.</p>
+<p>Remarquez la ligne <code>FOREIGN KEY(IdLangue) REFERENCES Langues(IdLangue)</code>. Celle-ci permet de déclarer une <em>contrainte</em> sur cette clé afin d'indiquer à SQLite que <em>IdLangue</em> est une clé étrangère. SQLite sera alors responsable de maintenir la cohérence entre les deux tables que l'on a ainsi reliée.</p>
+<p>Cette déclaration n'est pas obligatoire mais fortement conseillée.</p>
+
+</div>
+</div>
+</div>
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -932,7 +943,7 @@ raise NotImplementedError()
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Vérifiez votre travail en listant tous les enregistrements de la table <strong>LIVRES*</strong> dans la variable <code>resultat</code></p>
+<p>Vérifiez votre travail en listant tous les enregistrements de la table <strong>LIVRES</strong> dans la variable <code>resultat</code></p>
 
 </div>
 </div>
