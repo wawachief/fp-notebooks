@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>POO2 - Structure de liste chaînée | notebooks</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="POO2 - Structure de liste chaînée" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Cours NSI Terminale - Thème 1." />
+<meta property="og:description" content="Cours NSI Terminale - Thème 1." />
+<link rel="canonical" href="https://notebooks.lecluse.fr/python/nsi/terminale/structure_donnees/tp/2020/07/05/nsi_t_POO_liste_chainee.html" />
+<meta property="og:url" content="https://notebooks.lecluse.fr/python/nsi/terminale/structure_donnees/tp/2020/07/05/nsi_t_POO_liste_chainee.html" />
+<meta property="og:site_name" content="notebooks" />
+<meta property="og:image" content="https://notebooks.lecluse.fr/images/nsi1.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-07-05T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Cours NSI Terminale - Thème 1.","mainEntityOfPage":{"@type":"WebPage","@id":"https://notebooks.lecluse.fr/python/nsi/terminale/structure_donnees/tp/2020/07/05/nsi_t_POO_liste_chainee.html"},"@type":"BlogPosting","url":"https://notebooks.lecluse.fr/python/nsi/terminale/structure_donnees/tp/2020/07/05/nsi_t_POO_liste_chainee.html","headline":"POO2 - Structure de liste chaînée","dateModified":"2020-07-05T00:00:00-05:00","datePublished":"2020-07-05T00:00:00-05:00","image":"https://notebooks.lecluse.fr/images/nsi1.png","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://notebooks.lecluse.fr/feed.xml" title="notebooks" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>POO2 - Structure de liste chaînée | notebooks</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="POO2 - Structure de liste chaînée" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Cours NSI Terminale - Thème 1." />
+<meta property="og:description" content="Cours NSI Terminale - Thème 1." />
+<link rel="canonical" href="https://notebooks.lecluse.fr/python/nsi/terminale/structure_donnees/tp/2020/07/05/nsi_t_POO_liste_chainee.html" />
+<meta property="og:url" content="https://notebooks.lecluse.fr/python/nsi/terminale/structure_donnees/tp/2020/07/05/nsi_t_POO_liste_chainee.html" />
+<meta property="og:site_name" content="notebooks" />
+<meta property="og:image" content="https://notebooks.lecluse.fr/images/nsi1.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-07-05T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Cours NSI Terminale - Thème 1.","mainEntityOfPage":{"@type":"WebPage","@id":"https://notebooks.lecluse.fr/python/nsi/terminale/structure_donnees/tp/2020/07/05/nsi_t_POO_liste_chainee.html"},"@type":"BlogPosting","url":"https://notebooks.lecluse.fr/python/nsi/terminale/structure_donnees/tp/2020/07/05/nsi_t_POO_liste_chainee.html","headline":"POO2 - Structure de liste chaînée","dateModified":"2020-07-05T00:00:00-05:00","datePublished":"2020-07-05T00:00:00-05:00","image":"https://notebooks.lecluse.fr/images/nsi1.png","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://notebooks.lecluse.fr/feed.xml" title="notebooks" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">notebooks</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">A propos</a><a class="page-link" href="/">Notebooks Jupyter</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a><a class="page-link" href="/page2/">Notebooks Jupyter</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">POO2 - Structure de liste chaînée</h1><p class="page-description">Cours NSI Terminale - Thème 1.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-07-05T00:00:00-05:00" itemprop="datePublished">
+        Jul 5, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      10 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#python">python</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#NSI">NSI</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Terminale">Terminale</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Structure_donnees">Structure_donnees</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#TP">TP</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/wawachief/fp-notebooks/tree/master/_notebooks/2020-07-05-nsi_t_POO_liste_chainee.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/wawachief/fp-notebooks/master?filepath=_notebooks%2F2020-07-05-nsi_t_POO_liste_chainee.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/wawachief/fp-notebooks/blob/master/_notebooks/2020-07-05-nsi_t_POO_liste_chainee.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#Les-listes-chaînées">Les listes chaînées </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Description-de-la-structure">Description de la structure </a></li>
+<li class="toc-entry toc-h2"><a href="#Propriété-privée---défense-d'entrer-!">Propriété privée - défense d&#39;entrer ! </a></li>
+<li class="toc-entry toc-h2"><a href="#A-vous-de-jouer">A vous de jouer </a></li>
+<li class="toc-entry toc-h2"><a href="#Implémentez-à-présent-les-méthodes-demandées">Implémentez à présent les méthodes demandées </a></li>
+<li class="toc-entry toc-h2"><a href="#A-vous-de-jouer">A vous de jouer </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-07-05-nsi_t_POO_liste_chainee.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Les-listes-chaînées">
+<a class="anchor" href="#Les-listes-cha%C3%AEn%C3%A9es" aria-hidden="true"><span class="octicon octicon-link"></span></a>Les listes chaînées<a class="anchor-link" href="#Les-listes-cha%C3%AEn%C3%A9es"> </a>
+</h1>
+<h2 id="Description-de-la-structure">
+<a class="anchor" href="#Description-de-la-structure" aria-hidden="true"><span class="octicon octicon-link"></span></a>Description de la structure<a class="anchor-link" href="#Description-de-la-structure"> </a>
+</h2>
+<p>On rappelle que la structure d'une liste chaînée ressemble à ceci :
+<img src="/images/copied_from_nb/my_icons/listechainee.svg" alt="Liste chainée"></p>
+<p>L'illustration montre une liste chaînée composée de 4 maillons. Chaque maillon est composé de 2 champs : une valeur et un pointeur vers le maillon suivant.</p>
+<p>Pour implémenter une liste chaînée en python nous pourrions utiliser</p>
+<ul>
+<li>un tableau à 2 éléments décrivant un maillon<ul>
+<li>le premier élément du tableau est la valeur du maillon</li>
+<li>le second élément est l'indice du maillon suivant (ou None pour le dernier élément)</li>
+</ul>
+</li>
+<li>un tableau constitué de la liste de tous les maillons</li>
+</ul>
+<p>La liste chaînée donnée en illustration pourrait donc être représentée ainsi :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">maillons</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">premier</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vous constaterez que j'ai <em>volontairement</em> inscrit dans le tableau <code>maillons</code> les éléments de la liste dans le désordre car il n'y a aucune raison que l'ordre des éléments corresponde à l'ordre dans le tableau <code>maillons</code> si par exemple on insère en cours de route des éléments au milieu de la liste.</p>
+<p>la variable <code>premier</code> contient l'indice du premier élément de la liste, c'est donc le maillon <code>[2,0]</code> correspondant à la valeur 2. L'élément suivant sera le maillon à l'indice 0 dans le tableau donc <code>[3,2]</code> dont la valeur est 3. Ensuite on accède au maillon d'indice 2 donc <code>[5,1]</code> de valeur 5 pour terminer par le maillon <code>[8,None]</code> de valeur 8 marquant la fin de la liste. Au final la liste est donc bien $$2 - 3 - 5 - 8$$</p>
+<p>Cette approche a le mérite de se baser sur des types python standard que vous conaissez bien mais nous avons besoin de <strong>deux variables</strong> pour décrire un seul <em>objet</em></p>
+<ul>
+<li>le tableau contenant les maillons</li>
+<li>l'indice du premier élément de la liste chaînée dans notre tableau</li>
+</ul>
+<p>Cela alourdit énormément l'écriture des programmes que d'avoir un <em>objet</em> unique décrit par deux variables distinctes. Il y a moyen de faire beaucoup mieux grâce à la structure d'objets.</p>
+<p>Dans ce TP, nous allons créer une classe <strong>ListeChainee</strong> permettant de créer et manipuler des objets de type liste chaînée.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">ListeChainee</span><span class="p">:</span>
+    <span class="sd">"""Implementation d'une liste chaînée"""</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maillons</span><span class="o">=</span><span class="p">[],</span> <span class="n">premier</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""Initialisation de la liste chainée"""</span>
+        <span class="c1"># tableau contenant les maillons de la liste</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__maillons</span> <span class="o">=</span> <span class="n">maillons</span>
+        <span class="c1"># indice du premier élément.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__premier</span> <span class="o">=</span> <span class="n">premier</span> <span class="c1"># None lorsque la liste est vide</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Comme vous le voyez, la classe <strong>ListeChainee</strong> regroupe en un seul objet les deux informations nécessaires à la gestion de notre liste chaînée à savoir</p>
+<ul>
+<li>les maillons qui sont une liste au format que nous venons de décrire</li>
+<li>l'indice du premier élément</li>
+</ul>
+<p>Nous utilisons ici des <em>paramètres optionnels</em> qui permettent le cas échéant d'initialiser notre liste chaînée avec du contenu.</p>
+<h2 id="Propriété-privée---défense-d'entrer-!">
+<a class="anchor" href="#Propri%C3%A9t%C3%A9-priv%C3%A9e---d%C3%A9fense-d'entrer-!" aria-hidden="true"><span class="octicon octicon-link"></span></a>Propriété privée - défense d'entrer !<a class="anchor-link" href="#Propri%C3%A9t%C3%A9-priv%C3%A9e---d%C3%A9fense-d'entrer-!"> </a>
+</h2>
+<p>Parfois nous ne voulons pas qu'il soit possible de modifier les valeurs des propriétés d'une classe autrement qu'en passant par les méthodes de la classe afin de préserver la cohérence des données.</p>
+<p>Afin de protéger les propriétés d'un objet, on ajoute <strong>__</strong> devant leur nom. Ainsi, elles ne seront accessibles que depuis les méthodes de la classe, pas au travers des instances de l'objet. On parle alors de propriétés <em>privées</em> (sous python, elles sont plutôt<em> cachées</em>).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="A-vous-de-jouer">
+<a class="anchor" href="#A-vous-de-jouer" aria-hidden="true"><span class="octicon octicon-link"></span></a>A vous de jouer<a class="anchor-link" href="#A-vous-de-jouer"> </a>
+</h2>
+<p>Vous allez devoir implémenter les méthodes suivantes</p>
+<ul>
+<li>
+<code>premier()</code> <ul>
+<li>renvoye la valeur du premier élément de la liste ou <strong>None</strong> si la liste est vide</li>
+</ul>
+</li>
+<li>
+<code>longueur()</code><ul>
+<li>renvoie la longueur de la liste chainée (0 si elle est vide).</li>
+</ul>
+</li>
+<li>
+<code>valeurs()</code><ul>
+<li>renvoye un tableau avec toutes les valeurs de la liste</li>
+</ul>
+</li>
+<li>
+<code>insere_debut(v)</code><ul>
+<li>prend en paramètre la valeur à insérer <code>v</code>
+</li>
+<li>insère la valeur <code>v</code> au début de la liste </li>
+</ul>
+</li>
+<li>
+<code>insere_fin(v)</code><ul>
+<li>prend en paramètre la valeur à insérer <code>v</code>
+</li>
+<li>insère la valeur <code>v</code> à la fin de la liste </li>
+</ul>
+</li>
+</ul>
+<p>Avant de vous laisser implémenter ces fonctionnalités, nous allons faire ensemble la première méthode et tester le comportement de notre classe.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">ListeChainee</span><span class="p">:</span>
+    <span class="sd">"""Implementation d'une liste chaînée"""</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maillons</span><span class="o">=</span><span class="p">[],</span> <span class="n">premier</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""Initialisation de la liste chainée"""</span>
+        <span class="c1"># tableau contenant les maillons de la liste</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__maillons</span> <span class="o">=</span> <span class="n">maillons</span>
+        <span class="c1"># indice du premier élément.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__premier</span> <span class="o">=</span> <span class="n">premier</span> <span class="c1"># None lorsque la liste est vide</span>
+        
+    <span class="k">def</span> <span class="nf">premier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""renvoye la valeur du premier élément de la liste ou None si la liste est vide"""</span>
+        <span class="k">return</span> <span class="kc">None</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__premier</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">__maillons</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__premier</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">liste1</span> <span class="o">=</span> <span class="n">ListeChainee</span><span class="p">()</span>
+<span class="c1"># Aucun paramètre n'est passé, la liste1 est vide</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">liste1</span><span class="o">.</span><span class="n">premier</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">liste1</span> <span class="o">=</span> <span class="n">ListeChainee</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Dans la cellule ci-desssus, j'ai fourni une liste de maillons et un premier élément à la création de la liste. Cela va permettre de l'initialiser avec du contenu. Nous allons pouvoir vérifier que le premier élément de la liste est bien <strong>2</strong> :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">liste1</span><span class="o">.</span><span class="n">premier</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Essayons de récupérer l'indice du premier élément stocké das la propriété <strong>__premier</strong> : Vous constaterez une erreur. Cette propriété est cachée, on ne peut y accéder ni pour la consulter ni pour la modifier. C'est une sécurité nous garantissant l'intégrité des données.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">liste1</span><span class="o">.</span><span class="n">__premier</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Implémentez-à-présent-les-méthodes-demandées">
+<a class="anchor" href="#Impl%C3%A9mentez-%C3%A0-pr%C3%A9sent-les-m%C3%A9thodes-demand%C3%A9es" aria-hidden="true"><span class="octicon octicon-link"></span></a>Implémentez à présent les méthodes demandées<a class="anchor-link" href="#Impl%C3%A9mentez-%C3%A0-pr%C3%A9sent-les-m%C3%A9thodes-demand%C3%A9es"> </a>
+</h2>
+<p>L'ossature de la classe est déjà présente, il vous suffira de remplacer <strong>pass</strong> par la méthode que vous fabriquerez.
+Vous vous rappelez qu'une méthode se code comme une fonction, la seule différence est le paramètre <strong>self</strong> qui fait référence à l'objet qui contient la méthode. Ce paramètre est <em>toujours</em> le premier paramètre passé à la méthode.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">ListeChainee</span><span class="p">:</span>
+    <span class="sd">"""Implementation d'une liste chaînée"""</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maillons</span><span class="o">=</span><span class="p">[],</span> <span class="n">premier</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""Initialisation de la liste chainée"""</span>
+        <span class="c1"># tableau contenant les maillons de la liste</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__maillons</span> <span class="o">=</span> <span class="n">maillons</span>
+        <span class="c1"># indice du premier élément.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__premier</span> <span class="o">=</span> <span class="n">premier</span> <span class="c1"># None lorsque la liste est vide</span>
+        
+    <span class="k">def</span> <span class="nf">premier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""renvoye la valeur du premier élément de la liste ou None si la liste est vide"""</span>
+        <span class="k">return</span> <span class="kc">None</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__premier</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">__maillons</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__premier</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">longueur</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""renvoie la longueur de la liste chainée (0 si elle est vide)."""</span>
+        <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__premier</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__maillons</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">valeurs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""renvoye un tableau avec toutes les valeurs de la liste"""</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">insere_debut</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="sd">"""prend en paramètre la valeur à insérer v</span>
+<span class="sd">        insère la valeur v au début de la liste"""</span>
+        <span class="k">pass</span>
+    
+    <span class="k">def</span> <span class="nf">insere_fin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="sd">"""prend en paramètre la valeur à insérer v</span>
+<span class="sd">        insère la valeur v à la fin de la liste"""</span>
+        <span class="k">pass</span>
+    
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># YOUR CODE HERE</span>
+<span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Test de la méthode valeur</span>
+
+<span class="n">liste1</span> <span class="o">=</span> <span class="n">ListeChainee</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">liste1</span><span class="o">.</span><span class="n">valeurs</span><span class="p">()</span> <span class="o">==</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Test de la méthode longueur</span>
+
+<span class="n">liste1</span> <span class="o">=</span> <span class="n">ListeChainee</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">liste1</span><span class="o">.</span><span class="n">longueur</span><span class="p">()</span> <span class="o">==</span> <span class="mi">4</span>
+<span class="n">liste2</span> <span class="o">=</span> <span class="n">ListeChainee</span><span class="p">()</span>
+<span class="k">assert</span> <span class="n">liste2</span><span class="o">.</span><span class="n">longueur</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Test de la méthode insere_debut</span>
+
+<span class="n">liste1</span> <span class="o">=</span> <span class="n">ListeChainee</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">liste1</span><span class="o">.</span><span class="n">insere_debut</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">liste1</span><span class="o">.</span><span class="n">valeurs</span><span class="p">()</span> <span class="o">==</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Test de la méthode insere_fin</span>
+
+<span class="n">liste1</span> <span class="o">=</span> <span class="n">ListeChainee</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">liste1</span><span class="o">.</span><span class="n">insere_fin</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">liste1</span><span class="o">.</span><span class="n">valeurs</span><span class="p">()</span> <span class="o">==</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Nous allons poursuivre l'ajout de méthodes à notre classe. Nous voudrions implémenter la méthode suivante :</p>
+<ul>
+<li>
+<code>insere_milieu(valeur, place)</code><ul>
+<li>prend en paramètre une <code>valeur</code> et un emplacement <code>place</code> dans la liste</li>
+<li>insère la <code>valeur</code> à l'emplaceemnt <code>place</code>
+</li>
+</ul>
+</li>
+</ul>
+<p>Cette méthode va nécessiter d'accéder aux propriétés privées <strong>__maillons</strong> et <strong>__premier</strong>. Puisque ce n'est pas possible directement, nous allons écrite des méthodes qui permettent de renvoyer ces valeurs sans toutefois permettre leur modification.
+Afin de sécuriser davantage les données, on renverra une <strong>copie</strong> du tableau maillon et non l'objet original. On est ainsi assuré qu'aucune modification ne sera réalisée sur ce dernier.</p>
+<p>En <em>programmation orientée objet</em>, ces méthodes permettant d'accéder de manière sécurisée à des propriétés cachées s'appellent des <strong>accesseurs</strong>. Voici comment nous pouvons les implémenter :</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">ListeChainee</span><span class="p">:</span>
+    <span class="sd">"""Implementation d'une liste chaînée"""</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maillons</span><span class="o">=</span><span class="p">[],</span> <span class="n">premier</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""Initialisation de la liste chainée"""</span>
+        <span class="c1"># tableau contenant les maillons de la liste</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__maillons</span> <span class="o">=</span> <span class="n">maillons</span>
+        <span class="c1"># indice du premier élément.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__premier</span> <span class="o">=</span> <span class="n">premier</span> <span class="c1"># None lorsque la liste est vide</span>
+        
+    <span class="k">def</span> <span class="nf">lire_premier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__premier</span>
+    <span class="k">def</span> <span class="nf">lire_maillons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[[</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__maillons</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">remplace_maillons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maillons</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__maillons</span> <span class="o">=</span> <span class="n">maillons</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">liste1</span> <span class="o">=</span> <span class="n">ListeChainee</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">liste1</span><span class="o">.</span><span class="n">lire_premier</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">liste1</span><span class="o">.</span><span class="n">lire_maillons</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Ainsi, nous accédons aux données interne de notre classe sans pour autant risquer de compromettre ces dernières par une écriture malheureuse.
+Dans l'exemple suivant, nous allons voir comment utiliser ces accesseurs pour implémenter l'algorithme d'insertion dans une lliste chaînée. Il vous restera ensuite à terminer notre classe avec la méthode <strong>concat()</strong></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">ListeChainee</span><span class="p">:</span>
+    <span class="sd">"""Implementation d'une liste chaînée"""</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maillons</span><span class="o">=</span><span class="p">[],</span> <span class="n">premier</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""Initialisation de la liste chainée"""</span>
+        <span class="c1"># tableau contenant les maillons de la liste</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__maillons</span> <span class="o">=</span> <span class="n">maillons</span>
+        <span class="c1"># indice du premier élément.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__premier</span> <span class="o">=</span> <span class="n">premier</span> <span class="c1"># None lorsque la liste est vide</span>
+        
+    <span class="k">def</span> <span class="nf">lire_premier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__premier</span>
+    
+    <span class="k">def</span> <span class="nf">lire_maillons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[[</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__maillons</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">remplace_maillons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maillons</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__maillons</span> <span class="o">=</span> <span class="n">maillons</span>
+    
+    <span class="k">def</span> <span class="nf">premier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""renvoye la valeur du premier élément de la liste ou None si la liste est vide"""</span>
+        <span class="k">return</span> <span class="kc">None</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__premier</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">__maillons</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__premier</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">longueur</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""renvoie la longueur de la liste chainée (0 si elle est vide)."""</span>
+        <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__premier</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__maillons</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">insere_milieu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valeur</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+        <span class="sd">"""prend en paramètre la valeur et la position</span>
+<span class="sd">        insère la valeur dans la liste à la position demandée</span>
+<span class="sd">        Si la position n'existe pas dans la liste, on insère à la fin"""</span>
+        
+        <span class="c1"># On récupère les données internes</span>
+        <span class="n">maillons</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lire_maillons</span><span class="p">()</span>
+        <span class="n">premier</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lire_premier</span><span class="p">()</span>
+        
+        <span class="c1"># On utilise les méthodes existantes pour les cas limites</span>
+        <span class="k">if</span> <span class="n">pos</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">longueur</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">insere_fin</span><span class="p">(</span><span class="n">valeur</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">pos</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">insere_debut</span><span class="p">(</span><span class="n">valeur</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># parcour de la liste à la recherche de la position</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">premier</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pos</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">maillons</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">i</span> <span class="o">=</span> <span class="n">maillons</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="c1"># On crée un nouveau maillon à la fin de la liste</span>
+            <span class="n">maillons</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">valeur</span><span class="p">,</span> <span class="n">maillons</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]])</span>
+            <span class="c1"># On change les liens de manière à insérer le maillon</span>
+            <span class="n">maillons</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">maillons</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remplace_maillons</span><span class="p">(</span><span class="n">maillons</span><span class="p">)</span>
+    
+    <span class="c1"># Recopiez ici vos méthodes valeurs() et insere*()</span>
+            
+    <span class="c1"># YOUR CODE HERE</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Test de la méthode insere_milieu</span>
+
+<span class="n">liste1</span> <span class="o">=</span> <span class="n">ListeChainee</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">liste1</span><span class="o">.</span><span class="n">insere_milieu</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">liste1</span><span class="o">.</span><span class="n">valeurs</span><span class="p">()</span> <span class="o">==</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="A-vous-de-jouer">
+<a class="anchor" href="#A-vous-de-jouer" aria-hidden="true"><span class="octicon octicon-link"></span></a>A vous de jouer<a class="anchor-link" href="#A-vous-de-jouer"> </a>
+</h2>
+<p>Il ne vous reste plus à présent qu'à terminer notre classe <strong>ListeChainee</strong> en y ajoutant la méthode <strong>concat()</strong> :</p>
+<ul>
+<li>
+<code>concat(liste_c)</code><ul>
+<li>prend en paramètre une liste<code>liste_c</code>
+</li>
+<li>concatène (met bout à bout) <code>liste_c</code> à la fin de la liste courante</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">ListeChainee</span><span class="p">:</span>
+    <span class="sd">"""Implementation d'une liste chaînée"""</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maillons</span><span class="o">=</span><span class="p">[],</span> <span class="n">premier</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""Initialisation de la liste chainée"""</span>
+        <span class="c1"># tableau contenant les maillons de la liste</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__maillons</span> <span class="o">=</span> <span class="n">maillons</span>
+        <span class="c1"># indice du premier élément.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__premier</span> <span class="o">=</span> <span class="n">premier</span> <span class="c1"># None lorsque la liste est vide</span>
+        
+    <span class="k">def</span> <span class="nf">lire_premier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__premier</span>
+    
+    <span class="k">def</span> <span class="nf">lire_maillons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[[</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__maillons</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">remplace_maillons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maillons</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__maillons</span> <span class="o">=</span> <span class="n">maillons</span>
+    
+    <span class="k">def</span> <span class="nf">premier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""renvoye la valeur du premier élément de la liste ou None si la liste est vide"""</span>
+        <span class="k">return</span> <span class="kc">None</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__premier</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">__maillons</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__premier</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">longueur</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""renvoie la longueur de la liste chainée (0 si elle est vide)."""</span>
+        <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__premier</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__maillons</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">insere_milieu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valeur</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+        <span class="sd">"""prend en paramètre la valeur et la position</span>
+<span class="sd">        insère la valeur dans la liste à la position demandée</span>
+<span class="sd">        Si la position n'existe pas dans la liste, on insère à la fin"""</span>
+        
+        <span class="c1"># On récupère les données internes</span>
+        <span class="n">maillons</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lire_maillons</span><span class="p">()</span>
+        <span class="n">premier</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lire_premier</span><span class="p">()</span>
+        
+        <span class="c1"># On utilise les méthodes existantes pour les cas limites</span>
+        <span class="k">if</span> <span class="n">pos</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">longueur</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">insere_fin</span><span class="p">(</span><span class="n">valeur</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">pos</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">insere_debut</span><span class="p">(</span><span class="n">valeur</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># parcour de la liste à la recherche de la position</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">premier</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pos</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">maillons</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">i</span> <span class="o">=</span> <span class="n">maillons</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="c1"># On crée un nouveau maillon à la fin de la liste</span>
+            <span class="n">maillons</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">valeur</span><span class="p">,</span> <span class="n">maillons</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]])</span>
+            <span class="c1"># On change les liens de manière à insérer le maillon</span>
+            <span class="n">maillons</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">maillons</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remplace_maillons</span><span class="p">(</span><span class="n">maillons</span><span class="p">)</span>
+    
+    <span class="c1"># Recopiez ici vos méthodes valeurs() et insere*()</span>
+            
+    <span class="c1"># YOUR CODE HERE</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Test de la méthode concat</span>
+
+<span class="n">liste1</span> <span class="o">=</span> <span class="n">ListeChainee</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">liste2</span> <span class="o">=</span> <span class="n">ListeChainee</span><span class="p">([[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">liste1</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">liste2</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">liste1</span><span class="o">.</span><span class="n">valeurs</span><span class="p">()</span> <span class="o">==</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/python/nsi/terminale/structure_donnees/tp/2020/07/05/nsi_t_POO_liste_chainee.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Plateforme de blog avec support pour Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/wawachief" title="wawachief"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/leclusemaths" title="leclusemaths"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
