@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Algorithmes sur les graphes | notebooks</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Algorithmes sur les graphes" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Cours NSI Terminale - Thème 5." />
+<meta property="og:description" content="Cours NSI Terminale - Thème 5." />
+<link rel="canonical" href="https://notebooks.lecluse.fr/python/nsi/terminale/graphes/algorithmique/poo/tp/2020/08/17/nsi_t_algo_graphes.html" />
+<meta property="og:url" content="https://notebooks.lecluse.fr/python/nsi/terminale/graphes/algorithmique/poo/tp/2020/08/17/nsi_t_algo_graphes.html" />
+<meta property="og:site_name" content="notebooks" />
+<meta property="og:image" content="https://notebooks.lecluse.fr/images/nsi5.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-17T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Cours NSI Terminale - Thème 5.","@type":"BlogPosting","headline":"Algorithmes sur les graphes","url":"https://notebooks.lecluse.fr/python/nsi/terminale/graphes/algorithmique/poo/tp/2020/08/17/nsi_t_algo_graphes.html","datePublished":"2020-08-17T00:00:00-05:00","dateModified":"2020-08-17T00:00:00-05:00","image":"https://notebooks.lecluse.fr/images/nsi5.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://notebooks.lecluse.fr/python/nsi/terminale/graphes/algorithmique/poo/tp/2020/08/17/nsi_t_algo_graphes.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://notebooks.lecluse.fr/feed.xml" title="notebooks" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Algorithmes sur les graphes | notebooks</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Algorithmes sur les graphes" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Cours NSI Terminale - Thème 5." />
+<meta property="og:description" content="Cours NSI Terminale - Thème 5." />
+<link rel="canonical" href="https://notebooks.lecluse.fr/python/nsi/terminale/graphes/algorithmique/poo/tp/2020/08/17/nsi_t_algo_graphes.html" />
+<meta property="og:url" content="https://notebooks.lecluse.fr/python/nsi/terminale/graphes/algorithmique/poo/tp/2020/08/17/nsi_t_algo_graphes.html" />
+<meta property="og:site_name" content="notebooks" />
+<meta property="og:image" content="https://notebooks.lecluse.fr/images/nsi5.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-17T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Cours NSI Terminale - Thème 5.","@type":"BlogPosting","headline":"Algorithmes sur les graphes","url":"https://notebooks.lecluse.fr/python/nsi/terminale/graphes/algorithmique/poo/tp/2020/08/17/nsi_t_algo_graphes.html","datePublished":"2020-08-17T00:00:00-05:00","dateModified":"2020-08-17T00:00:00-05:00","image":"https://notebooks.lecluse.fr/images/nsi5.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://notebooks.lecluse.fr/python/nsi/terminale/graphes/algorithmique/poo/tp/2020/08/17/nsi_t_algo_graphes.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://notebooks.lecluse.fr/feed.xml" title="notebooks" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">notebooks</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">A propos</a><a class="page-link" href="/">Notebooks Jupyter</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a><a class="page-link" href="/page2/">Notebooks Jupyter</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Algorithmes sur les graphes</h1><p class="page-description">Cours NSI Terminale - Thème 5.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-08-17T00:00:00-05:00" itemprop="datePublished">
+        Aug 17, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      10 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#python">python</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#NSI">NSI</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Terminale">Terminale</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#graphes">graphes</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#Algorithmique">Algorithmique</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#POO">POO</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#TP">TP</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/wawachief/fp-notebooks/tree/master/_notebooks/2020-08-17-nsi_t_algo_graphes.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/wawachief/fp-notebooks/master?filepath=_notebooks%2F2020-08-17-nsi_t_algo_graphes.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/wawachief/fp-notebooks/blob/master/_notebooks/2020-08-17-nsi_t_algo_graphes.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#TP-sur-les-graphes">TP sur les graphes </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Exemples-de-graphes">Exemples de graphes </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Parcours-en-profondeur">Parcours en profondeur </a></li>
+<li class="toc-entry toc-h2"><a href="#Parcours-en-largeur">Parcours en largeur </a></li>
+<li class="toc-entry toc-h2"><a href="#Chercher-les-cycles">Chercher les cycles </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-08-17-nsi_t_algo_graphes.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="TP-sur-les-graphes">
+<a class="anchor" href="#TP-sur-les-graphes" aria-hidden="true"><span class="octicon octicon-link"></span></a>TP sur les graphes<a class="anchor-link" href="#TP-sur-les-graphes"> </a>
+</h2>
+<p>Nous comencerons par introduire la classe Graphe que nous allons compléter au fur à mesure de ce TP.</p>
+<p>Elle reprend un certain nombre de notions vues lors de la découverte des graphes dans la partie <em>Structures de données</em>.</p>
+<p>Un graphe y est représenté en interne par un dictionnaire d'adjacence :</p>
+<ul>
+<li>chaque clé est un noeud </li>
+<li>chaque valeur est la liste des noeuds connectés représenté par un tuple (noeud, pondération)</li>
+</ul>
+<p>Les données sont stockées dans la propriété privée <code>__noeud</code> de type dictionnaire. On y accède pas directement. L'accès se fait par les méthodes (<em>accesseurs</em>) comme <code>sommets()</code> ou <code>voisins()</code></p>
+<p>La méthode <code>show()</code> permet de visualiser graphiquement le graphe à l'aide du module <strong>graphviz</strong>. On ne cherchera pas à entrer dans les détails de cette méthode mais vous pouvez tenter de l'analyser, son fonctionnement est assez basique.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">graphviz</span> <span class="kn">import</span> <span class="n">Digraph</span>
+
+<span class="k">class</span> <span class="nc">Graphe</span><span class="p">():</span>
+    <span class="sd">"""Graphe implémenté à l'aide d'un dictionnaire</span>
+<span class="sd">    Exemple : </span>
+<span class="sd">    {'A': [('M', 65), ('R', 90), ('T', 80)],</span>
+<span class="sd">     'G': [('L', 70)],</span>
+<span class="sd">     'L': [('G', 70), ('P', 230), ('T', 260)],</span>
+<span class="sd">     'M': [('A', 65), ('P', 95), ('R', 90), ('T', 55)],</span>
+<span class="sd">     'P': [('L', 230), ('M', 95), ('T', 130)],</span>
+<span class="sd">     'R': [('A', 90), ('M', 90)],</span>
+<span class="sd">     'T': [('A', 80), ('L', 260), ('M', 55), ('P', 130)]}</span>
+<span class="sd">    """</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">noeuds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""Initialisation avec un graphe vide</span>
+<span class="sd">        __noeuds est un dictionnaire</span>
+<span class="sd">        - clé = Valeur du noeud (chaine, entier)</span>
+<span class="sd">        - valeur = liste d'aretes (clé, poids)"""</span>
+        <span class="k">if</span> <span class="n">noeuds</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span> <span class="o">=</span> <span class="n">noeuds</span>
+    
+    <span class="k">def</span> <span class="nf">importe_matrice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrice</span><span class="p">,</span> <span class="n">noms</span><span class="p">):</span>
+        <span class="sd">"""Importe une matrice d'adjacence"""</span>
+        <span class="n">longueur</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrice</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">longueur</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">noms</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">longueur</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">matrice</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">noms</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">noms</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">matrice</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]))</span>
+    
+    <span class="k">def</span> <span class="nf">ajouter_noeud</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nd</span><span class="p">):</span>
+        <span class="sd">"""Ajoute un nouveau noeud au graphe"""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">nd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">nd</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">ajouter_arete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nd1</span><span class="p">,</span> <span class="n">nd2</span><span class="p">,</span> <span class="n">poids</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">"""Ajoute une arête au graphe</span>
+<span class="sd">        si poids n'est pas renseigné, il prendra la valeur 1"""</span>
+        <span class="c1"># On s'assure que les arètes existent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ajouter_noeud</span><span class="p">(</span><span class="n">nd1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ajouter_noeud</span><span class="p">(</span><span class="n">nd2</span><span class="p">)</span>
+        <span class="c1"># On crée la connexion nd1 -&gt; nd2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">nd1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nd2</span><span class="p">,</span> <span class="n">poids</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">liste_noeuds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Renvoie la liste des noeuds"""</span>
+        <span class="n">nds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">nds</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">nds</span>
+    
+    <span class="k">def</span> <span class="nf">voisins</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nd</span><span class="p">):</span>
+        <span class="sd">"""Renvoie la liste des noeuds voisins de nd"""</span>
+        <span class="k">if</span> <span class="n">nd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">liste_noeuds</span><span class="p">():</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">nd</span><span class="p">]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">arete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nd1</span><span class="p">,</span> <span class="n">nd2</span><span class="p">):</span>
+        <span class="sd">"""Renvoie le poids de l'arete nd1-&gt;nd2 ou 0 si pas d'arête"""</span>
+        <span class="k">if</span> <span class="n">nd2</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">voisins</span><span class="p">(</span><span class="n">nd1</span><span class="p">):</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">nd1</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">nd2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Représentation graphique avec graphviz"""</span>
+        <span class="n">dot</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="n">comment</span><span class="o">=</span><span class="s2">"Graphe"</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">'svg'</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">nd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">liste_noeuds</span><span class="p">():</span>
+            <span class="n">dot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span><span class="n">nd</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">nd</span><span class="p">]:</span>
+                <span class="c1"># Teste si l'arête est orientée</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">arete</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nd</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">arete</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">:</span>
+                    <span class="c1"># dessin d'une arête non orientée</span>
+                    <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span> <span class="n">nd</span><span class="p">:</span>
+                        <span class="c1"># On ne dessine qu'une seule arête sur les 2</span>
+                        <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                            <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">dir</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">dir</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># dessin d'une arête orientée</span>
+                    <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">dot</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>En utilisant la commande <code>help()</code> vous aurez un résumé des méthodes à votre disposition
+dans cette classe.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">Graphe</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exemples-de-graphes">
+<a class="anchor" href="#Exemples-de-graphes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exemples de graphes<a class="anchor-link" href="#Exemples-de-graphes"> </a>
+</h3>
+<p>Pour commencer, voici quelques exemples de graphes. N'hésitez pas à  essayer sur ces exemples les méthodes offertes par la classe <strong>Graphe</strong> afin de bien vous en imprégner.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Premier exemple</span>
+
+<span class="n">gr1</span><span class="o">=</span><span class="n">Graphe</span><span class="p">()</span>
+<span class="n">gr1</span><span class="o">.</span><span class="n">ajouter_arete</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">)</span>
+<span class="n">gr1</span><span class="o">.</span><span class="n">ajouter_arete</span><span class="p">(</span><span class="s2">"C"</span><span class="p">,</span> <span class="s2">"A"</span><span class="p">)</span>
+<span class="n">gr1</span><span class="o">.</span><span class="n">ajouter_arete</span><span class="p">(</span><span class="s2">"C"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">)</span>
+<span class="n">gr1</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># testez ici les méthodes sur gr1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Deuxième exemple : le graphe du cours</span>
+<span class="n">matrice</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">gr2</span> <span class="o">=</span> <span class="n">Graphe</span><span class="p">()</span>
+<span class="n">gr2</span><span class="o">.</span><span class="n">importe_matrice</span><span class="p">(</span><span class="n">matrice</span><span class="p">,</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">,</span> <span class="s2">"F"</span><span class="p">,</span> <span class="s2">"G"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">])</span>
+<span class="n">gr2</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Testez ici quelques méthodes</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Parcours-en-profondeur">
+<a class="anchor" href="#Parcours-en-profondeur" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parcours en profondeur<a class="anchor-link" href="#Parcours-en-profondeur"> </a>
+</h2>
+<p>Complétez la classe Graphe afin d'ajouter la méthode <code>parcours_profondeur</code>. Celle-ci est déjà un peu ébauchée, vous devrez compléter le coeur de l'algorithme récursif dans la fonction <code>dfs</code>.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Graphe</span><span class="p">():</span>
+    <span class="sd">"""Graphe implémenté à l'aide d'un dictionnaire</span>
+<span class="sd">    Exemple : </span>
+<span class="sd">    {'A': [('M', 65), ('R', 90), ('T', 80)],</span>
+<span class="sd">     'G': [('L', 70)],</span>
+<span class="sd">     'L': [('G', 70), ('P', 230), ('T', 260)],</span>
+<span class="sd">     'M': [('A', 65), ('P', 95), ('R', 90), ('T', 55)],</span>
+<span class="sd">     'P': [('L', 230), ('M', 95), ('T', 130)],</span>
+<span class="sd">     'R': [('A', 90), ('M', 90)],</span>
+<span class="sd">     'T': [('A', 80), ('L', 260), ('M', 55), ('P', 130)]}</span>
+<span class="sd">    """</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">noeuds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""Initialisation avec un graphe vide</span>
+<span class="sd">        __noeuds est un dictionnaire</span>
+<span class="sd">        - clé = Valeur du noeud (chaine, entier)</span>
+<span class="sd">        - valeur = liste d'aretes (clé, poids)"""</span>
+        <span class="k">if</span> <span class="n">noeuds</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span> <span class="o">=</span> <span class="n">noeuds</span>
+    
+    <span class="k">def</span> <span class="nf">importe_matrice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrice</span><span class="p">,</span> <span class="n">noms</span><span class="p">):</span>
+        <span class="sd">"""Importe une matrice d'adjacence"""</span>
+        <span class="n">longueur</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrice</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">longueur</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">noms</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">longueur</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">matrice</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">noms</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">noms</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">matrice</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]))</span>
+    
+    <span class="k">def</span> <span class="nf">ajouter_noeud</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nd</span><span class="p">):</span>
+        <span class="sd">"""Ajoute un nouveau noeud au graphe"""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">nd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">nd</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">ajouter_arete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nd1</span><span class="p">,</span> <span class="n">nd2</span><span class="p">,</span> <span class="n">poids</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">"""Ajoute une arête au graphe</span>
+<span class="sd">        si poids n'est pas renseigné, il prendra la valeur 1"""</span>
+        <span class="c1"># On s'assure que les arètes existent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ajouter_noeud</span><span class="p">(</span><span class="n">nd1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ajouter_noeud</span><span class="p">(</span><span class="n">nd2</span><span class="p">)</span>
+        <span class="c1"># On crée la connexion nd1 -&gt; nd2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">nd1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nd2</span><span class="p">,</span> <span class="n">poids</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">liste_noeuds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Renvoie la liste des noeuds"""</span>
+        <span class="n">nds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">nds</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">nds</span>
+    
+    <span class="k">def</span> <span class="nf">voisins</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nd</span><span class="p">):</span>
+        <span class="sd">"""Renvoie la liste des noeuds voisins de nd"""</span>
+        <span class="k">if</span> <span class="n">nd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">liste_noeuds</span><span class="p">():</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">nd</span><span class="p">]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">arete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nd1</span><span class="p">,</span> <span class="n">nd2</span><span class="p">):</span>
+        <span class="sd">"""Renvoie le poids de l'arete nd1-&gt;nd2 ou 0 si pas d'arête"""</span>
+        <span class="k">if</span> <span class="n">nd2</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">voisins</span><span class="p">(</span><span class="n">nd1</span><span class="p">):</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">nd1</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">nd2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Représentation graphique avec graphviz"""</span>
+        <span class="n">dot</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="n">comment</span><span class="o">=</span><span class="s2">"Graphe"</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">'svg'</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">nd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">liste_noeuds</span><span class="p">():</span>
+            <span class="n">dot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span><span class="n">nd</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">nd</span><span class="p">]:</span>
+                <span class="c1"># Teste si l'arête est orientée</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">arete</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nd</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">arete</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">:</span>
+                    <span class="c1"># dessin d'une arête non orientée</span>
+                    <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span> <span class="n">nd</span><span class="p">:</span>
+                        <span class="c1"># On ne dessine qu'une seule arête sur les 2</span>
+                        <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                            <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">dir</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">dir</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># dessin d'une arête orientée</span>
+                    <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">dot</span>
+    
+    <span class="k">def</span> <span class="nf">parcours_profondeur</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">depart</span><span class="p">):</span>
+        <span class="sd">"""Parcourt l'arbre en profondeur"""</span>
+        <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">nd</span><span class="p">):</span>
+            <span class="c1"># YOUR CODE HERE</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+        <span class="n">deja_vu</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># noeuds déjà visités</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="n">depart</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">deja_vu</span>
+  
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Testez votre classe</span>
+<span class="n">matrice</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">gr2</span> <span class="o">=</span> <span class="n">Graphe</span><span class="p">()</span>
+<span class="n">gr2</span><span class="o">.</span><span class="n">importe_matrice</span><span class="p">(</span><span class="n">matrice</span><span class="p">,</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">,</span> <span class="s2">"F"</span><span class="p">,</span> <span class="s2">"G"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">])</span>
+<span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">gr2</span><span class="o">.</span><span class="n">parcours_profondeur</span><span class="p">(</span><span class="s2">"A"</span><span class="p">))</span> <span class="o">==</span> <span class="p">{</span><span class="s1">'A'</span><span class="p">,</span> <span class="s1">'B'</span><span class="p">,</span> <span class="s1">'D'</span><span class="p">,</span> <span class="s1">'C'</span><span class="p">,</span> <span class="s1">'E'</span><span class="p">,</span> <span class="s1">'F'</span><span class="p">,</span> <span class="s1">'G'</span><span class="p">,</span> <span class="s1">'H'</span><span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Parcours-en-largeur">
+<a class="anchor" href="#Parcours-en-largeur" aria-hidden="true"><span class="octicon octicon-link"></span></a>Parcours en largeur<a class="anchor-link" href="#Parcours-en-largeur"> </a>
+</h2>
+<p>Complétez la classe Graphe afin d'ajouter la méthode <code>parcours_largeur</code>. Celle-ci aura le même comportement que la méthode <code>parcours_profondeur</code> précédente.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Graphe</span><span class="p">():</span>
+    <span class="sd">"""Graphe implémenté à l'aide d'un dictionnaire</span>
+<span class="sd">    Exemple : </span>
+<span class="sd">    {'A': [('M', 65), ('R', 90), ('T', 80)],</span>
+<span class="sd">     'G': [('L', 70)],</span>
+<span class="sd">     'L': [('G', 70), ('P', 230), ('T', 260)],</span>
+<span class="sd">     'M': [('A', 65), ('P', 95), ('R', 90), ('T', 55)],</span>
+<span class="sd">     'P': [('L', 230), ('M', 95), ('T', 130)],</span>
+<span class="sd">     'R': [('A', 90), ('M', 90)],</span>
+<span class="sd">     'T': [('A', 80), ('L', 260), ('M', 55), ('P', 130)]}</span>
+<span class="sd">    """</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">noeuds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""Initialisation avec un graphe vide</span>
+<span class="sd">        __noeuds est un dictionnaire</span>
+<span class="sd">        - clé = Valeur du noeud (chaine, entier)</span>
+<span class="sd">        - valeur = liste d'aretes (clé, poids)"""</span>
+        <span class="k">if</span> <span class="n">noeuds</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span> <span class="o">=</span> <span class="n">noeuds</span>
+    
+    <span class="k">def</span> <span class="nf">importe_matrice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrice</span><span class="p">,</span> <span class="n">noms</span><span class="p">):</span>
+        <span class="sd">"""Importe une matrice d'adjacence"""</span>
+        <span class="n">longueur</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrice</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">longueur</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">noms</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">longueur</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">matrice</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">noms</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">noms</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">matrice</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]))</span>
+    
+    <span class="k">def</span> <span class="nf">ajouter_noeud</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nd</span><span class="p">):</span>
+        <span class="sd">"""Ajoute un nouveau noeud au graphe"""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">nd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">nd</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">ajouter_arete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nd1</span><span class="p">,</span> <span class="n">nd2</span><span class="p">,</span> <span class="n">poids</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">"""Ajoute une arête au graphe</span>
+<span class="sd">        si poids n'est pas renseigné, il prendra la valeur 1"""</span>
+        <span class="c1"># On s'assure que les arètes existent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ajouter_noeud</span><span class="p">(</span><span class="n">nd1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ajouter_noeud</span><span class="p">(</span><span class="n">nd2</span><span class="p">)</span>
+        <span class="c1"># On crée la connexion nd1 -&gt; nd2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">nd1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nd2</span><span class="p">,</span> <span class="n">poids</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">liste_noeuds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Renvoie la liste des noeuds"""</span>
+        <span class="n">nds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">nds</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">nds</span>
+    
+    <span class="k">def</span> <span class="nf">voisins</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nd</span><span class="p">):</span>
+        <span class="sd">"""Renvoie la liste des noeuds voisins de nd"""</span>
+        <span class="k">if</span> <span class="n">nd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">liste_noeuds</span><span class="p">():</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">nd</span><span class="p">]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">arete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nd1</span><span class="p">,</span> <span class="n">nd2</span><span class="p">):</span>
+        <span class="sd">"""Renvoie le poids de l'arete nd1-&gt;nd2 ou 0 si pas d'arête"""</span>
+        <span class="k">if</span> <span class="n">nd2</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">voisins</span><span class="p">(</span><span class="n">nd1</span><span class="p">):</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">nd1</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">nd2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Représentation graphique avec graphviz"""</span>
+        <span class="n">dot</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="n">comment</span><span class="o">=</span><span class="s2">"Graphe"</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">'svg'</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">nd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">liste_noeuds</span><span class="p">():</span>
+            <span class="n">dot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span><span class="n">nd</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">nd</span><span class="p">]:</span>
+                <span class="c1"># Teste si l'arête est orientée</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">arete</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nd</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">arete</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">:</span>
+                    <span class="c1"># dessin d'une arête non orientée</span>
+                    <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span> <span class="n">nd</span><span class="p">:</span>
+                        <span class="c1"># On ne dessine qu'une seule arête sur les 2</span>
+                        <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                            <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">dir</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">dir</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># dessin d'une arête orientée</span>
+                    <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">dot</span>
+    
+<span class="c1"># YOUR CODE HERE</span>
+<span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Testez votre classe</span>
+<span class="n">matrice</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">gr2</span> <span class="o">=</span> <span class="n">Graphe</span><span class="p">()</span>
+<span class="n">gr2</span><span class="o">.</span><span class="n">importe_matrice</span><span class="p">(</span><span class="n">matrice</span><span class="p">,</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">,</span> <span class="s2">"F"</span><span class="p">,</span> <span class="s2">"G"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">])</span>
+<span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">gr2</span><span class="o">.</span><span class="n">parcours_largeur</span><span class="p">(</span><span class="s2">"A"</span><span class="p">))</span> <span class="o">==</span> <span class="p">{</span><span class="s1">'A'</span><span class="p">,</span> <span class="s1">'B'</span><span class="p">,</span> <span class="s1">'D'</span><span class="p">,</span> <span class="s1">'C'</span><span class="p">,</span> <span class="s1">'E'</span><span class="p">,</span> <span class="s1">'F'</span><span class="p">,</span> <span class="s1">'G'</span><span class="p">,</span> <span class="s1">'H'</span><span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Chercher-les-cycles">
+<a class="anchor" href="#Chercher-les-cycles" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chercher les cycles<a class="anchor-link" href="#Chercher-les-cycles"> </a>
+</h2>
+<p>Pour finir ce TP, vous allez implémenter la méthode <code>cycle</code> qui ne prend aucun paramètres et qui renvoie un booleen selon que le graphe
+contient un cycle ou non.</p>
+<p>Vous implémenterez pour cela des parcours en largeur légèrement modifié</p>
+<ul>
+<li>pour partir de tous les noeuds possibles</li>
+<li>pour détecter si à un moment donné du parcours on atteint le noeud de départ.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Graphe</span><span class="p">():</span>
+    <span class="sd">"""Graphe implémenté à l'aide d'un dictionnaire</span>
+<span class="sd">    Exemple : </span>
+<span class="sd">    {'A': [('M', 65), ('R', 90), ('T', 80)],</span>
+<span class="sd">     'G': [('L', 70)],</span>
+<span class="sd">     'L': [('G', 70), ('P', 230), ('T', 260)],</span>
+<span class="sd">     'M': [('A', 65), ('P', 95), ('R', 90), ('T', 55)],</span>
+<span class="sd">     'P': [('L', 230), ('M', 95), ('T', 130)],</span>
+<span class="sd">     'R': [('A', 90), ('M', 90)],</span>
+<span class="sd">     'T': [('A', 80), ('L', 260), ('M', 55), ('P', 130)]}</span>
+<span class="sd">    """</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">noeuds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""Initialisation avec un graphe vide</span>
+<span class="sd">        __noeuds est un dictionnaire</span>
+<span class="sd">        - clé = Valeur du noeud (chaine, entier)</span>
+<span class="sd">        - valeur = liste d'aretes (clé, poids)"""</span>
+        <span class="k">if</span> <span class="n">noeuds</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span> <span class="o">=</span> <span class="n">noeuds</span>
+    
+    <span class="k">def</span> <span class="nf">importe_matrice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrice</span><span class="p">,</span> <span class="n">noms</span><span class="p">):</span>
+        <span class="sd">"""Importe une matrice d'adjacence"""</span>
+        <span class="n">longueur</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrice</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">longueur</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">noms</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">longueur</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">matrice</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">noms</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">noms</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">matrice</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]))</span>
+    
+    <span class="k">def</span> <span class="nf">ajouter_noeud</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nd</span><span class="p">):</span>
+        <span class="sd">"""Ajoute un nouveau noeud au graphe"""</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">nd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">nd</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">ajouter_arete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nd1</span><span class="p">,</span> <span class="n">nd2</span><span class="p">,</span> <span class="n">poids</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">"""Ajoute une arête au graphe</span>
+<span class="sd">        si poids n'est pas renseigné, il prendra la valeur 1"""</span>
+        <span class="c1"># On s'assure que les arètes existent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ajouter_noeud</span><span class="p">(</span><span class="n">nd1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ajouter_noeud</span><span class="p">(</span><span class="n">nd2</span><span class="p">)</span>
+        <span class="c1"># On crée la connexion nd1 -&gt; nd2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">nd1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">nd2</span><span class="p">,</span> <span class="n">poids</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">liste_noeuds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Renvoie la liste des noeuds"""</span>
+        <span class="n">nds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">nds</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">nds</span>
+    
+    <span class="k">def</span> <span class="nf">voisins</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nd</span><span class="p">):</span>
+        <span class="sd">"""Renvoie la liste des noeuds voisins de nd"""</span>
+        <span class="k">if</span> <span class="n">nd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">liste_noeuds</span><span class="p">():</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">nd</span><span class="p">]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">arete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nd1</span><span class="p">,</span> <span class="n">nd2</span><span class="p">):</span>
+        <span class="sd">"""Renvoie le poids de l'arete nd1-&gt;nd2 ou 0 si pas d'arête"""</span>
+        <span class="k">if</span> <span class="n">nd2</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">voisins</span><span class="p">(</span><span class="n">nd1</span><span class="p">):</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">nd1</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">nd2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""Représentation graphique avec graphviz"""</span>
+        <span class="n">dot</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="n">comment</span><span class="o">=</span><span class="s2">"Graphe"</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">'svg'</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">nd</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">liste_noeuds</span><span class="p">():</span>
+            <span class="n">dot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span><span class="n">nd</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__noeuds</span><span class="p">[</span><span class="n">nd</span><span class="p">]:</span>
+                <span class="c1"># Teste si l'arête est orientée</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">arete</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nd</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">arete</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">:</span>
+                    <span class="c1"># dessin d'une arête non orientée</span>
+                    <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span> <span class="n">nd</span><span class="p">:</span>
+                        <span class="c1"># On ne dessine qu'une seule arête sur les 2</span>
+                        <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                            <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">dir</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">dir</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># dessin d'une arête orientée</span>
+                    <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">nd</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">dot</span>
+    
+<span class="c1"># YOUR CODE HERE</span>
+<span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Testez votre classe</span>
+<span class="n">matrice</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">gr2</span> <span class="o">=</span> <span class="n">Graphe</span><span class="p">()</span>
+<span class="n">gr2</span><span class="o">.</span><span class="n">importe_matrice</span><span class="p">(</span><span class="n">matrice</span><span class="p">,</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">,</span> <span class="s2">"F"</span><span class="p">,</span> <span class="s2">"G"</span><span class="p">,</span> <span class="s2">"H"</span><span class="p">])</span>
+<span class="k">assert</span> <span class="n">gr2</span><span class="o">.</span><span class="n">cycle</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/python/nsi/terminale/graphes/algorithmique/poo/tp/2020/08/17/nsi_t_algo_graphes.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Plateforme de blog avec support pour Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/wawachief" title="wawachief"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/leclusemaths" title="leclusemaths"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
